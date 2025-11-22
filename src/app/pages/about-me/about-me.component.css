@@ -1,0 +1,49 @@
+/* 1. THE BORDER GLOW */
+.spotlight-card::before {
+  content: "";
+  position: absolute;
+  inset: 0px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: radial-gradient(
+    800px circle at var(--mouse-x) var(--mouse-y),
+    rgba(var(--spotlight-color), 0.6),
+    transparent 40%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+/* 2. THE INNER GLOW */
+.spotlight-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    400px circle at var(--mouse-x) var(--mouse-y),
+    /* Use the variable with 0.1 opacity (fainter) */
+      rgba(var(--spotlight-color), 0.1),
+    transparent 40%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s;
+  z-index: 1;
+}
+
+/* Show effects on hover */
+:host ::ng-deep .spotlight-grid:hover .spotlight-card::before,
+:host ::ng-deep .spotlight-grid:hover .spotlight-card::after {
+  opacity: 1;
+}
+
+.spotlight-content {
+  position: relative;
+  z-index: 10;
+  height: 100%;
+}

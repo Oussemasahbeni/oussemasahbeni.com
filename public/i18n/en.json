@@ -1,12 +1,9 @@
 {
-    "emailCopied": "Email copied to clipboard!",
     "navbar": {
         "aboutMe": "About Me",
         "experience": "Experience",
         "projects": "Projects",
         "contact": "Contact",
-        "resume": "Resume",
-        "downloadResume": "Download Resume",
         "settings": "Settings"
     },
     "introduction": {
@@ -15,7 +12,9 @@
         "description": "Fullstack Developer from Tunisia with 2+ years of hands-on experience designing, deploying, and securing scalable web platforms. Delivered data-driven applications used by 1,000+ users, automating workflows and contributing to mission-focused tech initiatives. Skilled in backend architecture, frontend frameworks, and cloud technologies.",
         "checkOutMySocials": "Let's connect:",
         "sayhi": "Say hi!",
-        "explore": "View Projects"
+        "explore": "View Projects",
+        "resume": "Resume",
+        "downloadResume": "Download Resume"
     },
     "home": {
         "aboutMe": {
@@ -131,29 +130,6 @@
                 }
             ]
         }
-    },
-    "contact": {
-        "getInTouch": "Get in Touch!",
-        "email": {
-            "title": "Email",
-            "description": "Drop me a line anytime",
-            "address": "oussemasahbeni300@gmail.com"
-        },
-        "phone": {
-            "title": "Phone",
-            "description": "Call me directly",
-            "number": "+216 54 750 526"
-        },
-        "linkedin": {
-            "title": "LinkedIn",
-            "description": "Don't like emails? Send me a message instead👋"
-        },
-        "github": {
-            "title": "GitHub",
-            "description": "Check out my code and projects"
-        },
-        "dontLikeMails": " Don't like mails ? Send me a",
-        "messageInstead": " message instead👋"
     },
     "footer": {
         "rightsReserved": "All rights reserved."

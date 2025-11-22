@@ -1,24 +1,36 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
-import { NgpButton } from 'ng-primitives/button';
-import { NgpMenu, NgpMenuItem, NgpMenuTrigger } from 'ng-primitives/menu';
+import { BrnMenuTrigger } from '@spartan-ng/brain/menu';
+import { HlmButtonImports } from '@spartan-ng/helm/button';
+import { HlmIconImports } from '@spartan-ng/helm/icon';
+import { HlmMenu, HlmMenuItem } from '@spartan-ng/helm/menu';
 
 @Component({
   selector: 'app-language',
-  imports: [NgpButton, NgpMenu, NgpMenuTrigger, NgpMenuItem],
+  imports: [
+    HlmButtonImports,
+    BrnMenuTrigger,
+    HlmMenu,
+    HlmMenuItem,
+    HlmIconImports,
+  ],
   templateUrl: './language.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrl: './language.component.css',
 })
 export class LanguageComponent {
   public translocoService = inject(TranslocoService);
 
-  getCurrentLanguage(): string {
-    const lang = this.translocoService.getActiveLang();
-    return lang === 'en' ? 'EN' : 'FR';
-  }
+  public activeLang = signal(
+    this.translocoService.getActiveLang().toUpperCase()
+  );
 
   setLanguage(lang: string): void {
     this.translocoService.setActiveLang(lang);
+    this.activeLang.set(lang.toUpperCase());
   }
 }

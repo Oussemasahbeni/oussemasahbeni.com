@@ -10,12 +10,25 @@ import {
 } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { radixArrowUp } from '@ng-icons/radix-icons';
+import { HlmButtonImports } from '@spartan-ng/helm/button';
+import { HlmIconImports } from '@spartan-ng/helm/icon';
 
 @Component({
-  selector: 'lib-back-to-top',
-  imports: [NgIcon],
+  selector: 'app-back-to-top',
+  imports: [NgIcon, HlmButtonImports, HlmIconImports],
   providers: [provideIcons({ radixArrowUp })],
-  templateUrl: './back-to-top.component.html',
+  template: `@if (isVisible()) {
+    <button
+      hlmBtn
+      class="fixed z-50 bottom-6 right-6"
+      (click)="scrollToTop()"
+      title="Back to top"
+      size="icon"
+      aria-label="Scroll back to top"
+    >
+      <ng-icon size="sm" name="radixArrowUp" hlm />
+    </button>
+    } `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

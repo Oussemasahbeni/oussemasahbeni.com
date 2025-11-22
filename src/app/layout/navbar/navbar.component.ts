@@ -8,21 +8,28 @@ import {
   OnDestroy,
   OnInit,
   PLATFORM_ID,
+  signal,
 } from '@angular/core';
 import { TranslocoDirective } from '@jsverse/transloco';
-import { NgpButton } from 'ng-primitives/button';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { radixHamburgerMenu } from '@ng-icons/radix-icons';
+import { HlmButtonImports } from '@spartan-ng/helm/button';
+import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { LanguageComponent } from '../language/language.component';
 import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 
 @Component({
   selector: 'app-navbar',
   imports: [
-    NgpButton,
+    HlmButtonImports,
+    NgIcon,
+    HlmIconImports,
     ThemeToggleComponent,
     LanguageComponent,
     TranslocoDirective,
   ],
   templateUrl: './navbar.component.html',
+  providers: [provideIcons({ radixHamburgerMenu })],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent implements OnInit, OnDestroy {
@@ -36,6 +43,27 @@ export class NavbarComponent implements OnInit, OnDestroy {
    * Whether the mobile menu is open.
    */
   readonly menuOpen = model(false);
+
+  readonly navigation = signal([
+    {
+      label: 'aboutMe',
+      id: 'about_me',
+      link: '#about_me',
+      ariaLabel: 'About Me',
+    },
+    {
+      label: 'experience',
+      id: 'experience',
+      link: '#experience',
+      ariaLabel: 'Experience',
+    },
+    {
+      label: 'projects',
+      id: 'projects',
+      link: '#projects',
+      ariaLabel: 'Projects',
+    },
+  ]);
 
   private clickListener?: (event: Event) => void;
 

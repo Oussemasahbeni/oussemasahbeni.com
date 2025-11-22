@@ -1,4 +1,3 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -17,7 +16,27 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "paths": {
+      "@spartan-ng/helm/button": [
+        "./src/app/components/ui/button/src/index.ts"
+      ],
+      "@spartan-ng/helm/card": [
+        "./src/app/components/ui/card/src/index.ts"
+      ],
+      "@spartan-ng/helm/icon": [
+        "./src/app/components/ui/icon/src/index.ts"
+      ],
+      "@spartan-ng/helm/menu": [
+        "./src/app/components/ui/menu/src/index.ts"
+      ],
+      "@spartan-ng/helm/utils": [
+        "./src/app/components/ui/utils/src/index.ts"
+      ],
+      "@spartan-ng/helm/badge": [
+        "./src/app/components/ui/badge/src/index.ts"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

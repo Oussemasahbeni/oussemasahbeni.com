@@ -4,28 +4,29 @@ import {
   inject,
   isDevMode,
   provideAppInitializer,
-  provideZonelessChangeDetection,
+  provideBrowserGlobalErrorListeners,
 } from '@angular/core';
 import {
   provideClientHydration,
   withEventReplay,
 } from '@angular/platform-browser';
 import { provideTransloco, TranslocoService } from '@jsverse/transloco';
-import { provideHotToastConfig } from '@ngxpert/hot-toast';
 import { firstValueFrom } from 'rxjs';
 import { TranslocoHttpLoader } from './transloco-loader';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(withFetch()),
-    provideZonelessChangeDetection(),
-    provideHotToastConfig(),
+    provideBrowserGlobalErrorListeners(),
     provideTransloco({
       config: {
         availableLangs: ['en', 'fr'],
         defaultLang: 'en',
         reRenderOnLangChange: true,
         prodMode: !isDevMode(),
+        flatten: {
+          aot: !isDevMode(),
+        },
       },
       loader: TranslocoHttpLoader,
     }),

@@ -1,18 +1,18 @@
 <button
-  [ngpMenuTrigger]="menu"
-  ngpButton
+  hlmBtn
+  [brnMenuTriggerFor]="menu"
   title="Change language"
-  class="btn btn-ghost h-9 w-9 rounded-lg glass-effect border border-zinc-200/50 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 dark:border-zinc-800/50 dark:focus-visible:ring-zinc-300 interactive-3d"
+  size="icon"
+  variant="outline"
+  class="size-8"
 >
-  <span class="text-xs font-medium text-zinc-700 dark:text-zinc-300">{{
-    getCurrentLanguage()
-  }}</span>
+  <span class="text-xs font-medium">{{ activeLang() }}</span>
 </button>
 
 <ng-template #menu>
-  <div ngpMenu class="min-w-32 glass-effect">
+  <hlm-menu class="min-w-32">
     <button
-      ngpMenuItem
+      hlmMenuItem
       (click)="setLanguage('en')"
       [class.font-semibold]="translocoService.getActiveLang() === 'en'"
       class="flex items-center gap-3 w-full text-left interactive-3d"
@@ -21,7 +21,7 @@
       <span>English</span>
     </button>
     <button
-      ngpMenuItem
+      hlmMenuItem
       (click)="setLanguage('fr')"
       [class.font-semibold]="translocoService.getActiveLang() === 'fr'"
       class="flex items-center gap-3 w-full text-left interactive-3d"
@@ -29,5 +29,5 @@
       <span class="text-base">🇫🇷</span>
       <span>Français</span>
     </button>
-  </div>
+  </hlm-menu>
 </ng-template>

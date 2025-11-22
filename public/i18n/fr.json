@@ -1,13 +1,9 @@
 {
-    "emailCopied": "Email copié dans le presse-papiers !",
     "navbar": {
         "aboutMe": "À Propos",
         "experience": "Expérience",
         "projects": "Projets",
-        "contact": "Contact",
-        "resume": "CV",
-        "downloadResume": "Télécharger le CV",
-        "settings": "Paramètres"
+        "contact": "Contact"
     },
     "introduction": {
         "title": "Salut ! Je suis",
@@ -15,7 +11,9 @@
         "description": "Développeur Fullstack de Tunisie avec plus de 2 ans d'expérience pratique dans la conception, le déploiement et la sécurisation de plateformes web évolutives. J'ai livré des applications basées sur les données utilisées par plus de 1 000 utilisateurs, automatisant les flux de travail et contribuant à des initiatives technologiques axées sur la mission. Compétent en architecture backend, frameworks frontend et technologies cloud.",
         "checkOutMySocials": "Connectons-nous :",
         "sayhi": "Dites bonjour !",
-        "explore": "Voir les Projets"
+        "explore": "Voir les Projets",
+        "resume": "CV",
+        "settings": "Paramètres"
     },
     "home": {
         "aboutMe": {
@@ -131,29 +129,6 @@
                 }
             ]
         }
-    },
-    "contact": {
-        "getInTouch": "Prenez Contact !",
-        "email": {
-            "title": "Email",
-            "description": "Envoyez-moi un message à tout moment",
-            "address": "oussemasahbeni300@gmail.com"
-        },
-        "phone": {
-            "title": "Téléphone",
-            "description": "Appelez-moi directement",
-            "number": "+216 54 750 526"
-        },
-        "linkedin": {
-            "title": "LinkedIn",
-            "description": "Vous n'aimez pas les emails ? Envoyez-moi un message à la place👋"
-        },
-        "github": {
-            "title": "GitHub",
-            "description": "Découvrez mon code et mes projets"
-        },
-        "dontLikeMails": "Vous n'aimez pas les emails ? Envoyez-moi un",
-        "messageInstead": "message à la place👋"
     },
     "footer": {
         "rightsReserved": "Tous droits réservés."
