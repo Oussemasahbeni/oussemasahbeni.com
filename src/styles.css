@@ -158,3 +158,20 @@ app-root {
     @apply bg-background text-foreground;
   }
 }
+
+.theme-transition::view-transition-old(root),
+.theme-transition::view-transition-new(root) {
+  /* Stop the default cross-fade */
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Force the NEW theme (the expanding circle) to be on TOP */
+.theme-transition::view-transition-new(root) {
+  z-index: 9999;
+}
+
+/* Force the OLD theme to be underneath */
+.theme-transition::view-transition-old(root) {
+  z-index: 1;
+}

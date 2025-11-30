@@ -10,7 +10,7 @@ import { ThemeService } from '../../../lib/theme/theme.service';
   selector: 'app-theme-toggler',
   template: `
     <button
-      (click)="toggleTheme()"
+      (click)="toggleTheme($event)"
       [title]="isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
       hlmBtn
       size="icon"
@@ -29,7 +29,7 @@ export class ThemeToggleComponent {
     () => this.themeService.theme() === 'dark'
   );
 
-  protected toggleTheme(): void {
-    this.themeService.toggleTheme();
+  protected toggleTheme(event: MouseEvent): void {
+    this.themeService.toggleTheme(event);
   }
 }

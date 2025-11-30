@@ -1,6 +1,6 @@
 import { injectContentFiles } from '@analogjs/content';
-import { Component } from '@angular/core';
-import { ContentMetadata } from '../../../lib/content-metadata';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ContentMetadata } from '../../../lib/content-metadata/content-metadata';
 import { FeaturedBlogPreviewComponent } from '../featured-blog-preview/featured-blog-preview.component';
 
 @Component({
@@ -9,6 +9,7 @@ import { FeaturedBlogPreviewComponent } from '../featured-blog-preview/featured-
   host: {
     class: 'block max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8 lg:py-24',
   },
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: ` <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">
       Featured Posts
     </h2>
@@ -16,8 +17,8 @@ import { FeaturedBlogPreviewComponent } from '../featured-blog-preview/featured-
     <div
       class="mt-6 w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
     >
-      @for(article of articles; track article.attributes.slug){
-      <app-featured-blog-preview [article]="article.attributes" />
+      @for(article of articles; track article.slug){
+      <app-featured-blog-preview [article]="article" />
 
       }
     </div>`,

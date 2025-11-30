@@ -1,7 +1,7 @@
 import { injectContentFiles } from '@analogjs/content';
 import { Component } from '@angular/core';
 import { BlogPreviewComponent } from '../../components/blog/blog-preview/blog-preview.component';
-import { ContentMetadata } from '../../lib/content-metadata';
+import { ContentMetadata } from '../../lib/content-metadata/content-metadata';
 
 @Component({
   selector: 'app-blog',

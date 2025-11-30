@@ -15,9 +15,14 @@ declare const gtag: Function;
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, FooterComponent, NavbarComponent, BackToTopComponent],
+  host: {
+    class: 'flex h-full w-full flex-auto  flex-col',
+  },
   template: `
     <app-navbar />
-    <router-outlet />
+    <main class="flex-1">
+      <router-outlet />
+    </main>
     <app-footer />
     <app-back-to-top
       variant="glass"

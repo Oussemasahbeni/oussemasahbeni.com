@@ -1,6 +1,6 @@
 import { SafeHtml } from '@angular/platform-browser';
 
-export type RawContentMetadata = {
+export type ContentMetadata = {
   title: string;
   date: string;
   description: string;
@@ -8,8 +8,6 @@ export type RawContentMetadata = {
   slug: string;
   tags: string[];
 };
-
-export type ContentMetadata = Omit<RawContentMetadata, 'date'> & { date: Date };
 
 export type ContentWithMetadata = {
   metadata: ContentMetadata;

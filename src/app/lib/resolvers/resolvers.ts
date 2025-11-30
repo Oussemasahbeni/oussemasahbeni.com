@@ -1,9 +1,8 @@
 import { injectContentFiles } from '@analogjs/content';
 import { MetaTag } from '@analogjs/router';
 import { ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
-import { ContentMetadata } from '../content-metadata';
+import { ContentMetadata } from '../content-metadata/content-metadata';
 
-// temporary
 function injectActiveContentMetadata(
   route: ActivatedRouteSnapshot
 ): ContentMetadata {

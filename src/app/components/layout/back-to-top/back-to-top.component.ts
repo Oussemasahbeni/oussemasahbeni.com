@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   DOCUMENT,
-  HostListener,
   inject,
   input,
   signal,
@@ -30,6 +29,9 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
     </button>
     } `,
   encapsulation: ViewEncapsulation.None,
+  host: {
+    '(window:scroll)': 'onWindowScroll()',
+  },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BackToTopComponent {
@@ -53,7 +55,6 @@ export class BackToTopComponent {
   // -----------------------------------------------------------------------------------------------------
   // @ Public methods
   // -----------------------------------------------------------------------------------------------------
-  @HostListener('window:scroll', [])
   onWindowScroll(): void {
     const scrollPosition =
       this.document.documentElement.scrollTop || this.document.body.scrollTop;

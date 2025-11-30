@@ -29,5 +29,5 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
-  date = signal(new Date().getFullYear());
+  readonly date = signal(new Date().getFullYear());
 }

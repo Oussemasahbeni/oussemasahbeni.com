@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
 import { lucideArrowRight } from '@ng-icons/lucide';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
-import { ContentMetadata } from '../../../lib/content-metadata';
+import { ContentMetadata } from '../../../lib/content-metadata/content-metadata';
 
 @Component({
   selector: 'app-blog-preview',
@@ -18,6 +18,8 @@ import { ContentMetadata } from '../../../lib/content-metadata';
     HlmBadgeImports,
   ],
   providers: [provideIcons({ lucideArrowRight })],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+
   host: {
     class: 'block  ',
   },
