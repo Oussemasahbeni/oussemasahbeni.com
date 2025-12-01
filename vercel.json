@@ -1,0 +1,11 @@
+{
+    "buildCommand": "npm run build",
+    "outputDirectory": "dist/analog/public",
+    "framework": null,
+    "rewrites": [
+        {
+            "source": "/((?!assets|blog|.*\\..*).*)",
+            "destination": "/index.html"
+        }
+    ]
+}
