@@ -1,0 +1,89 @@
+<brn-popover sideOffset="5" align="end">
+  <button hlmBtn brnPopoverTrigger variant="outline" size="sm">
+    <ng-icon hlm name="lucideShare2" size="sm" />
+    Share
+  </button>
+  <div hlmPopoverContent class="grid gap-3" *brnPopoverContent="let ctx">
+    <div class="space-y-2">
+      <h4 class="font-medium leading-none">Share article</h4>
+      <p class="text-sm text-muted-foreground">
+        Share this article with your network.
+      </p>
+    </div>
+
+    <div class="flex items-center justify-center gap-2">
+      <a
+        variant="outline"
+        size="icon"
+        hlmBtn
+        [href]="socialUrls().facebook"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <ng-icon hlm name="remixFacebookBoxFill" size="sm" />
+      </a>
+      <a
+        variant="outline"
+        size="icon"
+        hlmBtn
+        [href]="socialUrls().linkedin"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <ng-icon hlm name="radixLinkedinLogo" size="sm" />
+      </a>
+      <a
+        variant="outline"
+        size="icon"
+        hlmBtn
+        [href]="socialUrls().twitter"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <ng-icon hlm name="remixTwitterXFill" size="sm" />
+      </a>
+    </div>
+
+    <div class="w-full">
+      <div class="relative">
+        <input
+          hlmInput
+          readonly
+          class="peer w-full pe-9 text-sm"
+          type="email"
+          size="sm"
+          [value]="currentUrl()"
+        />
+        <button
+          hlmBtn
+          variant="link"
+          size="icon"
+          class="text-muted-foreground/80 hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md transition-[color,box-shadow] outline-none focus:z-10 focus-visible:ring-[3px] disabled:pointer-events-none disabled:cursor-not-allowed"
+          [disabled]="copied()"
+          (click)="onCopy()"
+        >
+          <ng-icon
+            hlm
+            name="lucideCopy"
+            size="sm"
+            class="transition-all"
+            [class.scale-0]="copied()"
+            [class.scale-0]="copied()"
+            [class.scale-100]="!copied()"
+            [class.opacity-100]="!copied()"
+          />
+          <ng-icon
+            hlm
+            name="lucideCheck"
+            size="sm"
+            class="absolute text-green-500 transition-all"
+            [class.scale-0]="!copied()"
+            [class.opacity-0]="!copied()"
+            [class.scale-100]="copied()"
+            [class.opacity-100]="copied()"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+</brn-popover>

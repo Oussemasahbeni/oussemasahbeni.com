@@ -6,21 +6,15 @@
 // };
 
 import { Component } from '@angular/core';
-import { FeaturedBlogsComponent } from '../components/blog/featured-blogs/featured-blogs.component';
-import { AboutMeComponent } from '../components/home/about-me/about-me.component';
-import { ExperienceComponent } from '../components/home/experience/experience.component';
-import { HeroComponent } from '../components/home/hero/hero.component';
-import { ProjectsComponent } from '../components/home/projects/projects.component';
+import { FeaturedBlogs } from '../components/blog/featured-blogs/featured-blogs';
+import { AboutMe } from '../components/home/about-me/about-me.';
+import { Experience } from '../components/home/experience/experience.';
+import { Hero } from '../components/home/hero/hero.';
+import { Projects } from '../components/home/projects/projects.';
 
 @Component({
   selector: 'home',
-  imports: [
-    HeroComponent,
-    AboutMeComponent,
-    ExperienceComponent,
-    ProjectsComponent,
-    FeaturedBlogsComponent,
-  ],
+  imports: [Hero, AboutMe, Experience, Projects, FeaturedBlogs],
   template: `
     <app-hero />
     <app-about-me />
@@ -29,4 +23,4 @@ import { ProjectsComponent } from '../components/home/projects/projects.componen
     <app-featured-blogs />
   `,
 })
-export default class HomeComponent {}
+export default class Home {}

@@ -16,8 +16,8 @@ import {
 } from '@ng-icons/lucide';
 import { HlmCardImports } from '@spartan-ng/helm/card';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
-import { SpotlightDirective } from '../../../components/directives/spotlight.directive';
 import { GithubApiService } from '../../../lib/github/github-api.service';
+import { SpotlightDirective } from '../../directives/spotlight.directive';
 
 interface TechStack {
   name: string;
@@ -36,12 +36,12 @@ interface TechStack {
       lucideDumbbell,
     }),
   ],
-  templateUrl: './about-me.component.html',
-  styleUrls: ['./about-me.component.css'],
+  templateUrl: './about-me.html',
+  styleUrls: ['./about-me.css'],
 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AboutMeComponent implements OnInit {
+export class AboutMe implements OnInit {
   private readonly gitApi = inject(GithubApiService);
   private readonly platform = inject(PLATFORM_ID);
 

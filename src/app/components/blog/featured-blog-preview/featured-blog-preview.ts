@@ -86,6 +86,6 @@ import { ContentMetadata } from '../../../lib/content-metadata/content-metadata'
     }
   `,
 })
-export class FeaturedBlogPreviewComponent {
+export class FeaturedBlogPreview {
   readonly article = input<ContentFile<ContentMetadata>>();
 }

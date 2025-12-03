@@ -43,12 +43,38 @@
       }
     </div>
 
-    <!-- Right Section - Theme, Language, and Mobile Menu -->
+    <!-- Right Section - Theme and Mobile Menu -->
     <div class="flex items-center gap-2">
-      <!-- Desktop Theme and Language Controls -->
-      <div class="hidden sm:flex items-center gap-2">
-        <app-theme-toggler />
-      </div>
+      <button
+        hlmBtn
+        size="icon"
+        variant="ghost"
+        type="button"
+        (click)="openGithub()"
+      >
+        <ng-icon hlm name="lucideGithub" class="text-primary" size="sm" />
+      </button>
+
+      <button
+        hlmBtn
+        size="icon"
+        variant="ghost"
+        type="button"
+        (click)="openX()"
+      >
+        <ng-icon hlm name="remixTwitterXFill" class="text-primary" size="sm" />
+      </button>
+      <button
+        hlmBtn
+        size="icon"
+        variant="ghost"
+        type="button"
+        (click)="openLinkedIn()"
+      >
+        <ng-icon hlm name="radixLinkedinLogo" class="text-primary" size="sm" />
+      </button>
+      <div class="bg-border h-6 w-px"></div>
+      <app-theme-toggler />
 
       <!-- Mobile Menu Button -->
       <button
@@ -69,36 +95,21 @@
 
   <!-- Mobile Navigation Menu -->
   @if(menuOpen()){
-  <nav class="transition-all duration-300 ease-in-out">
-    <div class="border-t border-zinc-200/50 dark:border-zinc-800/50">
-      <!-- Navigation Links -->
-      <div class="px-6 py-6 bg-white/98 backdrop-blur-md dark:bg-zinc-950/98">
-        <div class="flex flex-col gap-6">
-          @for(nav of navigation(); track nav){
-          <a
-            [routerLink]="nav.link"
-            class="cursor-pointer group flex items-center text-base font-medium text-zinc-700 hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400 transition-all duration-200"
-            [ariaLabel]="nav.ariaLabel"
-          >
-            {{ nav.title }}
-          </a>
-          }
-        </div>
-
-        <!-- Mobile Controls Section -->
-        <div
-          class="mt-8 pt-6 border-t border-zinc-200/50 dark:border-zinc-800/50"
-        >
-          <div class="flex items-center justify-between mb-6">
-            <span class="text-sm font-medium text-zinc-600 dark:text-zinc-400"
-              >Settings</span
-            >
-            <div class="flex items-center gap-3">
-              <app-theme-toggler />
-            </div>
-          </div>
-        </div>
-      </div>
+  <nav
+    class="transition-all duration-300 ease-in-out border-t border-zinc-200/50 bg-white dark:bg-zinc-950 dark:border-zinc-800/50 px-6 py-6"
+    (clickOutside)="onClickOutside()"
+  >
+    <!-- Navigation Links -->
+    <div class="flex flex-col gap-6">
+      @for(nav of navigation(); track nav){
+      <a
+        [routerLink]="nav.link"
+        class="cursor-pointer group flex items-center text-base font-medium text-zinc-700 hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400 transition-all duration-200"
+        [ariaLabel]="nav.ariaLabel"
+      >
+        {{ nav.title }}
+      </a>
+      }
     </div>
   </nav>
   }

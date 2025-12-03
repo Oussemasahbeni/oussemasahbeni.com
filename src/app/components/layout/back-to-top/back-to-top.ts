@@ -34,7 +34,7 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BackToTopComponent {
+export class BackToTop {
   // -----------------------------------------------------------------------------------------------------
   // @ Dependencies
   // -----------------------------------------------------------------------------------------------------

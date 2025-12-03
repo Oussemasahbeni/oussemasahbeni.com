@@ -14,28 +14,14 @@ export interface ActionButton {
 @Component({
   selector: 'app-hero',
   imports: [HlmButtonImports, HlmIconImports],
-  templateUrl: './hero.component.html',
+  templateUrl: './hero.html',
   host: {
     class:
       'block  relative min-h-screen flex items-center justify-center  px-4 sm:px-6 lg:px-8',
   },
-  providers: [provideIcons({ radixGithubLogo, radixLinkedinLogo })],
 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeroComponent {
-  readonly actionButtons = signal<ActionButton[]>([
-    {
-      title: 'GitHub',
-      icon: 'radixGithubLogo',
-      variant: 'default',
-      link: 'https://github.com/Oussemasahbeni',
-    },
-    {
-      title: 'LinkedIn',
-      icon: 'radixLinkedinLogo',
-      variant: 'outline',
-      link: 'https://www.linkedin.com/in/oussema-sahbeni-3b4b2521b/',
-    },
-  ]);
+export class Hero {
+
 }

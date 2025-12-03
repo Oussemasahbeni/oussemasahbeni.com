@@ -16,10 +16,10 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
       radixLockClosed,
     }),
   ],
-  templateUrl: './projects.component.html',
+  templateUrl: './projects.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProjectsComponent {
+export class Projects {
   projects = signal([
     {
       name: 'Sabeel Platform',

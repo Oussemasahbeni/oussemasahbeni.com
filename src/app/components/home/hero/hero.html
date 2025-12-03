@@ -45,31 +45,6 @@
             and cloud technologies.
           </p>
         </div>
-
-        <!-- Social CTA -->
-        <div class="text-sm font-mono text-zinc-700 dark:text-zinc-300">
-          Let's connect:
-        </div>
-
-        <!-- Action Buttons -->
-        <div
-          class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
-        >
-          @for(action of actionButtons(); track action.title) {
-          <a
-            [href]="action.link"
-            target="_blank"
-            rel="noopener noreferrer"
-            hlmBtn
-            [variant]="action.variant"
-            size="lg"
-          >
-            <ng-icon hlm size="sm" [name]="action.icon" />
-
-            <span>{{ action.title }}</span>
-          </a>
-          }
-        </div>
       </div>
 
       <!-- Code Editor Visual -->

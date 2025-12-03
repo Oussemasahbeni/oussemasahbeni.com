@@ -38,6 +38,15 @@
       ],
       "@spartan-ng/helm/skeleton": [
         "./src/app/components/ui/skeleton/src/index.ts"
+      ],
+      "@spartan-ng/helm/popover": [
+        "./src/app/components/ui/popover/src/index.ts"
+      ],
+      "@spartan-ng/helm/input": [
+        "./src/app/components/ui/input/src/index.ts"
+      ],
+      "@spartan-ng/helm/form-field": [
+        "./src/app/components/ui/form-field/src/index.ts"
       ]
     }
   },

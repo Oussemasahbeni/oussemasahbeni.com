@@ -9,6 +9,7 @@ import {
   radixLinkedinLogo,
   radixTwitterLogo,
 } from '@ng-icons/radix-icons';
+import { remixTwitterXFill } from '@ng-icons/remixicon';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 
@@ -23,11 +24,12 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
       radixInstagramLogo,
       radixTwitterLogo,
       lucidePhone,
+      remixTwitterXFill,
     }),
   ],
-  templateUrl: './footer.component.html',
+  templateUrl: './footer.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FooterComponent {
+export class Footer {
   readonly date = signal(new Date().getFullYear());
 }

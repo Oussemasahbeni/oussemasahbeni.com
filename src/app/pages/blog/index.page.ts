@@ -1,11 +1,11 @@
 import { injectContentFiles } from '@analogjs/content';
 import { Component } from '@angular/core';
-import { BlogPreviewComponent } from '../../components/blog/blog-preview/blog-preview.component';
+import { BlogPreview } from '../../components/blog/blog-preview/blog-preview';
 import { ContentMetadata } from '../../lib/content-metadata/content-metadata';
 
 @Component({
   selector: 'app-blog',
-  imports: [BlogPreviewComponent],
+  imports: [BlogPreview],
   host: {
     class: 'block max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8 lg:py-24',
   },

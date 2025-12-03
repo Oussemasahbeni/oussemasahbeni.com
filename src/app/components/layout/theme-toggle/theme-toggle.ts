@@ -14,7 +14,7 @@ import { ThemeService } from '../../../lib/theme/theme.service';
       [title]="isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
       hlmBtn
       size="icon"
-      variant="outline"
+      variant="ghost"
     >
       <ng-icon [name]="isDark() ? 'radixSun' : 'radixMoon'" hlmIcon size="sm" />
     </button>
@@ -22,7 +22,7 @@ import { ThemeService } from '../../../lib/theme/theme.service';
   providers: [provideIcons({ radixSun, radixMoon })],
   imports: [HlmIconImports, HlmButtonImports],
 })
-export class ThemeToggleComponent {
+export class ThemeToggle {
   protected readonly themeService = inject(ThemeService);
 
   protected readonly isDark = computed(

@@ -20,24 +20,24 @@ export const postTitleResolver: ResolveFn<string> = (route) =>
   injectActiveContentMetadata(route).title;
 
 export const postMetaResolver: ResolveFn<MetaTag[]> = (route) => {
-  const ContentMetadata = injectActiveContentMetadata(route);
+  const meta = injectActiveContentMetadata(route);
 
   return [
-    {
-      name: 'description',
-      content: ContentMetadata.description,
-    },
-    {
-      name: 'author',
-      content: 'Analog Team',
-    },
-    {
-      property: 'og:title',
-      content: ContentMetadata.title,
-    },
-    {
-      property: 'og:description',
-      content: ContentMetadata.description,
-    },
+    { name: 'description', content: meta.description },
+    { name: 'author', content: 'Oussema Sahbeni' },
+
+    // --- Open Graph (Facebook / LinkedIn) ---
+    { property: 'og:title', content: meta.title },
+    { property: 'og:description', content: meta.description },
+    { property: 'og:type', content: 'article' },
+    // { property: 'og:url', content: postUrl },
+    // { property: 'og:image', content: imageUrl },
+    { property: 'og:site_name', content: 'Oussema Sahbeni Portfolio' },
+
+    // --- Twitter / X ---
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: meta.title },
+    { name: 'twitter:description', content: meta.description },
+    // { name: 'twitter:image', content: imageUrl },
   ];
 };

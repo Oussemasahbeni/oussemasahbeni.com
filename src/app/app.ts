@@ -7,14 +7,14 @@ import {
 } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 
-import { BackToTopComponent } from './components/layout/back-to-top/back-to-top.component';
-import { FooterComponent } from './components/layout/footer/footer.component';
-import { NavbarComponent } from './components/layout/navbar/navbar.component';
+import { BackToTop } from './components/layout/back-to-top/back-to-top';
+import { Footer } from './components/layout/footer/footer';
+import { Navbar } from './components/layout/navbar/navbar';
 
 declare const gtag: Function;
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FooterComponent, NavbarComponent, BackToTopComponent],
+  imports: [RouterOutlet, Footer, Navbar, BackToTop],
   host: {
     class: 'flex h-full w-full flex-auto  flex-col',
   },
@@ -33,7 +33,7 @@ declare const gtag: Function;
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
+export class App {
   private readonly router = inject(Router);
   private readonly platform = inject(PLATFORM_ID);
 

@@ -6,10 +6,10 @@ import { HlmCardImports } from '@spartan-ng/helm/card';
 @Component({
   selector: 'app-experience',
   imports: [CommonModule, HlmCardImports, HlmBadgeImports],
-  templateUrl: './experience.component.html',
+  templateUrl: './experience.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ExperienceComponent {
+export class Experience {
   experience = signal([
     {
       title: 'Software Developer',

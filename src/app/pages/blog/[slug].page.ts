@@ -28,6 +28,7 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmSkeletonImports } from '@spartan-ng/helm/skeleton';
 import { ReadTimePipe } from '../../components/pipes/read-time.pipe';
+import { ShareButton } from '../../components/share-button/share-button';
 import { ContentMetadata } from '../../lib/content-metadata/content-metadata';
 import {
   postMetaResolver,
@@ -54,6 +55,7 @@ export const routeMeta: RouteMeta = {
 
 @Component({
   imports: [
+    ShareButton,
     MarkdownComponent,
     DatePipe,
     ReadTimePipe,
@@ -63,7 +65,7 @@ export const routeMeta: RouteMeta = {
     HlmIconImports,
   ],
   host: {
-    class: 'block max-w-7xl mx-auto px-4 py-16 lg:py-24',
+    class: 'block max-w-7xl mx-auto px-4 mt-4 py-16 lg:py-24',
     '(window:scroll)': 'onWindowScroll()',
   },
   providers: [
@@ -92,20 +94,22 @@ export const routeMeta: RouteMeta = {
             {{ article.attributes.title }}
           </h1>
 
-          <div
-            class="flex items-center justify-between gap-2 mt-4 text-base text-blue-400"
-          >
-            <div class="flex items-center gap-1">
-              <ng-icon name="radixClock" hlmIcon />
-              <span> {{ article.content | readTime }}</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <ng-icon name="radixCalendar" hlmIcon />
+          <div class="flex items-center justify-between mt-4 ">
+            <div class="flex items-center  gap-4 text-base text-blue-400">
+              <div class="flex items-center gap-2">
+                <ng-icon name="radixCalendar" hlmIcon />
 
-              <time [attr.datetime]="article.attributes.date | date">
-                {{ article.attributes.date | date }}
-              </time>
+                <time [attr.datetime]="article.attributes.date | date">
+                  {{ article.attributes.date | date }}
+                </time>
+              </div>
+              <div class="flex items-center gap-1">
+                <ng-icon name="radixClock" hlmIcon />
+                <span> {{ article.content | readTime }}</span>
+              </div>
             </div>
+
+            <app-share-button [title]="article.attributes.title" />
           </div>
         </header>
 
@@ -143,26 +147,6 @@ export const routeMeta: RouteMeta = {
           }
         </div>
       </aside>
-      <div class="flex gap-2">
-        <a
-          hlmBtn
-          size="icon"
-          variant="outline"
-          [href]="shareLinks(article).twitter"
-          target="_blank"
-        >
-          <ng-icon name="lucideTwitter" />
-        </a>
-        <a
-          hlmBtn
-          size="icon"
-          variant="outline"
-          [href]="shareLinks(article).linkedin"
-          target="_blank"
-        >
-          <ng-icon name="lucideLinkedin" />
-        </a>
-      </div>
     </div>
     } @else {
     <div class="flex flex-col space-y-3 max-w-7xl mx-auto">
@@ -204,17 +188,6 @@ export default class BlogPost {
         this.readingProgress.set(scrolled);
       }
     }
-  }
-
-  shareLinks(meta: any) {
-    const url = isPlatformBrowser(this.platformId) ? window.location.href : '';
-    const title = meta.attributes?.title || meta.title || '';
-    return {
-      twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-        title
-      )}&url=${url}`,
-      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
-    };
   }
 
   scrollTo(id: string) {

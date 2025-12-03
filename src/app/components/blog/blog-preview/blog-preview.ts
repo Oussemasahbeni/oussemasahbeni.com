@@ -64,11 +64,12 @@ import { ContentMetadata } from '../../../lib/content-metadata/content-metadata'
           </div>
 
           <button
+            type="button"
             hlmBtn
             size="sm"
             variant="default"
             [routerLink]="'/blog/' + article.slug"
-            class="ml-auto flex items-center "
+            class="ml-auto flex items-center cursor-pointer "
           >
             Read article
             <ng-icon name="lucideArrowRight" hlmIcon size="sm" />
@@ -79,6 +80,6 @@ import { ContentMetadata } from '../../../lib/content-metadata/content-metadata'
     }
   `,
 })
-export class BlogPreviewComponent {
+export class BlogPreview {
   readonly article = input<ContentMetadata>();
 }

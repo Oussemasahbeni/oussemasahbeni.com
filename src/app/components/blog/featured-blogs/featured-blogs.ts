@@ -1,11 +1,11 @@
 import { injectContentFiles } from '@analogjs/content';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ContentMetadata } from '../../../lib/content-metadata/content-metadata';
-import { FeaturedBlogPreviewComponent } from '../featured-blog-preview/featured-blog-preview.component';
+import { FeaturedBlogPreview } from '../featured-blog-preview/featured-blog-preview';
 
 @Component({
   selector: 'app-featured-blogs',
-  imports: [FeaturedBlogPreviewComponent],
+  imports: [FeaturedBlogPreview],
   host: {
     class: 'block max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8 lg:py-24',
   },
@@ -23,7 +23,7 @@ import { FeaturedBlogPreviewComponent } from '../featured-blog-preview/featured-
       }
     </div>`,
 })
-export class FeaturedBlogsComponent {
+export class FeaturedBlogs {
   public articles = injectContentFiles<ContentMetadata>()
     .reverse()
     .filter((_, i) => i < 3);
