@@ -4,7 +4,7 @@ import {
   MarkdownComponent,
 } from '@analogjs/content';
 import { RouteMeta } from '@analogjs/router';
-import { DatePipe, isPlatformBrowser } from '@angular/common';
+import { DatePipe, isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -56,6 +56,7 @@ export const routeMeta: RouteMeta = {
 @Component({
   imports: [
     ShareButton,
+    NgOptimizedImage,
     MarkdownComponent,
     DatePipe,
     ReadTimePipe,
@@ -112,6 +113,23 @@ export const routeMeta: RouteMeta = {
             <app-share-button [title]="article.attributes.title" />
           </div>
         </header>
+        @if (article.attributes.coverImage) {
+
+        <figure class="mt-8">
+          <img
+            class="w-full object-cover rounded-xl border border-border shadow-sm bg-muted"
+            width="1200"
+            height="630"
+            [ngSrc]="article.attributes.coverImage"
+            [alt]="article.attributes.title"
+            priority
+          />
+          <figcaption class="mt-2 text-center text-xs text-muted-foreground">
+            {{ article.attributes.title }}
+          </figcaption>
+        </figure>
+
+        }
 
         <div #contentRef>
           <analog-markdown

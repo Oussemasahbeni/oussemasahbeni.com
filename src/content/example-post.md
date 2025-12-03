@@ -6,6 +6,7 @@ slug: testing-the-toc-extraction
 tags:
   - Testing
   - AnalogJS
+coverImage: /default-social.jpg
 ---
 
 This is the introduction paragraph. The Table of Contents on the right should appear as soon as this content renders.

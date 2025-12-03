@@ -6,6 +6,7 @@ export type ContentMetadata = {
   description: string;
   draft: boolean;
   slug: string;
+  coverImage: string;
   tags: string[];
 };
 
