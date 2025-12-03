@@ -22,8 +22,8 @@
   },
   "private": true,
   "dependencies": {
-    "@analogjs/content": "^v2.1.2-beta.1",
-    "@analogjs/router": "^v2.1.2-beta.1",
+    "@analogjs/content": "^v2.1.2",
+    "@analogjs/router": "^v2.1.2",
     "@angular/cdk": "^21.0.0",
     "@angular/common": "^21.0.0",
     "@angular/compiler": "^21.0.0",
@@ -54,9 +54,9 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@analogjs/platform": "^v2.1.2-beta.1",
-    "@analogjs/vite-plugin-angular": "^v2.1.2-beta.1",
-    "@analogjs/vitest-angular": "^v2.1.2-beta.1",
+    "@analogjs/platform": "^v2.1.2",
+    "@analogjs/vite-plugin-angular": "^v2.1.2",
+    "@analogjs/vitest-angular": "^v2.1.2",
     "@angular/build": "^21.0.0",
     "@angular/cli": "^21.0.0",
     "@angular/compiler-cli": "^21.0.0",
