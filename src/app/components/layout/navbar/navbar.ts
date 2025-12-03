@@ -13,6 +13,7 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { GITHUB_LINK, LINKEDIN_LINK, X_LINK } from '../../../lib/constants';
 import { ClickOutsideDirective } from '../../directives/click-outisde.directive';
+import { NowPlaying } from '../now-playing/now-playing';
 import { ThemeToggle } from '../theme-toggle/theme-toggle';
 
 @Component({
@@ -23,6 +24,7 @@ import { ThemeToggle } from '../theme-toggle/theme-toggle';
     HlmIconImports,
     ThemeToggle,
     ClickOutsideDirective,
+    NowPlaying,
   ],
   templateUrl: './navbar.html',
   providers: [

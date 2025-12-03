@@ -45,6 +45,8 @@
 
     <!-- Right Section - Theme and Mobile Menu -->
     <div class="flex items-center gap-2">
+      <div class="bg-border h-6 w-px hidden md:block"></div>
+
       <button
         hlmBtn
         aria-label="Open GitHub Profile"
@@ -93,6 +95,10 @@
       >
         <ng-icon hlmIcon size="sm" name="radixHamburgerMenu" />
       </button>
+      <!-- Now Playing Widget (hidden on mobile) -->
+      <div class="hidden md:block">
+        <app-now-playing />
+      </div>
     </div>
   </nav>
 
