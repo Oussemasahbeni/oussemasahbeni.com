@@ -2,7 +2,7 @@
   class="fixed top-0 z-50 h-16 w-full bg-white/80 backdrop-blur-md border-b border-zinc-200/50 dark:bg-zinc-950/80 dark:border-zinc-800/50"
 >
   <nav
-    class="container relative mx-auto flex h-full w-full items-center justify-between px-6 lg:px-8"
+    class="container relative flex h-full w-full items-center justify-between"
   >
     <!-- Logo Section -->
     <a
@@ -27,77 +27,89 @@
       </svg>
     </a>
 
-    <!-- Desktop Navigation -->
-    <div class="hidden sm:flex items-center gap-8">
-      @for(nav of navigation(); track nav){
-      <a
-        [routerLink]="nav.link"
-        class="cursor-pointer group relative text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-all duration-200"
-        aria-label="{{ nav.ariaLabel }} section"
-      >
-        {{ nav.title }}
-        <span
-          class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"
-        ></span>
-      </a>
-      }
-    </div>
-
-    <!-- Right Section - Theme and Mobile Menu -->
     <div class="flex items-center gap-2">
-      <div class="bg-border h-6 w-px hidden md:block"></div>
+      <!-- Desktop Navigation -->
+      <div class="hidden sm:flex items-center gap-8">
+        @for(nav of navigation(); track nav){
+        <a
+          [routerLink]="nav.link"
+          class="cursor-pointer group relative text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-all duration-200"
+          aria-label="{{ nav.ariaLabel }} section"
+        >
+          {{ nav.title }}
+          <span
+            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"
+          ></span>
+        </a>
+        }
+      </div>
 
-      <button
-        hlmBtn
-        aria-label="Open GitHub Profile"
-        size="icon"
-        variant="ghost"
-        type="button"
-        (click)="openGithub()"
-      >
-        <ng-icon hlm name="lucideGithub" class="text-primary" size="sm" />
-      </button>
+      <!-- Right Section - Theme and Mobile Menu -->
+      <div class="flex items-center gap-2">
+        <div class="bg-border h-6 w-px hidden md:block"></div>
 
-      <button
-        hlmBtn
-        aria-label="Open Twitter X Profile"
-        size="icon"
-        variant="ghost"
-        type="button"
-        (click)="openX()"
-      >
-        <ng-icon hlm name="remixTwitterXFill" class="text-primary" size="sm" />
-      </button>
-      <button
-        hlmBtn
-        aria-label="Open LinkedIn Profile"
-        size="icon"
-        variant="ghost"
-        type="button"
-        (click)="openLinkedIn()"
-      >
-        <ng-icon hlm name="radixLinkedinLogo" class="text-primary" size="sm" />
-      </button>
-      <div class="bg-border h-6 w-px"></div>
-      <app-theme-toggler />
+        <button
+          hlmBtn
+          aria-label="Open GitHub Profile"
+          size="icon"
+          variant="ghost"
+          type="button"
+          (click)="openGithub()"
+        >
+          <ng-icon hlm name="lucideGithub" class="text-primary" size="sm" />
+        </button>
 
-      <!-- Mobile Menu Button -->
-      <button
-        class="sm:hidden"
-        (click)="toggle()"
-        [attr.aria-expanded]="menuOpen()"
-        aria-label="Toggle mobile navigation menu"
-        title="Toggle mobile navigation menu"
-        type="button"
-        hlmBtn
-        size="icon"
-        variant="outline"
-      >
-        <ng-icon hlmIcon size="sm" name="radixHamburgerMenu" />
-      </button>
-      <!-- Now Playing Widget (hidden on mobile) -->
-      <div class="hidden md:block">
-        <app-now-playing />
+        <button
+          hlmBtn
+          aria-label="Open Twitter X Profile"
+          size="icon"
+          variant="ghost"
+          type="button"
+          (click)="openX()"
+        >
+          <ng-icon
+            hlm
+            name="remixTwitterXFill"
+            class="text-primary"
+            size="sm"
+          />
+        </button>
+        <button
+          hlmBtn
+          aria-label="Open LinkedIn Profile"
+          size="icon"
+          variant="ghost"
+          type="button"
+          (click)="openLinkedIn()"
+        >
+          <ng-icon
+            hlm
+            name="radixLinkedinLogo"
+            class="text-primary"
+            size="sm"
+          />
+        </button>
+        <div class="bg-border h-6 w-px"></div>
+        <app-theme-toggler />
+
+        <!-- Mobile Menu Button -->
+        <button
+          class="sm:hidden"
+          (click)="toggle()"
+          [attr.aria-expanded]="menuOpen()"
+          aria-label="Toggle mobile navigation menu"
+          title="Toggle mobile navigation menu"
+          type="button"
+          hlmBtn
+          size="icon"
+          variant="outline"
+        >
+          <ng-icon hlmIcon size="sm" name="radixHamburgerMenu" />
+        </button>
+        <!-- Now Playing Widget (hidden on mobile) -->
+        <div class="hidden md:block">
+          <app-now-playing />
+        </div>
       </div>
     </div>
   </nav>
