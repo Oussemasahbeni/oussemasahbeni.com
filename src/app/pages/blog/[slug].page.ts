@@ -12,6 +12,7 @@ import {
   DOCUMENT,
   inject,
   PLATFORM_ID,
+  signal,
 } from '@angular/core';
 
 import { toSignal } from '@angular/core/rxjs-interop';

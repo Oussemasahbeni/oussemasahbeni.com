@@ -26,7 +26,6 @@ export class ThemeService {
     const x = event?.clientX;
     const y = event?.clientY;
 
-    // 1. Check strict requirements for animation:
     // - Must be in a browser (not SSR)
     // - Browser must support View Transitions API
     // - Coordinates (x, y) must exist
@@ -40,7 +39,6 @@ export class ThemeService {
       return;
     }
 
-    // 2. If all checks pass, run the animated switch
     this.animateThemeSwitch(x, y);
   }
 
@@ -64,15 +62,9 @@ export class ThemeService {
       Math.max(y, innerHeight - y)
     );
 
-    // Add a specific class to <html>.
-    // WHY? This allows us to scope our CSS (z-index, animation: none)
-    // specifically to this transaction, preventing it from breaking
-    // the Angular Router's default page animations.
     this.document.documentElement.classList.add('theme-transition');
 
     // Start the View Transition.
-    // The browser captures the "Old" state, runs this callback,
-    // then captures the "New" state.
     const transition = document.startViewTransition(() => {
       this.executeToggle();
     });

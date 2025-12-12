@@ -19,7 +19,7 @@ import { ContentMetadata } from '../../../lib/content-metadata/content-metadata'
     HlmIconImports,
   ],
   host: {
-    class: 'flex flex-1',
+    class: 'block h-full',
   },
   providers: [
     provideIcons({
@@ -30,62 +30,64 @@ import { ContentMetadata } from '../../../lib/content-metadata/content-metadata'
   template: `
     @if(article(); as article){
 
-    <article>
-      <a
-        hlmCard
-        class="
-        group relative w-full  p-1 
-        transition-all duration-300 ease-out
+    <a
+      hlmCard
+      [routerLink]="['/blog', article.slug]"
+      class="
+        group flex flex-col h-full
+        transition-all duration-300 
         hover:-translate-y-1 hover:shadow-lg hover:border-primary/50
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
       "
-        [routerLink]="'/blog/' + article.slug"
-      >
-        <div
-          class="flex flex-col h-full bg-popover rounded-lg p-5 z-10 relative"
-        >
-          <div class="flex justify-between items-start mb-3">
-            <span class="text-xs text-muted-foreground font-mono">
-              {{ article.attributes.date | date : 'mediumDate' }}
-            </span>
-
-            <ng-icon
-              name="lucideArrowRight"
-              hlmIcon
-              size="base"
-              class="text-primary opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
-            />
-          </div>
-
-          <h1 class="text-xl font-bold tracking-tight text-foreground">
-            {{ article.attributes.title }}
-          </h1>
-
-          <p
-            class="mt-2 mb-6 text-sm text-muted-foreground leading-relaxed line-clamp-3"
-          >
-            {{ article.attributes.description }}
-          </p>
-
-          <div
-            class="mt-auto flex flex-wrap items-center gap-2 pt-4 border-t border-border/50"
-          >
-            @for(tag of article.attributes.tags; track tag) {
-            <span
-              hlmBadge
-              variant="outline"
-              size="sm"
-              class="group-hover:bg-secondary/80 transition-colors"
-            >
-              {{ tag }}
-            </span>
-            }
-          </div>
+    >
+      <!-- HEADER-->
+      <div hlmCardHeader>
+        <div class="flex justify-between items-start mb-2">
+          <span class="text-xs font-mono text-muted-foreground">
+            {{ article.attributes.date | date : 'mediumDate' }}
+          </span>
+          <ng-icon
+            name="lucideArrowRight"
+            hlmIcon
+            size="base"
+            class="
+              text-primary transition-all duration-300
+              opacity-0 -translate-x-2 
+              group-hover:opacity-100 group-hover:translate-x-0
+            "
+          />
         </div>
-      </a>
-    </article>
+
+        <h3 hlmCardTitle class="text-2xl leading-tight">
+          {{ article.attributes.title }}
+        </h3>
+      </div>
+
+      <!-- CONTENT -->
+      <div hlmCardContent class="flex-1">
+        <p class="text-muted-foreground leading-relaxed line-clamp-3">
+          {{ article.attributes.description }}
+        </p>
+      </div>
+
+      <!-- FOOTER -->
+      <div hlmCardFooter class="pt-2">
+        <div class="flex flex-wrap gap-2">
+          @for(tag of article.attributes.tags; track tag) {
+          <span
+            hlmBadge
+            variant="outline"
+            class="transition-colors group-hover:border-primary/30 group-hover:bg-primary/5"
+          >
+            {{ tag }}
+          </span>
+          }
+        </div>
+      </div>
+    </a>
     }
   `,
 })
 export class FeaturedBlogPreview {
-  readonly article = input<ContentFile<ContentMetadata>>();
+  readonly article = input.required<ContentFile<ContentMetadata>>();
 }

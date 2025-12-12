@@ -21,6 +21,14 @@ export default defineConfig(({ mode }) => {
         static: false,
         content: {
           highlighter: 'shiki',
+          shikiOptions: {
+            highlighter: {
+              additionalLangs: ['bash', 'java', 'yaml'],
+            },
+            highlight: {
+              theme: 'github-dark',
+            },
+          },
         },
         prerender: {
           routes: [
