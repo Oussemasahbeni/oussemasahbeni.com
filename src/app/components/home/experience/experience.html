@@ -83,12 +83,12 @@
           <h4
             class="text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-3 uppercase"
           >
-            Skills Used
+            Skills:
           </h4>
           <div class="flex flex-wrap gap-2">
             @for (skill of item.skills; track $index) {
-            <span hlmBadge>
-              {{ skill | uppercase }}
+            <span hlmBadge variant="outline" class="text-xs font-normal">
+              {{ skill }}
             </span>
             }
           </div>

@@ -175,3 +175,16 @@ app-root {
 .theme-transition::view-transition-old(root) {
   z-index: 1;
 }
+
+@keyframes equalizer {
+  0% {
+    transform: scaleY(0.3);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+.equalizer-bar {
+  animation: equalizer 1.2s ease-in-out infinite alternate;
+}

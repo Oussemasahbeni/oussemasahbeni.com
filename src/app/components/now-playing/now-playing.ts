@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideMusic } from '@ng-icons/lucide';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
-import { SpotifyService } from '../../../lib/spotify/spotify.service';
+import { SpotifyService } from '../../lib/spotify/spotify.service';
 
 @Component({
   selector: 'app-now-playing',
@@ -14,22 +14,6 @@ import { SpotifyService } from '../../../lib/spotify/spotify.service';
     }),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styles: [
-    `
-      @keyframes equalizer {
-        0% {
-          transform: scaleY(0.3);
-        }
-        100% {
-          transform: scaleY(1);
-        }
-      }
-
-      .equalizer-bar {
-        animation: equalizer 1.2s ease-in-out infinite alternate;
-      }
-    `,
-  ],
   template: `
     <div
       class="group relative flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg bg-linear-to-br from-zinc-50 to-zinc-100/50 dark:from-zinc-800/90 dark:to-zinc-900/90 border border-zinc-200/60 dark:border-zinc-700/60 shadow-sm hover:shadow-md dark:shadow-zinc-950/50 transition-all duration-300 backdrop-blur-sm"
@@ -43,25 +27,15 @@ import { SpotifyService } from '../../../lib/spotify/spotify.service';
 
       <!-- Album Art / Icon -->
       @if (nowPlaying().isPlaying && nowPlaying().albumImageUrl) {
-      <div
-        class="relative w-8 h-8 rounded-md overflow-hidden shrink-0 shadow-sm ring-1 ring-black/5 dark:ring-white/10"
-      >
-        <img
-          [ngSrc]="nowPlaying().albumImageUrl!"
-          alt="Album cover"
-          width="32"
-          height="32"
-          class="object-cover scale-100 group-hover:scale-110 transition-transform duration-500"
-          priority
-        />
-        <div
-          class="absolute inset-0 bg-linear-to-t from-black/30 to-transparent"
-        ></div>
-        <!-- Vinyl spin effect overlay -->
-        <div
-          class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,black_31%,transparent_32%)] opacity-20"
-        ></div>
-      </div>
+      <img
+        [ngSrc]="nowPlaying().albumImageUrl!"
+        alt="Album cover"
+        width="32"
+        height="32"
+        class="object-cover "
+        priority
+      />
+
       } @else {
       <div
         class="w-8 h-8 rounded-md bg-linear-to-br from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-800 flex items-center justify-center shrink-0 shadow-sm"
