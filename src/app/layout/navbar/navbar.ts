@@ -2,20 +2,22 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  model,
   signal,
+  viewChild,
 } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
-import { lucideGithub } from '@ng-icons/lucide';
+import { lucideGithub, lucideRss } from '@ng-icons/lucide';
 import { radixHamburgerMenu, radixLinkedinLogo } from '@ng-icons/radix-icons';
 import { remixTwitterXFill } from '@ng-icons/remixicon';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { GITHUB_LINK, LINKEDIN_LINK, X_LINK } from '../../core/constants';
 import { NowPlaying } from '../../shared/components/now-playing/now-playing';
-import { ClickOutsideDirective } from '../../shared/directives/click-outisde.directive';
 import { ThemeToggle } from '../theme-toggle/theme-toggle';
+
+import { BrnSheet, BrnSheetImports } from '@spartan-ng/brain/sheet';
+import { HlmSheetImports } from '@spartan-ng/helm/sheet';
 
 @Component({
   selector: 'app-navbar',
@@ -23,8 +25,9 @@ import { ThemeToggle } from '../theme-toggle/theme-toggle';
     RouterLink,
     HlmButtonImports,
     HlmIconImports,
+    BrnSheetImports,
+    HlmSheetImports,
     ThemeToggle,
-    ClickOutsideDirective,
     NowPlaying,
   ],
   templateUrl: './navbar.html',
@@ -32,6 +35,7 @@ import { ThemeToggle } from '../theme-toggle/theme-toggle';
     provideIcons({
       radixHamburgerMenu,
       lucideGithub,
+      lucideRss,
       remixTwitterXFill,
       radixLinkedinLogo,
     }),
@@ -40,10 +44,8 @@ import { ThemeToggle } from '../theme-toggle/theme-toggle';
 })
 export class Navbar {
   private readonly router = inject(Router);
-  /**
-   * Whether the mobile menu is open.
-   */
-  readonly menuOpen = model(false);
+
+  public readonly viewchildSheetRef = viewChild(BrnSheet);
 
   readonly navigation = signal([
     {
@@ -58,26 +60,22 @@ export class Navbar {
     },
     {
       title: 'Projects',
-      link: '/project',
+      link: '/projects',
       ariaLabel: 'Projects page',
     },
   ]);
 
   onNavigte(link: string) {
     this.router.navigate([link]);
-    this.menuOpen.set(false);
-  }
-
-  onClickOutside(): void {
-    this.menuOpen.set(false);
-  }
-
-  toggle(): void {
-    this.menuOpen.update((open) => !open);
+    this.viewchildSheetRef()?.close({});
   }
 
   openGithub() {
     window.open(GITHUB_LINK, '_blank');
+  }
+
+  openRss() {
+    window.open('/api/rss.xml', '_blank');
   }
   openX() {
     window.open(X_LINK, '_blank');

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { lucidePhone } from '@ng-icons/lucide';
+import { lucideGithub, lucidePhone } from '@ng-icons/lucide';
 
 import {
   radixEnvelopeClosed,
@@ -12,6 +12,7 @@ import {
 import { remixTwitterXFill } from '@ng-icons/remixicon';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
+import { GITHUB_LINK, X_LINK, LINKEDIN_LINK } from '../../core/constants';
 
 @Component({
   selector: 'app-footer',
@@ -19,7 +20,7 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
   providers: [
     provideIcons({
       radixLinkedinLogo,
-      radixGithubLogo,
+      lucideGithub,
       radixEnvelopeClosed,
       radixInstagramLogo,
       radixTwitterLogo,
@@ -32,4 +33,14 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
 })
 export class Footer {
   readonly date = signal(new Date().getFullYear());
+
+  openGithub() {
+    window.open(GITHUB_LINK, '_blank');
+  }
+  openX() {
+    window.open(X_LINK, '_blank');
+  }
+  openLinkedIn() {
+    window.open(LINKEDIN_LINK, '_blank');
+  }
 }

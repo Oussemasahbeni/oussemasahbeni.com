@@ -1,5 +1,5 @@
 <header class="fixed top-0 z-50 h-16 w-full backdrop-blur-md border-b">
-  <nav class="relative flex h-full px-10 justify-between">
+  <nav class="relative flex h-full px-6 md:px-10 justify-between items-center">
     <!-- Logo Section -->
     <a
       routerLink="/"
@@ -24,7 +24,7 @@
     </a>
 
     <div class="flex items-center gap-2">
-      <!-- Desktop Navigation -->
+      <!-- Desktop Navigation Links -->
       <div class="hidden sm:flex items-center gap-8">
         @for(nav of navigation(); track nav){
         <a
@@ -40,97 +40,112 @@
         }
       </div>
 
-      <!-- Right Section - Theme and Mobile Menu -->
+      <!-- Right Section -->
       <div class="flex items-center gap-2">
-        <div class="bg-border h-6 w-px hidden md:block"></div>
+        <!-- Divider (Desktop only) -->
+        <div class="bg-border h-6 w-px hidden sm:block"></div>
 
-        <button
-          hlmBtn
-          class="cursor-pointer"
-          aria-label="Open GitHub Profile"
-          size="icon"
-          variant="ghost"
-          type="button"
-          (click)="openGithub()"
-        >
-          <ng-icon hlm name="lucideGithub" class="text-primary" size="sm" />
-        </button>
+        <!-- Desktop Only Socials & Now Playing -->
+        <div class="flex items-center gap-1">
+          <div class="hidden sm:flex items-center gap-1">
+            <button hlmBtn size="icon" variant="ghost" (click)="openGithub()">
+              <ng-icon hlm name="lucideGithub" class="text-primary" size="sm" />
+            </button>
+            <button hlmBtn size="icon" variant="ghost" (click)="openX()">
+              <ng-icon
+                hlm
+                name="remixTwitterXFill"
+                class="text-primary"
+                size="sm"
+              />
+            </button>
+            <button hlmBtn size="icon" variant="ghost" (click)="openLinkedIn()">
+              <ng-icon
+                hlm
+                name="radixLinkedinLogo"
+                class="text-primary"
+                size="sm"
+              />
+            </button>
+            <button hlmBtn size="icon" variant="ghost" (click)="openRss()">
+              <ng-icon hlm name="lucideRss" size="sm" />
+            </button>
+          </div>
 
-        <button
-          hlmBtn
-          aria-label="Open Twitter X Profile"
-          size="icon"
-          variant="ghost"
-          type="button"
-          class="cursor-pointer"
-          (click)="openX()"
-        >
-          <ng-icon
-            hlm
-            name="remixTwitterXFill"
-            class="text-primary"
-            size="sm"
-          />
-        </button>
-        <button
-          hlmBtn
-          aria-label="Open LinkedIn Profile"
-          size="icon"
-          variant="ghost"
-          type="button"
-          class="cursor-pointer"
-          (click)="openLinkedIn()"
-        >
-          <ng-icon
-            hlm
-            name="radixLinkedinLogo"
-            class="text-primary"
-            size="sm"
-          />
-        </button>
-        <div class="bg-border h-6 w-px"></div>
-        <app-theme-toggler />
+          <app-theme-toggler />
 
-        <!-- Mobile Menu Button -->
-        <button
-          class="sm:hidden cursor-pointer"
-          (click)="toggle()"
-          [attr.aria-expanded]="menuOpen()"
-          aria-label="Toggle mobile navigation menu"
-          title="Toggle mobile navigation menu"
-          type="button"
-          hlmBtn
-          size="icon"
-          variant="outline"
-        >
-          <ng-icon hlmIcon size="sm" name="radixHamburgerMenu" />
-        </button>
-        <!-- Now Playing Widget (hidden on mobile) -->
-        <div class="hidden md:block">
-          <app-now-playing />
+          <!-- Desktop Now Playing -->
+          <div class="ml-2 hidden sm:flex">
+            <app-now-playing />
+          </div>
         </div>
+
+        <!-- 2. Mobile Sheet (Drawer) -->
+        <hlm-sheet side="left">
+          <button
+            class="sm:hidden cursor-pointer"
+            hlmSheetTrigger
+            hlmBtn
+            size="icon"
+            variant="outline"
+            aria-label="Open mobile menu"
+          >
+            <ng-icon hlmIcon size="sm" name="radixHamburgerMenu" />
+          </button>
+
+          <hlm-sheet-content
+            *brnSheetContent="let ctx"
+            class="flex flex-col justify-between h-full p-6"
+          >
+            <!-- Top Section: Links -->
+            <div class="flex flex-col gap-6 mt-8">
+              @for(nav of navigation(); track nav){
+              <a
+                (click)="onNavigte(nav.link)"
+                class="cursor-pointer text-lg font-medium text-zinc-700 hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400 transition-colors"
+                [ariaLabel]="nav.ariaLabel"
+              >
+                {{ nav.title }}
+              </a>
+              }
+            </div>
+
+            <!-- Bottom Section: Mobile Footer -->
+            <div class="flex flex-col gap-6 pb-4">
+              <div class="w-full h-px bg-border"></div>
+
+              <!-- Mobile Now Playing -->
+              <app-now-playing />
+
+              <!-- Mobile Socials -->
+              <div class="flex items-center gap-1">
+                <button
+                  hlmBtn
+                  size="icon"
+                  variant="ghost"
+                  (click)="openGithub()"
+                >
+                  <ng-icon hlm name="lucideGithub" size="sm" />
+                </button>
+                <button hlmBtn size="icon" variant="ghost" (click)="openX()">
+                  <ng-icon hlm name="remixTwitterXFill" size="sm" />
+                </button>
+                <button
+                  hlmBtn
+                  size="icon"
+                  variant="ghost"
+                  (click)="openLinkedIn()"
+                >
+                  <ng-icon hlm name="radixLinkedinLogo" size="sm" />
+                </button>
+                <button hlmBtn size="icon" variant="ghost" (click)="openRss()">
+                  <ng-icon hlm name="lucideRss" size="sm" />
+                </button>
+              </div>
+            </div>
+          </hlm-sheet-content>
+        </hlm-sheet>
       </div>
     </div>
   </nav>
-
-  <!-- Mobile Navigation Menu -->
-  @if(menuOpen()){
-  <nav
-    class="transition-all duration-300 ease-in-out border-t border-zinc-200/50 bg-white dark:bg-zinc-950 dark:border-zinc-800/50 px-6 py-6"
-    (clickOutside)="onClickOutside()"
-  >
-    <!-- Navigation Links -->
-    <div class="flex flex-col gap-6">
-      @for(nav of navigation(); track nav){
-      <a
-        (click)="onNavigte(nav.link)"
-        class="cursor-pointer group flex items-center text-base font-medium text-zinc-700 hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400 transition-all duration-200"
-        [ariaLabel]="nav.ariaLabel"
-      >
-        {{ nav.title }}
-      </a>
-      }
-    </div>
-  </nav>
-  }
 </header>

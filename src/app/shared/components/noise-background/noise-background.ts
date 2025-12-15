@@ -1,9 +1,11 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
   ElementRef,
   NgZone,
+  PLATFORM_ID,
   afterNextRender,
   inject,
   viewChild,
@@ -33,6 +35,7 @@ import { createNoise3D } from 'simplex-noise';
 export class NoiseBackgroundComponent {
   private readonly ngZone = inject(NgZone);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly platformId = inject(PLATFORM_ID);
 
   readonly containerRef =
     viewChild.required<ElementRef<HTMLDivElement>>('container');
@@ -61,6 +64,8 @@ export class NoiseBackgroundComponent {
   private readonly INV_SCALE = 1 / this.SCALE;
 
   constructor() {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     afterNextRender(() => {
       this.ngZone.runOutsideAngular(() => this.setup());
     });

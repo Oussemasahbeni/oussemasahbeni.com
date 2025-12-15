@@ -47,6 +47,9 @@
       ],
       "@spartan-ng/helm/form-field": [
         "./src/app/components/ui/form-field/src/index.ts"
+      ],
+      "@spartan-ng/helm/sheet": [
+        "./src/app/components/ui/sheet/src/index.ts"
       ]
     }
   },

@@ -31,9 +31,14 @@ export default defineConfig(({ mode }) => {
           },
         },
         prerender: {
+          sitemap: {
+            host: 'https://www.oussemasahbeni.com',
+          },
           routes: [
             '/',
             '/blog',
+            '/projects',
+            '/api/rss.xml',
             {
               contentDir: 'src/content',
               transform: (file: PrerenderContentFile) => {

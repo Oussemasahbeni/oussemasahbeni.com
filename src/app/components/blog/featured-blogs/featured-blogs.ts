@@ -7,7 +7,7 @@ import { FeaturedBlogPreview } from '../featured-blog-preview/featured-blog-prev
   selector: 'app-featured-blogs',
   imports: [FeaturedBlogPreview],
   host: {
-    class: 'block max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8 ',
+    class: 'block max-w-7xl mx-auto px-6 sm:px-8 py-8  ',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: ` <!-- Section Header -->
@@ -21,9 +21,7 @@ import { FeaturedBlogPreview } from '../featured-blog-preview/featured-blog-prev
       </div>
     </div>
 
-    <div
-      class="mt-6 w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
-    >
+    <div class="mt-6 w-full grid grid-cols-1  lg:grid-cols-3 gap-4">
       @for(article of articles; track article.slug){
       <app-featured-blog-preview [article]="article" />
 
