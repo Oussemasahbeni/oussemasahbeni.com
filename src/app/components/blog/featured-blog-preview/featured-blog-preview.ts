@@ -1,4 +1,3 @@
-import { ContentFile } from '@analogjs/content';
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
@@ -11,6 +10,7 @@ import { ContentMetadata } from '../../../models/content-metadata';
 
 @Component({
   selector: 'app-featured-blog-preview',
+  standalone: true,
   imports: [
     RouterLink,
     HlmCardImports,
@@ -21,18 +21,13 @@ import { ContentMetadata } from '../../../models/content-metadata';
   host: {
     class: 'block h-full',
   },
-  providers: [
-    provideIcons({
-      lucideArrowRight,
-    }),
-  ],
+  providers: [provideIcons({ lucideArrowRight })],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     @if(article(); as article){
-
     <a
-      hlmCard
       [routerLink]="['/blog', article.slug]"
+      hlmCard
       class="
         group flex flex-col h-full
         transition-all duration-300 
@@ -40,45 +35,40 @@ import { ContentMetadata } from '../../../models/content-metadata';
         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
       "
     >
-      <!-- HEADER-->
       <div hlmCardHeader>
         <div class="flex justify-between items-start mb-2">
           <span class="text-xs font-mono text-muted-foreground">
-            {{ article.attributes.date | date : 'mediumDate' }}
+            {{ article.date | date : 'mediumDate' }}
           </span>
+          <!-- Mobile: Always visible | Desktop: Animation on hover -->
           <ng-icon
             name="lucideArrowRight"
             hlmIcon
             size="base"
             class="
               text-primary transition-all duration-300
-              opacity-0 -translate-x-2 
+              opacity-100 translate-x-0 
+              sm:opacity-0 sm:-translate-x-2 
               group-hover:opacity-100 group-hover:translate-x-0
             "
           />
         </div>
 
-        <h3 hlmCardTitle class="text-2xl leading-tight">
-          {{ article.attributes.title }}
+        <h3 hlmCardTitle class="text-xl leading-tight">
+          {{ article.title }}
         </h3>
       </div>
 
-      <!-- CONTENT -->
       <div hlmCardContent class="flex-1">
         <p class="text-muted-foreground leading-relaxed line-clamp-3">
-          {{ article.attributes.description }}
+          {{ article.description }}
         </p>
       </div>
 
-      <!-- FOOTER -->
       <div hlmCardFooter class="pt-2">
         <div class="flex flex-wrap gap-2">
-          @for(tag of article.attributes.tags; track tag) {
-          <span
-            hlmBadge
-            variant="outline"
-            class="transition-colors group-hover:border-primary/30 group-hover:bg-primary/5"
-          >
+          @for(tag of article.tags; track tag) {
+          <span hlmBadge variant="outline" class="group-hover:bg-primary/5">
             {{ tag }}
           </span>
           }
@@ -89,5 +79,5 @@ import { ContentMetadata } from '../../../models/content-metadata';
   `,
 })
 export class FeaturedBlogPreview {
-  readonly article = input.required<ContentFile<ContentMetadata>>();
+  readonly article = input.required<ContentMetadata>();
 }

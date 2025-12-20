@@ -1,8 +1,8 @@
 ---
 title: Modernizing Keycloak - Building Custom Themes with React, Tailwind v4, and Shadcn UI
 slug: modern-keycloak-react-theme
-description: A deep dive into a new boilerplate for building beautiful, type-safe Keycloak themes using React, Keycloakify, and Shadcn UI.
-date: 2025-12-12
+description: A production-ready Keycloak login theme starter kit with npm package support, built using React, Keycloakify, and Shadcn UI.
+date: 2025-12-21
 tags: ["Keycloak", "React", "TailwindCSS", "Authentication", "Open Source"]
 # coverImage: https://raw.githubusercontent.com/Oussemasahbeni/keycloak-react-theme-keycloakify/main/src/login/assets/img/auth-logo.svg
 ---
@@ -11,11 +11,11 @@ If you have ever worked with [Keycloak](https://www.keycloak.org/), you know tha
 
 Traditionally, theming Keycloak meant wrestling with **FreeMarker templates**, writing raw CSS, and rebuilding JAR files just to see a color change. It was a slow, developer-hostile process.
 
-Enter **[Keycloakify](https://www.keycloakify.dev/)** and the new **Keycloak React Theme** starter kit.
+Enter **[Keycloakify](https://www.keycloakify.dev/)** and the **Keycloakify Shadcn Starter** — now available as an npm package for instant setup.
 
-In this post, I want to share a modern, open-source boilerplate I built to make Keycloak customization not just bearable, but actually enjoyable.
+In this post, I want to share a modern, production-ready starter kit I built to make Keycloak customization not just bearable, but actually enjoyable. The best part? You can now install it directly from npm and have a fully functional theme running in minutes.
 
-**[🔗 Preview the theme in action](https://oussemasahbeni.github.io/keycloak-react-theme-keycloakify/)**
+**📦 npm package:** `@oussemasahbeni/keycloakify-login-shadcn`
 
 ## The Tech Stack
 
@@ -29,24 +29,15 @@ This project allows you to build Keycloak themes using the modern frontend stack
 
 ## Why use this starter?
 
-While Keycloakify does the heavy lifting of compiling React to Keycloak themes, setting up a production-ready project still takes time. This repository comes pre-configured with everything you need for a professional identity provider.
+While Keycloakify does the heavy lifting of compiling React to Keycloak themes, setting up a production-ready project still takes time. This starter comes pre-configured with everything you need for a professional identity provider, and now it's available as an npm package for instant setup.
 
-### 1. Complete Page Coverage
+### Key Features
 
-Most tutorials only show you how to style the Login page. This theme includes custom implementations for **all 35+ Keycloak login pages**, including:
+**Modern UI** - Beautiful, responsive design using Tailwind CSS v4 and shadcn/ui components that look great out of the box.
 
-- Login, Register, and Forgot Password
-- OTP and WebAuthn (Passkeys)
-- Terms & Conditions
-- Update Profile and more...
+**Dark Mode** - Built-in dark/light/system theme toggle with persistent preferences across sessions.
 
-### 2. Built-in Dark Mode
-
-Using `shadcn/ui` and Tailwind, the theme includes a robust dark/light mode toggle that persists user preferences.
-
-### 3. Internationalization (i18n)
-
-Keycloak is often used in global enterprise environments. This theme supports English, French, and Arabic (with RTL support) out of the box. Adding a new language is as simple as adding a key to the configuration:
+**Multi-language Support** - i18n ready with English, French, and Arabic (RTL supported) translations. Adding a new language is as simple as adding a key to the configuration:
 
 ```typescript
 // src/login/i18n.ts
@@ -59,18 +50,25 @@ Keycloak is often used in global enterprise environments. This theme supports En
         welcomeMessage: "Bienvenue sur votre application",
         loginAccountTitle: "Connectez-vous à votre compte",
     },
+    ar: { /* Arabic translations with RTL support */ }
 })
 ```
 
-### 4. Custom Email Templates
-
-One of the most neglected parts of IAM is email. Keycloak's default emails look outdated.
-
-This project integrates **jsx-email**, allowing you to build transactional emails (Password Reset, Email Verification) using React components. You can preview them locally before deploying:
+**Custom Email Templates** - One of the most neglected parts of IAM is email. This project integrates **jsx-email**, allowing you to build transactional emails (Password Reset, Email Verification, Login Errors) using React components. Preview them locally before deploying:
 
 ```bash
 pnpm emails:preview
 ```
+
+**Complete Login Flow** - All 35+ Keycloak login pages are fully customized, including Login, Register, OTP, WebAuthn (Passkeys), Terms & Conditions, Update Profile, and more.
+
+**social Login Providers** - Pre-styled icons for 16+ OAuth providers including Google, GitHub, Microsoft, and more.
+
+**Storybook Integration** - Visual testing and documentation for all components to streamline development.
+
+**Vite Powered** - Lightning-fast development with HMR and optimized production builds.
+
+**Type-Safe** - Full TypeScript support throughout the codebase for better developer experience.
 
 ## Screenshots
 
@@ -82,48 +80,96 @@ Here is a preview of the custom login screen:
 
 ## Developer Experience (DX)
 
-The biggest advantage of this setup is the loop. You can run the theme locally and see changes instantly without running a heavy Keycloak Docker container during UI development.
+The biggest advantage of this setup is the development loop. You can run the theme locally and see changes instantly without running a heavy Keycloak Docker container during UI development.
 
 ```bash
 # Start development server with hot reload
 pnpm dev
 
-# Run Storybook for component isolation
+# Run Storybook for component isolation and testing
 pnpm storybook
+
+# Preview email templates locally
+pnpm emails:preview
+
+# Build the Keycloak theme JAR
+pnpm build-keycloak-theme
 ```
 
 ## How to use it
 
-Getting started is straightforward. You will need Node.js and Maven (for the final build step).
+There are two ways to get started: using the npm package (recommended) or cloning the repository for deeper customization.
 
-1. **Clone the repository:**
+### Quick Start with npm Package
+
+The fastest way to get started is using the published npm package:
+
+1. **Create a new Vite + React + TypeScript project:**
 
    ```bash
-   git clone https://github.com/Oussemasahbeni/keycloak-react-theme-keycloakify.git
-   cd keycloak-react-theme-keycloakify
+   pnpm create vite
+   # Choose React and TypeScript when prompted
+   cd your-project-name
    ```
 
-2. **Install dependencies:**
+2. **Install the theme package:**
 
    ```bash
+   pnpm add keycloakify @oussemasahbeni/keycloakify-login-shadcn
    pnpm install
    ```
 
-3. **Customize:**
-   Change your logo in `src/login/assets` and adjust your colors in `src/login/index.css`.
+3. **Initialize Keycloakify:**
 
-4. **Build:**
+   ```bash
+   npx keycloakify init
+   # Select login theme and install stories when prompted
+   ```
+
+4. **Configure Vite** (update `vite.config.ts`):
+
+   ```typescript
+   import react from "@vitejs/plugin-react";
+   import { keycloakify } from "keycloakify/vite-plugin";
+   import { defineConfig } from "vite";
+   import path from "node:path";
+   import tailwindcss from "@tailwindcss/vite";
+
+   export default defineConfig({
+     plugins: [react(), tailwindcss(), keycloakify({ accountThemeImplementation: "none" })],
+     resolve: {
+       alias: { "@": path.resolve(__dirname, "./src") },
+     },
+   });
+   ```
+
+5. **Build the theme:**
 
    ```bash
    pnpm build-keycloak-theme
    ```
 
-   This generates a standard `.jar` file that you can drop into any Keycloak instance.
+   This generates a standard `.jar` file that you can deploy to any Keycloak instance.
+
+### Clone for Deep Customization
+
+If you want full control and plan to customize extensively:
+
+```bash
+git clone https://github.com/Oussemasahbeni/keycloakify-shadcn-starter.git
+cd keycloakify-shadcn-starter
+pnpm install
+```
+
+Then customize your logo in `src/login/assets`, adjust colors in `src/login/index.css`, and modify components as needed.
 
 ## Conclusion
 
 Identity screens are the front door to your application. They shouldn't look like they were built in 2010. By leveraging React and Keycloakify, we can bring the full power of the modern frontend ecosystem to Keycloak.
 
+With the npm package now available, getting started has never been easier. Install it, customize it, and deploy professional-looking authentication screens in minutes.
+
 Check out the repository, give it a star, and feel free to contribute!
 
-**[View on GitHub](https://github.com/Oussemasahbeni/keycloak-react-theme-keycloakify)**
+**[View on GitHub](https://github.com/Oussemasahbeni/keycloakify-shadcn-starter)**  
+**[npm Package](https://www.npmjs.com/package/@oussemasahbeni/keycloakify-login-shadcn)**

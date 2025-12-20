@@ -53,7 +53,7 @@ import { ContentMetadata } from '../../../models/content-metadata';
       <!-- FOOTER -->
       <div
         hlmCardFooter
-        class="flex items-center justify-between gap-4 mt-auto"
+        class="flex flex-col sm:flex-row items-start  sm:items-center justify-between gap-4 mt-auto"
       >
         <div class="flex flex-wrap gap-2">
           @for(tag of article.tags; track tag) {
@@ -69,7 +69,7 @@ import { ContentMetadata } from '../../../models/content-metadata';
           size="sm"
           variant="default"
           [routerLink]="['/blog', article.slug]"
-          class="group gap-2 pl-0 cursor-pointer transition-colors"
+          class="group gap-2 pl-0 cursor-pointer transition-colors w-full sm:w-fit"
         >
           Read article
           <ng-icon

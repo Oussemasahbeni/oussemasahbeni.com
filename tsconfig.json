@@ -21,18 +21,10 @@
       "@spartan-ng/helm/button": [
         "./src/app/components/ui/button/src/index.ts"
       ],
-      "@spartan-ng/helm/card": [
-        "./src/app/components/ui/card/src/index.ts"
-      ],
-      "@spartan-ng/helm/icon": [
-        "./src/app/components/ui/icon/src/index.ts"
-      ],
-      "@spartan-ng/helm/utils": [
-        "./src/app/components/ui/utils/src/index.ts"
-      ],
-      "@spartan-ng/helm/badge": [
-        "./src/app/components/ui/badge/src/index.ts"
-      ],
+      "@spartan-ng/helm/card": ["./src/app/components/ui/card/src/index.ts"],
+      "@spartan-ng/helm/icon": ["./src/app/components/ui/icon/src/index.ts"],
+      "@spartan-ng/helm/utils": ["./src/app/components/ui/utils/src/index.ts"],
+      "@spartan-ng/helm/badge": ["./src/app/components/ui/badge/src/index.ts"],
       "@spartan-ng/helm/dropdown-menu": [
         "./src/app/components/ui/dropdown-menu/src/index.ts"
       ],
@@ -42,14 +34,19 @@
       "@spartan-ng/helm/popover": [
         "./src/app/components/ui/popover/src/index.ts"
       ],
-      "@spartan-ng/helm/input": [
-        "./src/app/components/ui/input/src/index.ts"
+      "@spartan-ng/helm/input": ["./src/app/components/ui/input/src/index.ts"],
+
+      "@spartan-ng/helm/sheet": ["./src/app/components/ui/sheet/src/index.ts"],
+      "@spartan-ng/helm/textarea": [
+        "./src/app/components/ui/textarea/src/index.ts"
       ],
-      "@spartan-ng/helm/form-field": [
-        "./src/app/components/ui/form-field/src/index.ts"
+      "@spartan-ng/helm/spinner": [
+        "./src/app/components/ui/spinner/src/index.ts"
       ],
-      "@spartan-ng/helm/sheet": [
-        "./src/app/components/ui/sheet/src/index.ts"
+      "@spartan-ng/helm/field": ["./src/app/components/ui/field/src/index.ts"],
+      "@spartan-ng/helm/label": ["./src/app/components/ui/label/src/index.ts"],
+      "@spartan-ng/helm/separator": [
+        "./src/app/components/ui/separator/src/index.ts"
       ]
     }
   },

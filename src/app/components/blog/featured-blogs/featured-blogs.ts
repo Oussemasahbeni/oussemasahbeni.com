@@ -23,8 +23,7 @@ import { FeaturedBlogPreview } from '../featured-blog-preview/featured-blog-prev
 
     <div class="mt-6 w-full grid grid-cols-1  lg:grid-cols-3 gap-4">
       @for(article of articles; track article.slug){
-      <app-featured-blog-preview [article]="article" />
-
+      <app-featured-blog-preview [article]="article.attributes" />
       }
     </div>`,
 })

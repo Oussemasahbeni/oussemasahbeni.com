@@ -60,6 +60,7 @@ export class Navbar {
       link: '/projects',
       ariaLabel: 'Projects page',
     },
+    { title: 'Contact', link: '/contact', ariaLabel: 'Contact page' },
   ]);
 
   closeMenu() {

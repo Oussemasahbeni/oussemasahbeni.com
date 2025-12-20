@@ -1,0 +1,203 @@
+<app-noise-background />
+<section
+  class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 animate-in fade-in slide-in-from-bottom-4 duration-500"
+>
+  <div class="flex flex-col gap-8">
+    <!-- Section Header -->
+    <div class="text-center">
+      <div
+        class="inline-flex items-center gap-2 text-lg font-mono text-zinc-600 dark:text-zinc-400"
+      >
+        <span class="w-8 h-px bg-zinc-300 dark:bg-zinc-700"></span>
+        <span>Get In Touch</span>
+        <span class="w-8 h-px bg-zinc-300 dark:bg-zinc-700"></span>
+      </div>
+      <h1 class="mt-4 text-4xl font-bold text-zinc-900 dark:text-zinc-100">
+        Let's Work Together
+      </h1>
+      <p
+        class="mt-4 text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto"
+      >
+        I'm always open to discussing new projects, creative ideas, or
+        opportunities to be part of your vision.
+      </p>
+    </div>
+
+    <!-- Contact Methods Grid -->
+    <div class="grid gap-6 grid-cols-1 lg:grid-cols-3 mt-8">
+      @for (method of contactMethods(); track method.title) {
+      <div hlmCard class="p-6 hover:shadow-lg transition-shadow">
+        <div class="flex items-start gap-4">
+          <ng-icon
+            hlmIcon
+            [name]="method.icon"
+            size="lg"
+            class="flex items-center justify-center rounded-lg"
+          />
+          <div class="flex-1">
+            <h3 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+              {{ method.title }}
+            </h3>
+            <p class="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+              {{ method.description }}
+            </p>
+            @if (method.value) {
+            <p class="mt-2 font-mono text-sm text-zinc-700 dark:text-zinc-300">
+              {{ method.value }}
+            </p>
+            }
+          </div>
+        </div>
+        @if (method.link) {
+        <div hlmCardAction class="w-full mt-auto">
+          <a
+            [href]="method.link"
+            target="_blank"
+            rel="noopener noreferrer"
+            hlmBtn
+            class="w-full"
+          >
+            <ng-icon name="lucideExternalLink" hlm size="sm" />
+            {{ method.linkText }}
+          </a>
+        </div>
+        }
+      </div>
+      }
+    </div>
+
+    <!--  Form  -->
+
+    <div hlmCard class="p-8 mt-12">
+      @if (submitMessage() !== 'success') {
+      <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
+        Send Me a Message
+      </h2>
+      <p class="text-sm text-zinc-600 dark:text-zinc-400 mb-6">
+        Fill out the form below and I'll get back to you as soon as possible.
+      </p>
+
+      <form (submit)="onSubmit($event)" class="flex flex-col gap-4">
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Name Field -->
+          <div hlmField>
+            <label hlmFieldLabel for="name">Name</label>
+            <input
+              hlmInput
+              id="name"
+              type="text"
+              [field]="contactForm.name"
+              placeholder="Your Name"
+              class="w-full"
+            />
+            @if (contactForm.name().touched() && contactForm.name().invalid()) {
+            @for (error of contactForm.name().errors(); track error) {
+            <hlm-field-error>{{ error.message }}</hlm-field-error>
+            } }
+          </div>
+
+          <!-- Email Field -->
+          <div hlmField>
+            <label hlmFieldLabel for="email">Email</label>
+            <input
+              hlmInput
+              id="email"
+              type="email"
+              [field]="contactForm.email"
+              placeholder="your.email@example.com"
+              class="w-full"
+            />
+
+            @if (contactForm.email().touched() && contactForm.email().invalid())
+            { @for (error of contactForm.email().errors(); track error) {
+            <hlm-field-error>{{ error.message }}</hlm-field-error>
+            } }
+          </div>
+        </div>
+
+        <!-- Subject Field -->
+        <div hlmField>
+          <label hlmFieldLabel for="subject">Subject</label>
+          <input
+            hlmInput
+            id="subject"
+            type="text"
+            [field]="contactForm.subject"
+            placeholder="What's this about?"
+            class="w-full"
+          />
+          @if (contactForm.subject().touched() &&
+          contactForm.subject().invalid()) { @for (error of
+          contactForm.subject().errors(); track error) {
+          <hlm-field-error>{{ error.message }}</hlm-field-error>
+          } }
+        </div>
+
+        <!-- Message Field -->
+        <div hlmField>
+          <label hlmFieldLabel for="message">Message</label>
+          <textarea
+            id="message"
+            [field]="contactForm.message"
+            placeholder="Tell me more about your project or inquiry..."
+            hlmTextarea
+            class="min-h-38"
+          ></textarea>
+
+          @if (contactForm.message().touched() &&
+          contactForm.message().invalid()) { @for (error of
+          contactForm.message().errors(); track error) {
+          <hlm-field-error>{{ error.message }}</hlm-field-error>
+          } }
+        </div>
+
+        <div class="absolute -top-1250 -left-1250" aria-hidden="true">
+          <input
+            type="text"
+            tabindex="-1"
+            autocomplete="off"
+            [field]="contactForm.honeypot"
+          />
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex justify-end mt-4">
+          <button
+            hlmBtn
+            type="submit"
+            size="lg"
+            class="w-fit"
+            [disabled]="contactForm().invalid() || isSubmitting()"
+          >
+            @if (isSubmitting()) {
+            <hlm-spinner />
+            }@else {
+            <ng-icon name="lucideSend" hlm size="sm" />
+            }
+            <span>Send Message</span>
+          </button>
+        </div>
+      </form>
+      } @else {
+      <!-- Success Hero View -->
+      <div class="py-12 text-center animate-in fade-in zoom-in duration-300">
+        <ng-icon
+          hlmIcon
+          size="lg"
+          name="lucideCheckCircle"
+          class="text-green-600"
+        />
+        <h2 class="mt-4 text-2xl font-bold text-zinc-900 dark:text-zinc-100">
+          Message Sent!
+        </h2>
+        <p class="mt-2 text-zinc-600 dark:text-zinc-400">
+          Thank you for reaching out. I'll get back to you within 24-48 hours.
+        </p>
+        <button hlmBtn variant="outline" class="mt-8" (click)="sendAnotherMessage()">
+          Send another message
+        </button>
+      </div>
+      }
+    </div>
+  </div>
+</section>

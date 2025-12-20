@@ -3,15 +3,19 @@ import { hlm } from '@spartan-ng/helm/utils';
 import type { ClassValue } from 'clsx';
 
 @Directive({
-	// eslint-disable-next-line @angular-eslint/directive-selector
-	selector: 'hlm-error',
+	selector: '[hlmFieldGroup],hlm-field-group',
 	host: {
+		'data-slot': 'field-group',
 		'[class]': '_computedClass()',
 	},
 })
-export class HlmError {
+export class HlmFieldGroup {
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+
 	protected readonly _computedClass = computed(() =>
-		hlm('text-destructive block text-sm font-medium', this.userClass()),
+		hlm(
+			'group/field-group @container/field-group flex w-full flex-col gap-7 data-[slot=checkbox-group]:gap-3 [&>[data-slot=field-group]]:gap-4',
+			this.userClass(),
+		),
 	);
 }
