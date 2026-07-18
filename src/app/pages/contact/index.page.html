@@ -84,8 +84,8 @@
         <form (submit)="onSubmit($event)" class="flex flex-col gap-4">
           <div class="grid md:grid-cols-2 gap-6">
             <!-- Name Field -->
-            <div hlmField>
-              <label hlmFieldLabel for="name">Name</label>
+            <hlm-field>
+              <hlm-field-label for="name">Name</hlm-field-label>
               <input
                 hlmInput
                 id="name"
@@ -101,11 +101,11 @@
                   <hlm-field-error>{{ error.message }}</hlm-field-error>
                 }
               }
-            </div>
+            </hlm-field>
 
             <!-- Email Field -->
-            <div hlmField>
-              <label hlmFieldLabel for="email">Email</label>
+            <hlm-field>
+              <hlm-field-label for="email">Email</hlm-field-label>
               <input
                 hlmInput
                 id="email"
@@ -122,12 +122,12 @@
                   <hlm-field-error>{{ error.message }}</hlm-field-error>
                 }
               }
-            </div>
+            </hlm-field>
           </div>
 
           <!-- Subject Field -->
-          <div hlmField>
-            <label hlmFieldLabel for="subject">Subject</label>
+          <hlm-field>
+            <hlm-field-label for="subject">Subject</hlm-field-label>
             <input
               hlmInput
               id="subject"
@@ -143,11 +143,11 @@
                 <hlm-field-error>{{ error.message }}</hlm-field-error>
               }
             }
-          </div>
+          </hlm-field>
 
           <!-- Message Field -->
-          <div hlmField>
-            <label hlmFieldLabel for="message">Message</label>
+          <hlm-field>
+            <hlm-field-label for="message">Message</hlm-field-label>
             <textarea
               id="message"
               [field]="contactForm.message"
@@ -162,7 +162,7 @@
                 <hlm-field-error>{{ error.message }}</hlm-field-error>
               }
             }
-          </div>
+          </hlm-field>
 
           <div class="absolute -top-1250 -left-1250" aria-hidden="true">
             <input
