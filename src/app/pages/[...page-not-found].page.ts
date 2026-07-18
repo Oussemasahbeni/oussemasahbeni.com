@@ -14,7 +14,6 @@ export const routeMeta: RouteMeta = {
   },
   template: `
     <h2>Page Not Found</h2>
-
     <a hlmBtn variant="default" routerLink="/">Go Back Home</a>
   `,
 })

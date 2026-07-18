@@ -15,6 +15,7 @@
   "include": [
     "src/**/*.d.ts",
     "src/app/pages/**/*.page.ts",
-    "src/server/middleware/**/*.ts"
+    "src/server/middleware/**/*.ts",
+    "src/app/components/ui/**/src/**/*.ts"
   ]
 }

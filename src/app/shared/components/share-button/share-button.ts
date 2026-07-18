@@ -8,13 +8,11 @@ import {
   PLATFORM_ID,
   signal,
 } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCheck, lucideCopy, lucideShare2 } from '@ng-icons/lucide';
 import { radixLinkedinLogo } from '@ng-icons/radix-icons';
-import { remixFacebookBoxFill, remixTwitterXFill } from '@ng-icons/remixicon';
-import { BrnPopoverImports } from '@spartan-ng/brain/popover';
+import { simpleFacebook, simpleX } from '@ng-icons/simple-icons';
 import { HlmButton } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmPopoverImports } from '@spartan-ng/helm/popover';
 
@@ -23,20 +21,14 @@ import { HlmPopoverImports } from '@spartan-ng/helm/popover';
   providers: [
     provideIcons({
       lucideCopy,
-      remixFacebookBoxFill,
+      simpleFacebook,
       radixLinkedinLogo,
-      remixTwitterXFill,
+      simpleX,
       lucideCheck,
       lucideShare2,
     }),
   ],
-  imports: [
-    HlmButton,
-    BrnPopoverImports,
-    HlmPopoverImports,
-    HlmIconImports,
-    HlmInputImports,
-  ],
+  imports: [HlmButton, NgIcon, HlmPopoverImports, HlmInputImports],
   templateUrl: './share-button.html',
 })
 export class ShareButton {

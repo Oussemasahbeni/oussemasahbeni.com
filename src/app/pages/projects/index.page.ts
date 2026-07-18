@@ -1,12 +1,10 @@
 import { RouteMeta } from '@analogjs/router';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
-import { lucideExternalLink } from '@ng-icons/lucide';
-import { radixLockClosed } from '@ng-icons/radix-icons';
+import { Component, signal } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideExternalLink, lucideLock } from '@ng-icons/lucide';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCardImports } from '@spartan-ng/helm/card';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { NoiseBackgroundComponent } from '../../shared/components/noise-background/noise-background';
 
 export const routeMeta: RouteMeta = {
@@ -19,17 +17,16 @@ export const routeMeta: RouteMeta = {
     HlmCardImports,
     HlmButtonImports,
     HlmBadgeImports,
-    HlmIconImports,
+    NgIcon,
     NoiseBackgroundComponent,
   ],
   providers: [
     provideIcons({
       lucideExternalLink,
-      radixLockClosed,
+      lucideLock,
     }),
   ],
   templateUrl: './index.page.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class Projects {
   projects = signal([

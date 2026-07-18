@@ -1,9 +1,7 @@
 import { Component, computed, inject } from '@angular/core';
-
-import { provideIcons } from '@ng-icons/core';
-import { radixMoon, radixSun } from '@ng-icons/radix-icons';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideMoon, lucideSun } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { ThemeService } from '../../core/services/theme.service';
 
 @Component({
@@ -17,17 +15,17 @@ import { ThemeService } from '../../core/services/theme.service';
       size="icon"
       variant="ghost"
     >
-      <ng-icon [name]="isDark() ? 'radixSun' : 'radixMoon'" hlmIcon size="sm" />
+      <ng-icon [name]="isDark() ? 'lucideSun' : 'lucideMoon'" />
     </button>
   `,
-  providers: [provideIcons({ radixSun, radixMoon })],
-  imports: [HlmIconImports, HlmButtonImports],
+  providers: [provideIcons({ lucideSun, lucideMoon })],
+  imports: [NgIcon, HlmButtonImports],
 })
 export class ThemeToggle {
   protected readonly themeService = inject(ThemeService);
 
   protected readonly isDark = computed(
-    () => this.themeService.theme() === 'dark'
+    () => this.themeService.theme() === 'dark',
   );
 
   protected toggleTheme(event: MouseEvent): void {

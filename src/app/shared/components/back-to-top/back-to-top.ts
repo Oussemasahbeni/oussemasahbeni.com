@@ -1,6 +1,5 @@
 import { ViewportScroller } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   DOCUMENT,
   inject,
@@ -8,15 +7,14 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
-import { radixArrowUp } from '@ng-icons/radix-icons';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideArrowUp } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 
 @Component({
   selector: 'app-back-to-top',
-  imports: [HlmButtonImports, HlmIconImports],
-  providers: [provideIcons({ radixArrowUp })],
+  imports: [HlmButtonImports, NgIcon],
+  providers: [provideIcons({ lucideArrowUp })],
   template: `@if (isVisible()) {
     <button
       hlmBtn
@@ -26,14 +24,13 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
       size="icon"
       aria-label="Scroll back to top"
     >
-      <ng-icon size="sm" name="radixArrowUp" hlm />
+      <ng-icon name="lucideArrowUp" />
     </button>
-    } `,
+  } `,
   encapsulation: ViewEncapsulation.None,
   host: {
     '(window:scroll)': 'onWindowScroll()',
   },
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BackToTop {
   // -----------------------------------------------------------------------------------------------------

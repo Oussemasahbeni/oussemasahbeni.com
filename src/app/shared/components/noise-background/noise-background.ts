@@ -1,6 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   ElementRef,
@@ -30,7 +29,6 @@ import { createNoise3D } from 'simplex-noise';
   host: {
     class: 'block',
   },
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NoiseBackgroundComponent {
   private readonly ngZone = inject(NgZone);
@@ -177,7 +175,7 @@ export class NoiseBackgroundComponent {
     w: number,
     h: number,
     dotTexture: Texture,
-    container: ParticleContainer
+    container: ParticleContainer,
   ) {
     for (let x = -this.SPACING / 2; x < w + this.SPACING; x += this.SPACING) {
       for (let y = -this.SPACING / 2; y < h + this.SPACING; y += this.SPACING) {

@@ -1,17 +1,14 @@
 import { CdkMenuGroup } from '@angular/cdk/menu';
-import { computed, Directive, input } from '@angular/core';
-import { hlm } from '@spartan-ng/helm/utils';
-import type { ClassValue } from 'clsx';
+import { Directive } from '@angular/core';
+import { classes } from '@spartan-ng/helm/utils';
 
 @Directive({
 	selector: '[hlmDropdownMenuGroup],hlm-dropdown-menu-group',
 	hostDirectives: [CdkMenuGroup],
-	host: {
-		'data-slot': 'dropdown-menu-group',
-		'[class]': '_computedClass()',
-	},
+	host: { 'data-slot': 'dropdown-menu-group' },
 })
 export class HlmDropdownMenuGroup {
-	public readonly userClass = input<ClassValue>('', { alias: 'class' });
-	protected readonly _computedClass = computed(() => hlm('block', this.userClass()));
+	constructor() {
+		classes(() => 'block');
+	}
 }

@@ -1,13 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  PLATFORM_ID,
-  inject,
-  signal,
-} from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { Component, OnInit, PLATFORM_ID, inject, signal } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideDumbbell,
   lucideFolders,
@@ -15,7 +8,6 @@ import {
   lucideUsers,
 } from '@ng-icons/lucide';
 import { HlmCardImports } from '@spartan-ng/helm/card';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { GithubApiService } from '../../../core/services/github-api.service';
 import { SpotlightDirective } from '../../../shared/directives/spotlight.directive';
 
@@ -27,7 +19,7 @@ interface TechStack {
 
 @Component({
   selector: 'app-about-me',
-  imports: [HlmCardImports, HlmIconImports, SpotlightDirective],
+  imports: [HlmCardImports, NgIcon, SpotlightDirective],
   providers: [
     provideIcons({
       lucideUsers,
@@ -38,8 +30,6 @@ interface TechStack {
   ],
   templateUrl: './about-me.html',
   styleUrls: ['./about-me.css'],
-
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AboutMe implements OnInit {
   private readonly gitApi = inject(GithubApiService);

@@ -1,10 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  PLATFORM_ID,
-  inject,
-} from '@angular/core';
+import { Component, PLATFORM_ID, inject } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 
 import { Footer } from './layout/footer/footer';
@@ -32,7 +27,6 @@ declare const gtag: Function;
       [showAfter]="200"
     />
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App {
   private readonly router = inject(Router);

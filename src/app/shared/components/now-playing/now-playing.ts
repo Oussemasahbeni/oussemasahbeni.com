@@ -1,19 +1,17 @@
 import { NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { Component, inject } from '@angular/core';
+import { NgIcon,provideIcons } from '@ng-icons/core';
 import { lucideMusic } from '@ng-icons/lucide';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { SpotifyService } from '../../../core/services/spotify.service';
 
 @Component({
   selector: 'app-now-playing',
-  imports: [NgOptimizedImage, HlmIconImports],
+  imports: [NgOptimizedImage, NgIcon],
   providers: [
     provideIcons({
       lucideMusic,
     }),
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './now-playing.css',
   template: `
     <div
@@ -21,72 +19,69 @@ import { SpotifyService } from '../../../core/services/spotify.service';
     >
       <!-- Spotify Green Accent Line -->
       @if (nowPlaying().isPlaying) {
-      <div
-        class="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-6 bg-linear-to-b from-green-400 to-green-600 rounded-r-full animate-pulse"
-      ></div>
+        <div
+          class="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-6 bg-linear-to-b from-green-400 to-green-600 rounded-r-full animate-pulse"
+        ></div>
       }
 
       <!-- Album Art / Icon -->
       @if (nowPlaying().isPlaying && nowPlaying().albumImageUrl) {
-      <img
-        [ngSrc]="nowPlaying().albumImageUrl!"
-        alt="Album cover"
-        width="32"
-        height="32"
-        class="object-cover "
-        priority
-      />
-
-      } @else {
-      <div
-        class="w-8 h-8 rounded-md bg-linear-to-br from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-800 flex items-center justify-center shrink-0 shadow-sm"
-      >
-        <ng-icon
-          hlm
-          name="lucideMusic"
-          size="xs"
-          class="text-zinc-500 dark:text-zinc-400"
+        <img
+          [ngSrc]="nowPlaying().albumImageUrl!"
+          alt="Album cover"
+          width="32"
+          height="32"
+          class="object-cover "
+          priority
         />
-      </div>
+      } @else {
+        <div
+          class="w-8 h-8 rounded-md bg-linear-to-br from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-800 flex items-center justify-center shrink-0 shadow-sm"
+        >
+          <ng-icon
+            name="lucideMusic"
+            class="text-zinc-500 dark:text-zinc-400"
+          />
+        </div>
       }
 
       <!-- Song Info -->
       <div class="flex flex-col min-w-0 max-w-40">
         @if (nowPlaying().isPlaying) {
-        <a
-          [href]="nowPlaying().songUrl"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-xs font-semibold text-zinc-900 dark:text-zinc-50 truncate hover:text-green-600 dark:hover:text-green-400 transition-colors duration-200"
-        >
-          {{ nowPlaying().title }}
-        </a>
-        <span
-          class="text-[10px] text-zinc-600 dark:text-zinc-400 truncate flex items-center gap-1"
-        >
+          <a
+            [href]="nowPlaying().songUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-xs font-semibold text-zinc-900 dark:text-zinc-50 truncate hover:text-green-600 dark:hover:text-green-400 transition-colors duration-200"
+          >
+            {{ nowPlaying().title }}
+          </a>
           <span
-            class="inline-block w-1 h-1 rounded-full bg-green-500 animate-pulse"
-          ></span>
-          {{ nowPlaying().artist }}
-        </span>
+            class="text-[10px] text-zinc-600 dark:text-zinc-400 truncate flex items-center gap-1"
+          >
+            <span
+              class="inline-block w-1 h-1 rounded-full bg-green-500 animate-pulse"
+            ></span>
+            {{ nowPlaying().artist }}
+          </span>
         } @else {
-        <span class="text-xs font-medium text-zinc-500 dark:text-zinc-500">
-          Not playing
-        </span>
+          <span class="text-xs font-medium text-zinc-500 dark:text-zinc-500">
+            Not playing
+          </span>
         }
       </div>
 
       <!-- Animated Equalizer Bars -->
       @if (nowPlaying().isPlaying) {
-      <div class="flex gap-0.5 items-end ml-auto h-4">
-        @for (bar of [1, 2, 3]; track bar) {
-        <div
-          class="w-0.5 bg-linear-to-t from-green-600 to-green-400 rounded-full origin-bottom equalizer-bar"
-          [style.height.px]="6 + bar * 2"
-          [style.animation-delay]="bar * 0.1 + 's'"
-        ></div>
-        }
-      </div>
+        <div class="flex gap-0.5 items-end ml-auto h-4">
+          @for (bar of [1, 2, 3]; track bar) {
+            <div
+              class="w-0.5 bg-linear-to-t from-green-600 to-green-400 rounded-full origin-bottom equalizer-bar"
+              [style.height.px]="6 + bar * 2"
+              [style.animation-delay]="bar * 0.1 + 's'"
+            ></div>
+          }
+        </div>
       }
     </div>
   `,

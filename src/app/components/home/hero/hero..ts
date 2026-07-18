@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ButtonVariants, HlmButtonImports } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 
 export interface ActionButton {
   title: string;
@@ -11,14 +10,12 @@ export interface ActionButton {
 
 @Component({
   selector: 'app-hero',
-  imports: [HlmButtonImports, HlmIconImports],
+  imports: [HlmButtonImports],
   templateUrl: './hero.html',
   styleUrl: './hero.css',
   host: {
     class:
       'block  relative min-h-screen flex items-center justify-center  px-4 sm:px-6 lg:px-8',
   },
-
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Hero {}

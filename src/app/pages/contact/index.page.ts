@@ -1,31 +1,25 @@
 import { RouteMeta } from '@analogjs/router';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  signal,
-} from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
   email,
-  Field,
   form,
+  FormField,
   minLength,
   required,
 } from '@angular/forms/signals';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideCheckCircle,
   lucideExternalLink,
-  lucideGithub,
-  lucideLinkedin,
   lucideMail,
   lucideSend,
 } from '@ng-icons/lucide';
+import { radixLinkedinLogo } from '@ng-icons/radix-icons';
+import { simpleGithub } from '@ng-icons/simple-icons';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCardImports } from '@spartan-ng/helm/card';
 import { HlmFieldImports } from '@spartan-ng/helm/field';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
 import { HlmTextareaImports } from '@spartan-ng/helm/textarea';
@@ -39,11 +33,11 @@ export const routeMeta: RouteMeta = {
 @Component({
   selector: 'app-contact',
   imports: [
-    Field,
+    FormField,
     HlmCardImports,
     HlmButtonImports,
     HlmBadgeImports,
-    HlmIconImports,
+    NgIcon,
     HlmInputImports,
     HlmTextareaImports,
     HlmSpinnerImports,
@@ -53,15 +47,14 @@ export const routeMeta: RouteMeta = {
   providers: [
     provideIcons({
       lucideExternalLink,
-      lucideGithub,
-      lucideLinkedin,
+      simpleGithub,
+      radixLinkedinLogo,
       lucideMail,
       lucideSend,
       lucideCheckCircle,
     }),
   ],
   templateUrl: './index.page.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class Contact {
   private readonly contactService = inject(ContactService);
@@ -76,7 +69,7 @@ export default class Contact {
       linkText: 'Send Email',
     },
     {
-      icon: 'lucideLinkedin',
+      icon: 'radixLinkedinLogo',
       title: 'LinkedIn',
       description: 'Connect with me professionally',
       value: null,
@@ -84,7 +77,7 @@ export default class Contact {
       linkText: 'View Profile',
     },
     {
-      icon: 'lucideGithub',
+      icon: 'simpleGithub',
       title: 'GitHub',
       description: 'Check out my open source work',
       value: '@Oussemasahbeni',

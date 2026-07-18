@@ -1,35 +1,26 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
-import { lucideGithub, lucidePhone } from '@ng-icons/lucide';
+import { Component, signal } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideMail, lucidePhone } from '@ng-icons/lucide';
 
-import {
-  radixEnvelopeClosed,
-  radixGithubLogo,
-  radixInstagramLogo,
-  radixLinkedinLogo,
-  radixTwitterLogo,
-} from '@ng-icons/radix-icons';
-import { remixTwitterXFill } from '@ng-icons/remixicon';
+import { radixLinkedinLogo } from '@ng-icons/radix-icons';
+import { simpleGithub, simpleInstagram, simpleX } from '@ng-icons/simple-icons';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
-import { GITHUB_LINK, X_LINK, LINKEDIN_LINK } from '../../core/constants';
+import { GITHUB_LINK, LINKEDIN_LINK, X_LINK } from '../../core/constants';
 
 @Component({
   selector: 'app-footer',
-  imports: [HlmButtonImports, HlmIconImports],
+  imports: [HlmButtonImports, NgIcon],
   providers: [
     provideIcons({
       radixLinkedinLogo,
-      lucideGithub,
-      radixEnvelopeClosed,
-      radixInstagramLogo,
-      radixTwitterLogo,
+      simpleGithub,
+      lucideMail,
+      simpleInstagram,
+      simpleX,
       lucidePhone,
-      remixTwitterXFill,
     }),
   ],
   templateUrl: './footer.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Footer {
   readonly date = signal(new Date().getFullYear());

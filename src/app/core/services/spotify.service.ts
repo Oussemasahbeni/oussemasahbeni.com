@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject, signal } from '@angular/core';
+import { Injectable, Service, inject, signal } from '@angular/core';
 import { catchError, interval, of, startWith, switchMap } from 'rxjs';
 
 export interface SpotifyNowPlaying {
@@ -11,9 +11,7 @@ export interface SpotifyNowPlaying {
   songUrl?: string;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class SpotifyService {
   private readonly http = inject(HttpClient);
 

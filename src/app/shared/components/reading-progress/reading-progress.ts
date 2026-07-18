@@ -40,14 +40,13 @@ import { fromEvent, throttleTime } from 'rxjs';
 export class ReadingProgress {
   private readonly document = inject(DOCUMENT);
   private readonly platformId = inject(PLATFORM_ID);
-  private readonly destroyRef = inject(DestroyRef);
 
   readonly readingProgress = signal(0);
 
   constructor() {
     if (isPlatformBrowser(this.platformId)) {
       fromEvent(window, 'scroll')
-        .pipe(throttleTime(20), takeUntilDestroyed(this.destroyRef))
+        .pipe(throttleTime(20), takeUntilDestroyed())
         .subscribe(() => {
           this.calculateReadingProgress();
         });

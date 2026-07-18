@@ -1,27 +1,23 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCheck } from '@ng-icons/lucide';
-import { hlm } from '@spartan-ng/helm/utils';
-import type { ClassValue } from 'clsx';
+import { classes } from '@spartan-ng/helm/utils';
 
 @Component({
 	selector: 'hlm-dropdown-menu-checkbox-indicator',
 	imports: [NgIcon],
 	providers: [provideIcons({ lucideCheck })],
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	host: {
-		'[class]': '_computedClass()',
-	},
+	host: { 'data-slot': 'dropdown-menu-checkbox-item-indicator' },
 	template: `
-		<ng-icon class="text-base" name="lucideCheck" />
+		<ng-icon name="lucideCheck" />
 	`,
 })
 export class HlmDropdownMenuCheckboxIndicator {
-	public readonly userClass = input<ClassValue>('', { alias: 'class' });
-	protected readonly _computedClass = computed(() =>
-		hlm(
-			'pointer-events-none absolute left-2 flex size-3.5 items-center justify-center opacity-0 group-data-[checked]:opacity-100',
-			this.userClass(),
-		),
-	);
+	constructor() {
+		classes(
+			() =>
+				'absolute end-2 flex items-center justify-center [&_ng-icon]:text-[length:--spacing(4)] pointer-events-none opacity-0 group-data-checked/dropdown-menu-checkbox:opacity-100',
+		);
+	}
 }

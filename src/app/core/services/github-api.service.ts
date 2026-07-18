@@ -1,10 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { shareReplay } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class GithubApiService {
   private readonly http = inject(HttpClient);
 

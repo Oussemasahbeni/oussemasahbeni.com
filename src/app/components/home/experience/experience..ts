@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmCardImports } from '@spartan-ng/helm/card';
 
@@ -7,7 +7,6 @@ import { HlmCardImports } from '@spartan-ng/helm/card';
   selector: 'app-experience',
   imports: [CommonModule, HlmCardImports, HlmBadgeImports],
   templateUrl: './experience.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Experience {
   experience = signal([

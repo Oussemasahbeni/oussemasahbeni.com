@@ -1,30 +1,22 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  signal,
-  viewChild,
-} from '@angular/core';
+import { Component, signal, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { provideIcons } from '@ng-icons/core';
-import { lucideGithub, lucideRss } from '@ng-icons/lucide';
-import { radixHamburgerMenu, radixLinkedinLogo } from '@ng-icons/radix-icons';
-import { remixTwitterXFill } from '@ng-icons/remixicon';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { GITHUB_LINK, LINKEDIN_LINK, X_LINK } from '../../core/constants';
 import { NowPlaying } from '../../shared/components/now-playing/now-playing';
 import { ThemeToggle } from '../theme-toggle/theme-toggle';
 
-import { BrnSheet, BrnSheetImports } from '@spartan-ng/brain/sheet';
-import { HlmSheetImports } from '@spartan-ng/helm/sheet';
+import { lucideMenu, lucideRss } from '@ng-icons/lucide';
+import { radixLinkedinLogo } from '@ng-icons/radix-icons';
+import { simpleGithub, simpleX } from '@ng-icons/simple-icons';
+import { HlmSheet, HlmSheetImports } from '@spartan-ng/helm/sheet';
 
 @Component({
   selector: 'app-navbar',
   imports: [
     RouterLink,
     HlmButtonImports,
-    HlmIconImports,
-    BrnSheetImports,
+    NgIcon,
     HlmSheetImports,
     ThemeToggle,
     NowPlaying,
@@ -32,17 +24,16 @@ import { HlmSheetImports } from '@spartan-ng/helm/sheet';
   templateUrl: './navbar.html',
   providers: [
     provideIcons({
-      radixHamburgerMenu,
-      lucideGithub,
-      lucideRss,
-      remixTwitterXFill,
+      lucideMenu,
+      simpleGithub,
       radixLinkedinLogo,
+      lucideRss,
+      simpleX,
     }),
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Navbar {
-  public readonly viewchildSheetRef = viewChild(BrnSheet);
+  public readonly viewchildSheetRef = viewChild(HlmSheet);
 
   readonly navigation = signal([
     {
