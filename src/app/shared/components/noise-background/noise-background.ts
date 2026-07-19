@@ -1,31 +1,11 @@
 import { isPlatformBrowser } from '@angular/common';
-import {
-  Component,
-  DestroyRef,
-  ElementRef,
-  NgZone,
-  PLATFORM_ID,
-  afterNextRender,
-  inject,
-  viewChild,
-} from '@angular/core';
-import {
-  Application,
-  Graphics,
-  Particle,
-  ParticleContainer,
-  Texture,
-} from 'pixi.js';
+import { Component, DestroyRef, ElementRef, NgZone, PLATFORM_ID, afterNextRender, inject, viewChild } from '@angular/core';
+import { Application, Graphics, Particle, ParticleContainer, Texture } from 'pixi.js';
 import { createNoise3D } from 'simplex-noise';
 
 @Component({
   selector: 'app-noise-background',
-  template: `
-    <div
-      #container
-      class="fixed inset-0 pointer-events-none -z-10 dark:invert"
-    ></div>
-  `,
+  template: ` <div #container class="pointer-events-none fixed inset-0 -z-10 dark:invert"></div> `,
   host: {
     class: 'block',
   },
@@ -35,8 +15,7 @@ export class NoiseBackgroundComponent {
   private readonly destroyRef = inject(DestroyRef);
   private readonly platformId = inject(PLATFORM_ID);
 
-  readonly containerRef =
-    viewChild.required<ElementRef<HTMLDivElement>>('container');
+  protected readonly containerRef = viewChild.required<ElementRef<HTMLDivElement>>('container');
 
   // Pixi
   private app: Application | null = null;
@@ -49,7 +28,7 @@ export class NoiseBackgroundComponent {
   }[] = [];
   private existingPoints = new Set<string>();
   private dotTexture: Texture | null = null;
-  private resizeTimeout: any;
+  private resizeTimeout: ReturnType<typeof setTimeout> | undefined;
 
   // Controls how "zoomed in" the noise patterns are
   private readonly SCALE = 200;
@@ -144,8 +123,7 @@ export class NoiseBackgroundComponent {
         particle.y = y + Math.sin(rad) * len;
 
         const cosRad = Math.cos(rad);
-        particle.alpha =
-          ((cosRad > 0 ? cosRad : -cosRad) * 0.8 + 0.2) * opacity;
+        particle.alpha = ((cosRad > 0 ? cosRad : -cosRad) * 0.8 + 0.2) * opacity;
       }
     });
   }
@@ -171,12 +149,7 @@ export class NoiseBackgroundComponent {
     return app.renderer.generateTexture(g);
   }
 
-  private addPoints(
-    w: number,
-    h: number,
-    dotTexture: Texture,
-    container: ParticleContainer,
-  ) {
+  private addPoints(w: number, h: number, dotTexture: Texture, container: ParticleContainer) {
     for (let x = -this.SPACING / 2; x < w + this.SPACING; x += this.SPACING) {
       for (let y = -this.SPACING / 2; y < h + this.SPACING; y += this.SPACING) {
         const id = `${x}-${y}`;

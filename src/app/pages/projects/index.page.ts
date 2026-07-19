@@ -13,13 +13,7 @@ export const routeMeta: RouteMeta = {
 
 @Component({
   selector: 'app-projects',
-  imports: [
-    HlmCardImports,
-    HlmButtonImports,
-    HlmBadgeImports,
-    NgIcon,
-    NoiseBackgroundComponent,
-  ],
+  imports: [HlmCardImports, HlmButtonImports, HlmBadgeImports, NgIcon, NoiseBackgroundComponent],
   providers: [
     provideIcons({
       lucideExternalLink,
@@ -29,7 +23,7 @@ export const routeMeta: RouteMeta = {
   templateUrl: './index.page.html',
 })
 export default class Projects {
-  projects = signal([
+  protected readonly projects = signal([
     {
       name: 'Sabeel Platform',
       type: 'Reintegration Platform',
@@ -77,14 +71,7 @@ export default class Projects {
       type: 'Government Web Platform',
       description:
         'Official website of the Ministry of Agriculture of Tunisia. Provides comprehensive access to information, services, and news related to agriculture, fisheries, and rural development. Features secure authentication, advanced search capabilities, and rate limiting for optimal performance.',
-      techs: [
-        'angular',
-        'spring',
-        'tailwindcss',
-        'keycloak',
-        'elasticsearch',
-        'resilience4j',
-      ],
+      techs: ['angular', 'spring', 'tailwindcss', 'keycloak', 'elasticsearch', 'resilience4j'],
       website: 'https://staging-agri.agrinet.tn/home',
       highlights: [
         'Government-grade security implementation',
@@ -114,8 +101,7 @@ export default class Projects {
       description:
         'Custom Keycloak login theme built with Keycloakify and Tailwind CSS. Modernizes the default Keycloak interface with responsive design, dark mode support, and customized email templates for enhanced user experience.',
       techs: ['react', 'typescript', 'tailwindcss', 'keycloakify', 'keycloak'],
-      website:
-        'https://github.com/Oussemasahbeni/keycloak-react-custom-theme-keycloakify',
+      website: 'https://github.com/Oussemasahbeni/keycloak-react-custom-theme-keycloakify',
       highlights: [
         'Modern React-based login interface',
         'Responsive design with Tailwind CSS',

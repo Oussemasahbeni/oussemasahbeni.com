@@ -1,19 +1,8 @@
 import { RouteMeta } from '@analogjs/router';
 import { Component, inject, signal } from '@angular/core';
-import {
-  email,
-  form,
-  FormField,
-  minLength,
-  required,
-} from '@angular/forms/signals';
+import { email, form, FormField, minLength, required } from '@angular/forms/signals';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import {
-  lucideCheckCircle,
-  lucideExternalLink,
-  lucideMail,
-  lucideSend,
-} from '@ng-icons/lucide';
+import { lucideCheckCircle, lucideExternalLink, lucideMail, lucideSend } from '@ng-icons/lucide';
 import { radixLinkedinLogo } from '@ng-icons/radix-icons';
 import { simpleGithub } from '@ng-icons/simple-icons';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
@@ -23,6 +12,7 @@ import { HlmFieldImports } from '@spartan-ng/helm/field';
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
 import { HlmTextareaImports } from '@spartan-ng/helm/textarea';
+import { play } from 'cuelume';
 import { ContactService } from '../../core/services/contact.service';
 import { NoiseBackgroundComponent } from '../../shared/components/noise-background/noise-background';
 
@@ -59,7 +49,7 @@ export const routeMeta: RouteMeta = {
 export default class Contact {
   private readonly contactService = inject(ContactService);
 
-  readonly contactMethods = signal([
+  protected readonly contactMethods = signal([
     {
       icon: 'lucideMail',
       title: 'Email',
@@ -85,10 +75,10 @@ export default class Contact {
       linkText: 'View Projects',
     },
   ]);
-  readonly isSubmitting = signal(false);
-  readonly submitMessage = signal<'success' | 'error' | null>(null);
+  protected readonly isSubmitting = signal(false);
+  protected readonly submitMessage = signal<'success' | 'error' | null>(null);
 
-  readonly contactModel = signal({
+  protected readonly contactModel = signal({
     name: '',
     email: '',
     subject: '',
@@ -96,7 +86,7 @@ export default class Contact {
     honeypot: '',
   });
 
-  readonly contactForm = form(this.contactModel, (schema) => {
+  protected readonly contactForm = form(this.contactModel, (schema) => {
     required(schema.email, { message: 'Email is required' });
     email(schema.email, { message: 'Invalid email format' });
     required(schema.name, { message: 'Name is required' });
@@ -125,11 +115,13 @@ export default class Contact {
       next: () => {
         this.submitMessage.set('success');
         this.isSubmitting.set(false);
+        play('success');
         this.resetForm();
       },
       error: () => {
         this.submitMessage.set('error');
         this.isSubmitting.set(false);
+        play('error');
       },
     });
   }

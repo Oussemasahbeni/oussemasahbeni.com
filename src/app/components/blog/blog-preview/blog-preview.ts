@@ -10,27 +10,20 @@ import { ContentMetadata } from '../../../models/content-metadata';
 
 @Component({
   selector: 'app-blog-preview',
-  imports: [
-    DatePipe,
-    RouterLink,
-    HlmButtonImports,
-    HlmBadgeImports,
-    HlmCardImports,
-    NgIcon,
-  ],
+  imports: [DatePipe, RouterLink, HlmButtonImports, HlmBadgeImports, HlmCardImports, NgIcon],
   providers: [provideIcons({ lucideArrowRight })],
   host: {
     class: 'block h-full',
   },
   template: `
     @if (article(); as article) {
-      <article hlmCard class="h-full flex flex-col hover:shadow-lg ">
+      <article hlmCard class="flex h-full flex-col hover:shadow-lg">
         <!-- HEADER -->
         <div hlmCardHeader>
           <h2 hlmCardTitle class="text-xl font-bold tracking-tight">
             <a
+              class="focus:ring-ring rounded-md hover:underline focus:ring-2 focus:outline-none"
               [routerLink]="['/blog', article.slug]"
-              class="hover:underline focus:outline-none focus:ring-2 focus:ring-ring rounded-md"
             >
               {{ article.title }}
             </a>
@@ -43,16 +36,13 @@ import { ContentMetadata } from '../../../models/content-metadata';
 
         <!-- CONTENT -->
         <div hlmCardContent class="flex-1">
-          <p class="text-muted-foreground leading-relaxed line-clamp-3">
+          <p class="text-muted-foreground line-clamp-3 leading-relaxed">
             {{ article.description }}
           </p>
         </div>
 
         <!-- FOOTER -->
-        <div
-          hlmCardFooter
-          class="flex flex-col sm:flex-row items-start  sm:items-center justify-between gap-4 mt-auto"
-        >
+        <div hlmCardFooter class="mt-auto flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
           <div class="flex flex-wrap gap-2">
             @for (tag of article.tags; track tag) {
               <span hlmBadge variant="outline" class="text-xs font-normal">
@@ -66,14 +56,11 @@ import { ContentMetadata } from '../../../models/content-metadata';
             hlmBtn
             size="sm"
             variant="default"
+            class="group w-full cursor-pointer gap-2 pl-0 transition-colors sm:w-fit"
             [routerLink]="['/blog', article.slug]"
-            class="group gap-2 pl-0 cursor-pointer transition-colors w-full sm:w-fit"
           >
             Read article
-            <ng-icon
-              name="lucideArrowRight"
-              class="transition-transform group-hover:translate-x-1"
-            />
+            <ng-icon name="lucideArrowRight" class="transition-transform group-hover:translate-x-1" />
           </button>
         </div>
       </article>
@@ -81,5 +68,5 @@ import { ContentMetadata } from '../../../models/content-metadata';
   `,
 })
 export class BlogPreview {
-  readonly article = input.required<ContentMetadata>();
+  public readonly article = input.required<ContentMetadata>();
 }

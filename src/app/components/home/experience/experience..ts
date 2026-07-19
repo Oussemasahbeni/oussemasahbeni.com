@@ -9,7 +9,7 @@ import { HlmCardImports } from '@spartan-ng/helm/card';
   templateUrl: './experience.html',
 })
 export class Experience {
-  experience = signal([
+  protected readonly experience = signal([
     {
       title: 'Software Developer',
       date: 'Jan 2024 - Present',
@@ -45,13 +45,7 @@ export class Experience {
         'Developed internal task management platform adopted by 3 departments; improved tracking efficiency by 50%',
         'Configured role-based access via Spring Security; optimized PostgreSQL queries to reduce API latency by 35%',
       ],
-      skills: [
-        'Spring Boot',
-        'Spring Security',
-        'PostgreSQL',
-        'Angular',
-        'MySQL',
-      ],
+      skills: ['Spring Boot', 'Spring Security', 'PostgreSQL', 'Angular', 'MySQL'],
     },
   ]);
 }

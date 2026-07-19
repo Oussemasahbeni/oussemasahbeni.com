@@ -8,6 +8,27 @@ const NOW_PLAYING_ENDPOINT =
   'https://api.spotify.com/v1/me/player/currently-playing';
 const TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token';
 
+interface SpotifyTokenResponse {
+  access_token: string;
+}
+
+interface SpotifyArtist {
+  name: string;
+}
+
+interface SpotifyNowPlayingResponse {
+  is_playing: boolean;
+  item: {
+    name: string;
+    artists: SpotifyArtist[];
+    album: {
+      name: string;
+      images: { url: string }[];
+    };
+    external_urls: { spotify: string };
+  };
+}
+
 async function getAccessToken() {
   if (!SPOTIFY_CLIENT_ID || !SPOTIFY_CLIENT_SECRET || !SPOTIFY_REFRESH_TOKEN) {
     throw new Error('Spotify credentials not configured');
@@ -20,7 +41,7 @@ async function getAccessToken() {
   const response = await fetch(TOKEN_ENDPOINT, {
     method: 'POST',
     headers: {
-      Authorization: `Basic ${basic}`,
+      "Authorization": `Basic ${basic}`,
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: new URLSearchParams({
@@ -29,7 +50,7 @@ async function getAccessToken() {
     }),
   });
 
-  return response.json();
+  return response.json() as Promise<SpotifyTokenResponse>;
 }
 
 async function getNowPlaying() {
@@ -45,7 +66,7 @@ async function getNowPlaying() {
     return { isPlaying: false };
   }
 
-  const song = await response.json();
+  const song = (await response.json()) as SpotifyNowPlayingResponse;
 
   if (!song.is_playing) {
     return { isPlaying: false };
@@ -53,7 +74,7 @@ async function getNowPlaying() {
 
   const isPlaying = song.is_playing;
   const title = song.item.name;
-  const artist = song.item.artists.map((artist: any) => artist.name).join(', ');
+  const artist = song.item.artists.map((artist) => artist.name).join(', ');
   const album = song.item.album.name;
   const albumImageUrl = song.item.album.images[0]?.url;
   const songUrl = song.item.external_urls.spotify;

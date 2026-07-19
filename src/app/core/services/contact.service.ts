@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, Service, inject } from '@angular/core';
+import { Service, inject } from '@angular/core';
 import { ContactMessage } from '../../models/contact';
 
 @Service()

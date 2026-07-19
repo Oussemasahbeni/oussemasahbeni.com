@@ -1,6 +1,6 @@
 import { SafeHtml } from '@angular/platform-browser';
 
-export type ContentMetadata = {
+export interface ContentMetadata {
   title: string;
   date: string;
   description: string;
@@ -8,9 +8,9 @@ export type ContentMetadata = {
   slug: string;
   coverImage: string;
   tags: string[];
-};
+}
 
-export type ContentWithMetadata = {
+export interface ContentWithMetadata {
   metadata: ContentMetadata;
   content: SafeHtml;
-};
+}

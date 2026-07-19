@@ -3,24 +3,17 @@ import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { GITHUB_LINK, LINKEDIN_LINK, X_LINK } from '../../core/constants';
-import { NowPlaying } from '../../shared/components/now-playing/now-playing';
-import { ThemeToggle } from '../theme-toggle/theme-toggle';
 
 import { lucideMenu, lucideRss } from '@ng-icons/lucide';
 import { radixLinkedinLogo } from '@ng-icons/radix-icons';
 import { simpleGithub, simpleX } from '@ng-icons/simple-icons';
 import { HlmSheet, HlmSheetImports } from '@spartan-ng/helm/sheet';
+import { ThemeSwitch } from '../../shared/components/theme-toggle/theme-toggle';
+import { SpotifyWidget } from '../../shared/components/spotifty-widget/spotify-widget';
 
 @Component({
   selector: 'app-navbar',
-  imports: [
-    RouterLink,
-    HlmButtonImports,
-    NgIcon,
-    HlmSheetImports,
-    ThemeToggle,
-    NowPlaying,
-  ],
+  imports: [RouterLink, HlmButtonImports, NgIcon, HlmSheetImports, ThemeSwitch, SpotifyWidget],
   templateUrl: './navbar.html',
   providers: [
     provideIcons({
@@ -35,7 +28,7 @@ import { HlmSheet, HlmSheetImports } from '@spartan-ng/helm/sheet';
 export class Navbar {
   public readonly viewchildSheetRef = viewChild(HlmSheet);
 
-  readonly navigation = signal([
+  protected readonly navigation = signal([
     {
       title: 'Home',
       link: '/',

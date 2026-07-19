@@ -18,7 +18,6 @@ import { ContentMetadata } from '../../../models/content-metadata';
   template: `
     @if (article(); as article) {
       <a
-        [routerLink]="['/blog', article.slug]"
         hlmCard
         class="
         group flex flex-col h-full
@@ -26,6 +25,7 @@ import { ContentMetadata } from '../../../models/content-metadata';
         hover:-translate-y-1 hover:shadow-lg hover:border-primary/50
         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
       "
+        [routerLink]="['/blog', article.slug]"
       >
         <div hlmCardHeader>
           <div class="flex justify-between items-start mb-2">
@@ -69,5 +69,5 @@ import { ContentMetadata } from '../../../models/content-metadata';
   `,
 })
 export class FeaturedBlogPreview {
-  readonly article = input.required<ContentMetadata>();
+  public readonly article = input.required<ContentMetadata>();
 }

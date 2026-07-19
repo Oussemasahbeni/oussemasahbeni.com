@@ -27,12 +27,12 @@ import { TableOfContentItem } from './toc.util';
           <nav class="flex flex-col gap-2 text-sm text-muted-foreground">
             @for (item of tableOfContentItems(); track item.id) {
               <a
-                (click)="scrollTo(item.id); $event.preventDefault()"
-                [href]="'#' + item.id"
                 class=" hover:text-blue-400 text-xs"
+                [href]="'#' + item.id"
                 [class.pl-4]="item.level === 3"
                 [class.font-medium]="item.level === 2"
                 [class.text-blue-400]="currentTocItem() === item.id"
+                (click)="scrollTo(item.id); $event.preventDefault()"
               >
                 {{ item.text }}
               </a>
@@ -48,9 +48,9 @@ export class TableOfContent {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly destroyRef = inject(DestroyRef);
 
-  readonly tableOfContentItems = input.required<TableOfContentItem[]>();
+  public readonly tableOfContentItems = input.required<TableOfContentItem[]>();
 
-  readonly currentTocItem = signal<string | null>(null);
+  protected readonly currentTocItem = signal<string | null>(null);
   constructor() {
     if (isPlatformBrowser(this.platformId)) {
       fromEvent(window, 'scroll')

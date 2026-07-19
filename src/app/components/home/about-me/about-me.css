@@ -10,7 +10,9 @@
     rgba(var(--spotlight-color), 0.6),
     transparent 40%
   );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
@@ -27,7 +29,7 @@
   background: radial-gradient(
     400px circle at var(--mouse-x) var(--mouse-y),
     /* Use the variable with 0.1 opacity (fainter) */
-      rgba(var(--spotlight-color), 0.1),
+    rgba(var(--spotlight-color), 0.1),
     transparent 40%
   );
   pointer-events: none;

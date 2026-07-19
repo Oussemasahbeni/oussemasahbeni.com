@@ -14,8 +14,7 @@ export interface ActionButton {
   templateUrl: './hero.html',
   styleUrl: './hero.css',
   host: {
-    class:
-      'block  relative min-h-screen flex items-center justify-center  px-4 sm:px-6 lg:px-8',
+    class: 'block relative min-h-screen flex items-center justify-center  px-4 sm:px-6 lg:px-8',
   },
 })
 export class Hero {}

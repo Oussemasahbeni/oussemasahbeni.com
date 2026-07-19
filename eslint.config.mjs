@@ -102,7 +102,7 @@ export default defineConfig([
       ],
       "@angular-eslint/component-selector": [
         "error",
-        { type: "element", prefix: "adm", style: "kebab-case" },
+        { type: "element", prefix: "app", style: "kebab-case" },
       ],
       "@angular-eslint/no-implicit-take-until-destroyed": "error",
       "@angular-eslint/prefer-signal-model": "error",

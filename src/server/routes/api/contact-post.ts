@@ -3,10 +3,17 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env['RESEND_API_KEY']);
 
+interface ContactBody {
+  name?: string;
+  email?: string;
+  subject?: string;
+  message?: string;
+}
+
 export default defineEventHandler(async (event) => {
   try {
-    const body = await readBody(event);
-    const { name, email, subject, message } = body;
+    const body = await readBody<ContactBody>(event);
+    const { name, email, subject, message } = body ?? {};
 
     if (!name || !email || !message) {
       return { success: false, message: 'Missing required fields' };
@@ -36,7 +43,7 @@ export default defineEventHandler(async (event) => {
     }
 
     return { success: true, id: data?.id };
-  } catch (err: any) {
+  } catch (err) {
     console.error('Server Error:', err);
     return { success: false, message: 'Internal Server Error' };
   }

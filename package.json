@@ -11,16 +11,6 @@
     "preview": "node dist/analog/server/index.mjs"
   },
   "type": "module",
-  "prettier": {
-    "overrides": [
-      {
-        "files": "*.html",
-        "options": {
-          "parser": "angular"
-        }
-      }
-    ]
-  },
   "private": true,
   "dependencies": {
     "@analogjs/content": "^2.6.3",
@@ -36,12 +26,13 @@
     "@angular/ssr": "^22.0.7",
     "@ng-icons/core": "^34.0.0",
     "@ng-icons/lucide": "^34.0.0",
-    "@ng-icons/simple-icons": "^34.0.0",
     "@ng-icons/radix-icons": "^34.0.0",
+    "@ng-icons/simple-icons": "^34.0.0",
     "@nx/angular": "^23.1.0",
     "@spartan-ng/brain": "^1.1.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "cuelume": "^0.1.2",
     "express": "^5.1.0",
     "front-matter": "^4.0.2",
     "marked": "^18.0.6",
@@ -61,22 +52,23 @@
     "@analogjs/platform": "^2.6.3",
     "@analogjs/vite-plugin-angular": "^2.6.3",
     "@analogjs/vitest-angular": "^2.6.3",
+    "@angular-eslint/builder": "^22.1.0",
     "@angular/build": "^22.0.7",
     "@angular/cli": "^22.0.7",
     "@angular/compiler-cli": "^22.0.7",
-    "@angular-eslint/builder": "^22.1.0",
+    "@eslint/js": "^10.0.1",
     "@nx/vite": "^23.1.0",
     "@spartan-ng/cli": "^1.1.0",
     "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "^4.3.3",
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",
-    "@tailwindcss/vite": "^4.3.3",
     "@vitest/coverage-v8": "^4.0.0",
     "@vitest/ui": "^4.0.0",
     "angular-eslint": "22.1.0",
     "eslint": "^9.39.1",
     "eslint-plugin-unused-imports": "^4.4.1",
-    "@eslint/js": "^10.0.1",
+    "h3": "2.0.1-rc.25",
     "jsdom": "^27.1.0",
     "postcss": "^8.5.3",
     "prettier": "^3.8.3",

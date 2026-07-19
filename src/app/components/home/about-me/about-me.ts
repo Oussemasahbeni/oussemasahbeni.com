@@ -1,15 +1,10 @@
-import { isPlatformBrowser } from '@angular/common';
-import { Component, OnInit, PLATFORM_ID, inject, signal } from '@angular/core';
+import { httpResource } from '@angular/common/http';
+import { Component, signal } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import {
-  lucideDumbbell,
-  lucideFolders,
-  lucideTrendingUp,
-  lucideUsers,
-} from '@ng-icons/lucide';
+import { lucideDumbbell, lucideFolders, lucideTrendingUp, lucideUsers } from '@ng-icons/lucide';
 import { HlmCardImports } from '@spartan-ng/helm/card';
-import { GithubApiService } from '../../../core/services/github-api.service';
-import { SpotlightDirective } from '../../../shared/directives/spotlight.directive';
+import { SpotlightColorDirective, SpotlightDirective } from '../../../shared/directives/spotlight.directive';
+import { NgOptimizedImage } from '@angular/common';
 
 interface TechStack {
   name: string;
@@ -17,9 +12,14 @@ interface TechStack {
   title: string;
 }
 
+interface GitHubData {
+  public_repos: number;
+  followers: number;
+}
+
 @Component({
   selector: 'app-about-me',
-  imports: [HlmCardImports, NgIcon, SpotlightDirective],
+  imports: [HlmCardImports,NgOptimizedImage, NgIcon, SpotlightDirective, SpotlightColorDirective],
   providers: [
     provideIcons({
       lucideUsers,
@@ -31,16 +31,13 @@ interface TechStack {
   templateUrl: './about-me.html',
   styleUrls: ['./about-me.css'],
 })
-export class AboutMe implements OnInit {
-  private readonly gitApi = inject(GithubApiService);
-  private readonly platform = inject(PLATFORM_ID);
+export class AboutMe {
+  protected readonly yearsExperience = signal(2);
+  protected readonly usersServed = signal(1000);
+  protected readonly projectsCompleted = signal(4);
+  protected readonly languagesSpoken = signal(3);
 
-  readonly publicRepos = signal(0);
-  readonly followers = signal(0);
-  readonly yearsExperience = signal(2);
-  readonly usersServed = signal(1000);
-  readonly projectsCompleted = signal(4);
-  readonly languagesSpoken = signal(3);
+  protected readonly githubData = httpResource<GitHubData>(() => `https://api.github.com/users/Oussemasahbeni`);
 
   protected readonly techStack = signal<TechStack[]>([
     {
@@ -124,13 +121,4 @@ export class AboutMe implements OnInit {
       title: 'AWS - Amazon Web Services cloud platform',
     },
   ]);
-
-  ngOnInit(): void {
-    if (isPlatformBrowser(this.platform)) {
-      this.gitApi.getInfo().subscribe((data: any) => {
-        this.followers.set(data.followers);
-        this.publicRepos.set(data.public_repos);
-      });
-    }
-  }
 }

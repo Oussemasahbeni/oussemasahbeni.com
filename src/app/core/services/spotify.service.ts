@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, Service, inject, signal } from '@angular/core';
+import { Service, inject, signal } from '@angular/core';
 import { catchError, interval, of, startWith, switchMap } from 'rxjs';
 
 export interface SpotifyNowPlaying {
@@ -15,7 +15,8 @@ export interface SpotifyNowPlaying {
 export class SpotifyService {
   private readonly http = inject(HttpClient);
 
-  readonly nowPlaying = signal<SpotifyNowPlaying>({ isPlaying: false });
+  private readonly _nowPlaying = signal<SpotifyNowPlaying>({ isPlaying: false });
+  public readonly nowPlaying = this._nowPlaying.asReadonly();
 
   constructor() {
     // Poll Spotify API every 30 seconds
@@ -25,7 +26,7 @@ export class SpotifyService {
         switchMap(() => this.fetchNowPlaying()),
         catchError(() => of({ isPlaying: false }))
       )
-      .subscribe((data) => this.nowPlaying.set(data));
+      .subscribe((data) => this._nowPlaying.set(data));
   }
 
   private fetchNowPlaying() {

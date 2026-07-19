@@ -1,138 +1,112 @@
-<section class="max-w-7xl mx-auto px-6 sm:px-8">
+<section class="mx-auto max-w-7xl px-6 sm:px-8">
   <div class="flex flex-col gap-8">
     <!-- Section Header -->
-    <div class="text-center space-y-4">
-      <div
-        class="inline-flex items-center gap-2 text-lg font-mono text-zinc-600 dark:text-zinc-400"
-      >
-        <span class="w-8 h-px bg-zinc-300 dark:bg-zinc-700"></span>
+    <div class="space-y-4 text-center">
+      <div class="inline-flex items-center gap-2 font-mono text-lg text-zinc-600 dark:text-zinc-400">
+        <span class="h-px w-8 bg-zinc-300 dark:bg-zinc-700"></span>
         <span>About Me</span>
-        <span class="w-8 h-px bg-zinc-300 dark:bg-zinc-700"></span>
+        <span class="h-px w-8 bg-zinc-300 dark:bg-zinc-700"></span>
       </div>
     </div>
 
     <!--  Stats Grid -->
     <div class="flex flex-col gap-8">
       <div class="text-center">
-        <h3 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100 mb-2">
-          By the Numbers
-        </h3>
-        <p class="text-zinc-600 dark:text-zinc-400">
-          A few metrics that define my journey
-        </p>
+        <h3 class="mb-2 text-2xl font-bold text-zinc-900 dark:text-zinc-100">By the Numbers</h3>
+        <p class="text-zinc-600 dark:text-zinc-400">A few metrics that define my journey</p>
       </div>
 
       <!-- Stats Cards Grid -->
-      <div
-        appSpotlight
-        class="spotlight-grid grid grid-cols-1 lg:grid-cols-4 gap-4"
-      >
-        <section
-          hlmCard
-          style="--spotlight-color: 59, 130, 246"
-          class="spotlight-card group relative transition-all duration-300 text-center"
-        >
-          <div class="spotlight-content p-6">
-            <ng-icon
-              class="mx-auto mb-4 text-zinc-500 group-hover:text-blue-500 transition-colors"
-              name="lucideUsers"
-            />
-            <div hlmCardContent>
-              <div class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
-                {{ followers() }}
-              </div>
-              <div class="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
-                Total Github Followers
+      @if (githubData.hasValue()) {
+        <div appSpotlight class="spotlight-grid grid grid-cols-1 gap-4 lg:grid-cols-4">
+          <section
+            hlmCard
+            appSpotlightColor="59, 130, 246"
+            class="spotlight-card group relative text-center transition-all duration-300"
+          >
+            <div class="spotlight-content p-6">
+              <ng-icon class="mx-auto mb-4 text-zinc-500 transition-colors group-hover:text-blue-500" name="lucideUsers" />
+              <div hlmCardContent>
+                <div class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
+                  {{ githubData.value().followers }}
+                </div>
+                <div class="mt-1 text-sm text-zinc-600 dark:text-zinc-400">Total Github Followers</div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section
-          hlmCard
-          style="--spotlight-color: 168, 85, 247"
-          class="spotlight-card group relative transition-all duration-300 text-center"
-        >
-          <div class="spotlight-content p-6">
-            <ng-icon
-              class="mx-auto mb-4 text-zinc-500 group-hover:text-purple-500 transition-colors"
-              name="lucideFolders"
-            />
-            <div hlmCardContent>
-              <div class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
-                {{ publicRepos() }}
-              </div>
-              <div class="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
-                Total GitHub Repositories
+          <section
+            hlmCard
+            appSpotlightColor="168, 85, 247"
+            class="spotlight-card group relative text-center transition-all duration-300"
+          >
+            <div class="spotlight-content p-6">
+              <ng-icon
+                class="mx-auto mb-4 text-zinc-500 transition-colors group-hover:text-purple-500"
+                name="lucideFolders"
+              />
+              <div hlmCardContent>
+                <div class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
+                  {{ githubData.value().public_repos }}
+                </div>
+                <div class="mt-1 text-sm text-zinc-600 dark:text-zinc-400">Total GitHub Repositories</div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section
-          hlmCard
-          style="--spotlight-color: 16, 185, 129"
-          class="spotlight-card group relative transition-all duration-300 text-center"
-        >
-          <div class="spotlight-content p-6">
-            <ng-icon
-              class="mx-auto mb-4 text-zinc-500 group-hover:text-emerald-500 transition-colors"
-              name="lucideTrendingUp"
-            />
-            <div hlmCardContent>
-              <div class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
-                ∞
-              </div>
-              <div class="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
-                Years of Experience
+          <section
+            hlmCard
+            appSpotlightColor="16, 185, 129"
+            class="spotlight-card group relative text-center transition-all duration-300"
+          >
+            <div class="spotlight-content p-6">
+              <ng-icon
+                class="mx-auto mb-4 text-zinc-500 transition-colors group-hover:text-emerald-500"
+                name="lucideTrendingUp"
+              />
+              <div hlmCardContent>
+                <div class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">∞</div>
+                <div class="mt-1 text-sm text-zinc-600 dark:text-zinc-400">Years of Experience</div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section
-          hlmCard
-          style="--spotlight-color: 249, 115, 22"
-          class="spotlight-card group relative transition-all duration-300 text-center"
-        >
-          <div class="spotlight-content p-6">
-            <ng-icon
-              class="mx-auto mb-4 text-zinc-500 group-hover:text-orange-500 transition-colors"
-              name="lucideDumbbell"
-            />
-            <div hlmCardContent>
-              <div class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
-                80kg
-              </div>
-              <div class="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
-                How Much I Bench
+          <section
+            hlmCard
+            appSpotlightColor="249, 115, 22"
+            class="spotlight-card group relative text-center transition-all duration-300"
+          >
+            <div class="spotlight-content p-6">
+              <ng-icon
+                class="mx-auto mb-4 text-zinc-500 transition-colors group-hover:text-orange-500"
+                name="lucideDumbbell"
+              />
+              <div hlmCardContent>
+                <div class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">80kg</div>
+                <div class="mt-1 text-sm text-zinc-600 dark:text-zinc-400">How Much I Bench</div>
               </div>
             </div>
-          </div>
-        </section>
-      </div>
+          </section>
+        </div>
+      }
     </div>
 
     <!-- Modern Tech Stack -->
     <div class="flex flex-col gap-8">
       <div class="text-center">
-        <h3 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100 mb-2">
-          Technologies I Work With
-        </h3>
-        <p class="text-zinc-600 dark:text-zinc-400">
-          A look at the technologies and tools I use regularly.
-        </p>
+        <h3 class="mb-2 text-2xl font-bold text-zinc-900 dark:text-zinc-100">Technologies I Work With</h3>
+        <p class="text-zinc-600 dark:text-zinc-400">A look at the technologies and tools I use regularly.</p>
       </div>
 
-      <!-- Fixed Grid Layout for Tech Icons -->
-      <div class="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-6 w-full">
+      <!-- Tech Icons -->
+      <div class="grid w-full grid-cols-4 gap-6 md:grid-cols-6 lg:grid-cols-8">
         @for (tech of techStack(); track tech.name) {
-        <div
-          class="flex items-center justify-center w-16 h-16 rounded-xl bg-white dark:bg-zinc-800 shadow-sm border border-zinc-200 dark:border-zinc-700 hover:shadow-md transition-shadow"
-          [title]="tech.title"
-        >
-          <img [src]="tech.icon" [alt]="tech.name" class="w-10 h-10" />
-        </div>
+          <div
+            class="flex h-16 w-16 items-center justify-center rounded-xl border border-zinc-200 bg-white shadow-sm transition-shadow hover:shadow-md dark:border-zinc-700 dark:bg-zinc-800"
+            [title]="tech.title"
+          >
+            <img class="size-10" width="40" height="40" [ngSrc]="tech.icon" [alt]="tech.name" />
+          </div>
         }
       </div>
     </div>

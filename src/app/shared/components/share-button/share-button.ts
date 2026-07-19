@@ -1,13 +1,6 @@
 import { Clipboard } from '@angular/cdk/clipboard';
 import { isPlatformBrowser } from '@angular/common';
-import {
-  Component,
-  computed,
-  inject,
-  input,
-  PLATFORM_ID,
-  signal,
-} from '@angular/core';
+import { Component, computed, inject, input, PLATFORM_ID, signal } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCheck, lucideCopy, lucideShare2 } from '@ng-icons/lucide';
 import { radixLinkedinLogo } from '@ng-icons/radix-icons';
@@ -15,6 +8,7 @@ import { simpleFacebook, simpleX } from '@ng-icons/simple-icons';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmPopoverImports } from '@spartan-ng/helm/popover';
+import { play } from 'cuelume';
 
 @Component({
   selector: 'app-share-button',
@@ -40,7 +34,7 @@ export class ShareButton {
   public readonly currentUrl = computed(() => {
     return isPlatformBrowser(this.platformId) ? window.location.href : '';
   });
-  public copied = signal<boolean>(false);
+  public readonly copied = signal<boolean>(false);
 
   public readonly socialUrls = computed(() => {
     const url = this.currentUrl();
@@ -58,6 +52,7 @@ export class ShareButton {
     if (!isPlatformBrowser(this.platformId)) return;
 
     const success = this._clipboard.copy(this.currentUrl());
+    play('success');
 
     if (success) {
       this.copied.set(true);

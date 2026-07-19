@@ -3,6 +3,7 @@ import {
   Directive,
   ElementRef,
   inject,
+  input,
   OnDestroy,
   Renderer2,
 } from '@angular/core';
@@ -53,4 +54,20 @@ export class SpotlightDirective implements AfterViewInit, OnDestroy {
       card.style.setProperty('--mouse-y', `${y}px`);
     }
   }
+}
+
+
+/**
+ * Sets the `--spotlight-color` CSS custom property on the host card so the
+ * spotlight glow (see about-me.css `::before`/`::after`) can tint per card.
+ * Value is a raw RGB triplet, e.g. "59, 130, 246".
+ */
+@Directive({
+  selector: '[appSpotlightColor]',
+  host: {
+    '[style.--spotlight-color]': 'appSpotlightColor()',
+  },
+})
+export class SpotlightColorDirective {
+  public readonly appSpotlightColor = input.required<string>();
 }
