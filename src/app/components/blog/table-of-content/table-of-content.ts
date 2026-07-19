@@ -1,6 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   DOCUMENT,
@@ -16,32 +15,31 @@ import { TableOfContentItem } from './toc.util';
 @Component({
   selector: 'app-table-of-content',
   imports: [],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'hidden lg:col-span-3 lg:block sticky top-24 w-full self-start',
   },
   template: `
     @if (tableOfContentItems().length > 0) {
-    <aside class="flex flex-row items-stretch">
-      <div class="w-px bg-border mr-4"></div>
-      <div class="flex flex-col gap-2 pb-4">
-        <h3 class="font-semibold mb-4 text-sm">Table of Contents</h3>
-        <nav class="flex flex-col gap-2 text-sm text-muted-foreground">
-          @for(item of tableOfContentItems(); track item.id) {
-          <a
-            (click)="scrollTo(item.id); $event.preventDefault()"
-            [href]="'#' + item.id"
-            class=" hover:text-blue-400 text-xs"
-            [class.pl-4]="item.level === 3"
-            [class.font-medium]="item.level === 2"
-            [class.text-blue-400]="currentTocItem() === item.id"
-          >
-            {{ item.text }}
-          </a>
-          }
-        </nav>
-      </div>
-    </aside>
+      <aside class="flex flex-row items-stretch">
+        <div class="w-px bg-border mr-4"></div>
+        <div class="flex flex-col gap-2 pb-4">
+          <h3 class="font-semibold mb-4 text-sm">Table of Contents</h3>
+          <nav class="flex flex-col gap-2 text-sm text-muted-foreground">
+            @for (item of tableOfContentItems(); track item.id) {
+              <a
+                class=" hover:text-blue-400 text-xs"
+                [href]="'#' + item.id"
+                [class.pl-4]="item.level === 3"
+                [class.font-medium]="item.level === 2"
+                [class.text-blue-400]="currentTocItem() === item.id"
+                (click)="scrollTo(item.id); $event.preventDefault()"
+              >
+                {{ item.text }}
+              </a>
+            }
+          </nav>
+        </div>
+      </aside>
     }
   `,
 })
@@ -50,9 +48,9 @@ export class TableOfContent {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly destroyRef = inject(DestroyRef);
 
-  readonly tableOfContentItems = input.required<TableOfContentItem[]>();
+  public readonly tableOfContentItems = input.required<TableOfContentItem[]>();
 
-  readonly currentTocItem = signal<string | null>(null);
+  protected readonly currentTocItem = signal<string | null>(null);
   constructor() {
     if (isPlatformBrowser(this.platformId)) {
       fromEvent(window, 'scroll')

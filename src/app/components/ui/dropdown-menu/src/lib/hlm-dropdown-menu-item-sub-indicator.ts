@@ -1,22 +1,19 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronRight } from '@ng-icons/lucide';
-import { hlm } from '@spartan-ng/helm/utils';
-import type { ClassValue } from 'clsx';
+import { classes } from '@spartan-ng/helm/utils';
 
 @Component({
 	selector: 'hlm-dropdown-menu-item-sub-indicator',
 	imports: [NgIcon],
 	providers: [provideIcons({ lucideChevronRight })],
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	host: {
-		'[class]': '_computedClass()',
-	},
 	template: `
-		<ng-icon name="lucideChevronRight" class="text-base" />
+		<ng-icon name="lucideChevronRight" class="text-[length:--spacing(4)] rtl:rotate-180" />
 	`,
 })
 export class HlmDropdownMenuItemSubIndicator {
-	public readonly userClass = input<ClassValue>('', { alias: 'class' });
-	protected readonly _computedClass = computed(() => hlm('ml-auto size-4', this.userClass()));
+	constructor() {
+		classes(() => 'ms-auto flex items-center justify-center');
+	}
 }

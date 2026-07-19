@@ -1,23 +1,40 @@
-@keyframes typewriter {
-  from {
-    width: 0;
+/* Pure-CSS "slot machine" role rotator.
+   Each line is 2rem tall (h-8). The stack holds N roles + a duplicate of the
+   first, and slides up one line at a time, pausing on each.
+   NOTE: tuned for 5 roles (6 lines). Update the keyframe steps if the count
+   in hero..ts changes. */
+.role-rotator {
+  animation: role-rotate 12s ease-in-out infinite;
+}
+
+@keyframes role-rotate {
+  0%,
+  14% {
+    transform: translateY(0);
   }
-  to {
-    width: 100%;
+  20%,
+  34% {
+    transform: translateY(-2rem);
+  }
+  40%,
+  54% {
+    transform: translateY(-4rem);
+  }
+  60%,
+  74% {
+    transform: translateY(-6rem);
+  }
+  80%,
+  94% {
+    transform: translateY(-8rem);
+  }
+  100% {
+    transform: translateY(-10rem);
   }
 }
-.typewriter {
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 0.15em solid var(--foreground);
-  animation: typewriter 2s steps(40, end), blink-caret 0.75s step-end infinite;
-}
-@keyframes blink-caret {
-  from,
-  to {
-    border-color: transparent;
-  }
-  50% {
-    border-color: var(--foreground);
+
+@media (prefers-reduced-motion: reduce) {
+  .role-rotator {
+    animation: none;
   }
 }

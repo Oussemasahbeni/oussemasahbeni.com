@@ -1,42 +1,28 @@
 import { Clipboard } from '@angular/cdk/clipboard';
 import { isPlatformBrowser } from '@angular/common';
-import {
-  Component,
-  computed,
-  inject,
-  input,
-  PLATFORM_ID,
-  signal,
-} from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { Component, computed, inject, input, PLATFORM_ID, signal } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCheck, lucideCopy, lucideShare2 } from '@ng-icons/lucide';
 import { radixLinkedinLogo } from '@ng-icons/radix-icons';
-import { remixFacebookBoxFill, remixTwitterXFill } from '@ng-icons/remixicon';
-import { BrnPopoverImports } from '@spartan-ng/brain/popover';
+import { simpleFacebook, simpleX } from '@ng-icons/simple-icons';
 import { HlmButton } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmPopoverImports } from '@spartan-ng/helm/popover';
+import { play } from 'cuelume';
 
 @Component({
   selector: 'app-share-button',
   providers: [
     provideIcons({
       lucideCopy,
-      remixFacebookBoxFill,
+      simpleFacebook,
       radixLinkedinLogo,
-      remixTwitterXFill,
+      simpleX,
       lucideCheck,
       lucideShare2,
     }),
   ],
-  imports: [
-    HlmButton,
-    BrnPopoverImports,
-    HlmPopoverImports,
-    HlmIconImports,
-    HlmInputImports,
-  ],
+  imports: [HlmButton, NgIcon, HlmPopoverImports, HlmInputImports],
   templateUrl: './share-button.html',
 })
 export class ShareButton {
@@ -48,7 +34,7 @@ export class ShareButton {
   public readonly currentUrl = computed(() => {
     return isPlatformBrowser(this.platformId) ? window.location.href : '';
   });
-  public copied = signal<boolean>(false);
+  public readonly copied = signal<boolean>(false);
 
   public readonly socialUrls = computed(() => {
     const url = this.currentUrl();
@@ -66,6 +52,7 @@ export class ShareButton {
     if (!isPlatformBrowser(this.platformId)) return;
 
     const success = this._clipboard.copy(this.currentUrl());
+    play('success');
 
     if (success) {
       this.copied.set(true);

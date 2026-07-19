@@ -1,22 +1,47 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
+import { Component, signal } from '@angular/core';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
-import { HlmCardImports } from '@spartan-ng/helm/card';
 
 @Component({
   selector: 'app-experience',
-  imports: [CommonModule, HlmCardImports, HlmBadgeImports],
+  imports: [HlmBadgeImports, NgOptimizedImage],
   templateUrl: './experience.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Experience {
-  experience = signal([
+  protected readonly experience = signal([
     {
-      title: 'Software Developer',
-      date: 'Jan 2024 - Present',
-      company: 'Inspark, Ariana, Tunisia',
+      title: 'Software Engineer',
+      date: 'Jan 2026 - Present',
+      company: 'Oddo BHF, Tunis, Tunisia',
+      logo: '/companies/oddobhf.png',
       current: true,
-      gotBulletPoints: true,
+      description: [
+        'Architected the entire frontend from the ground up with Angular, delivering a scalable and maintainable UI foundation',
+        'Designed and implemented a micro-frontend architecture, enabling independent team delivery and modular deployments',
+        'Contributed a range of new features while continuously improving application performance across the stack',
+        'Optimized backend startup times using GraalVM native images, significantly reducing cold-start latency',
+      ],
+      skills: [
+        'Angular',
+        'Micro-frontends',
+        'GraalVM',
+        'Spring Boot',
+        'Keycloak',
+        'Kafka',
+        'Camunda',
+        'Openshift',
+        'Azure DevOps',
+        'DDD',
+        'Kubernetes',
+        'Microservices',
+      ],
+    },
+    {
+      title: 'Software Engineer',
+      date: 'Jan 2024 - Dec 2025',
+      company: 'Inspark, Ariana, Tunisia',
+      logo: '/companies/inspark.png',
+      current: false,
       description: [
         'Maintaining enterprise-grade Angular/Spring Boot apps with Keycloak SSO and modular component architecture',
         'Refactored core services into reusable modules using domain-driven design, increasing maintainability by 30%',
@@ -34,24 +59,6 @@ export class Experience {
         'Docker',
         'Git',
         'PostgreSQL',
-      ],
-    },
-    {
-      title: 'Internship Trainee',
-      date: 'Jan 2023 - Feb 2023',
-      company: "Centre National de l'Informatique, Tunisia",
-      current: false,
-      gotBulletPoints: true,
-      description: [
-        'Developed internal task management platform adopted by 3 departments; improved tracking efficiency by 50%',
-        'Configured role-based access via Spring Security; optimized PostgreSQL queries to reduce API latency by 35%',
-      ],
-      skills: [
-        'Spring Boot',
-        'Spring Security',
-        'PostgreSQL',
-        'Angular',
-        'MySQL',
       ],
     },
   ]);

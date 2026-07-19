@@ -1,39 +1,31 @@
 import { ViewportScroller } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DOCUMENT,
-  inject,
-  input,
-  signal,
-  ViewEncapsulation,
-} from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
-import { radixArrowUp } from '@ng-icons/radix-icons';
+import { Component, DOCUMENT, inject, input, signal, ViewEncapsulation } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideArrowUp } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+import { play } from 'cuelume';
 
 @Component({
   selector: 'app-back-to-top',
-  imports: [HlmButtonImports, HlmIconImports],
-  providers: [provideIcons({ radixArrowUp })],
+  imports: [HlmButtonImports, NgIcon],
+  providers: [provideIcons({ lucideArrowUp })],
   template: `@if (isVisible()) {
     <button
+      type="button"
       hlmBtn
-      class="fixed z-50 bottom-6 right-6"
-      (click)="scrollToTop()"
+      class="fixed right-6 bottom-6 z-50"
       title="Back to top"
       size="icon"
       aria-label="Scroll back to top"
+      (click)="scrollToTop()"
     >
-      <ng-icon size="sm" name="radixArrowUp" hlm />
+      <ng-icon name="lucideArrowUp" />
     </button>
-    } `,
+  } `,
   encapsulation: ViewEncapsulation.None,
   host: {
     '(window:scroll)': 'onWindowScroll()',
   },
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BackToTop {
   // -----------------------------------------------------------------------------------------------------
@@ -45,25 +37,25 @@ export class BackToTop {
   // -----------------------------------------------------------------------------------------------------
   // @ Inputs
   // -----------------------------------------------------------------------------------------------------
-  readonly showAfter = input(300); // Pixels scrolled before showing
-  readonly scrollToPosition = input(0); // Position to scroll to
-  readonly animationDuration = input(500); // Animation duration in ms
+  public readonly showAfter = input(300); // Pixels scrolled before showing
+  public readonly scrollToPosition = input(0); // Position to scroll to
+  public readonly animationDuration = input(500); // Animation duration in ms
 
   // -----------------------------------------------------------------------------------------------------
   // @ Signals and State
   // -----------------------------------------------------------------------------------------------------
-  readonly isVisible = signal(false);
+  protected readonly isVisible = signal(false);
 
   // -----------------------------------------------------------------------------------------------------
   // @ Public methods
   // -----------------------------------------------------------------------------------------------------
   onWindowScroll(): void {
-    const scrollPosition =
-      this.document.documentElement.scrollTop || this.document.body.scrollTop;
+    const scrollPosition = this.document.documentElement.scrollTop || this.document.body.scrollTop;
     this.isVisible.set(scrollPosition > this.showAfter());
   }
 
   scrollToTop(): void {
+    play('page');
     this.viewportScroller.scrollToPosition([0, 0], { behavior: 'smooth' });
   }
 }

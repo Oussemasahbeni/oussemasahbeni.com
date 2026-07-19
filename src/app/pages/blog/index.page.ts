@@ -20,38 +20,34 @@ export const routeMeta: RouteMeta = {
     <app-noise-background />
     <div class="flex flex-col gap-10">
       <!-- HEADER -->
-      <div class="border-b border-border/40 pb-8">
-        <h1
-          class="text-3xl font-bold tracking-tight sm:text-4xl text-foreground"
-        >
-          Latest Updates
-        </h1>
-        <p class="mt-4 text-muted-foreground text-lg">
-          Thoughts on Software Engineering.
-        </p>
+      <div class="border-border/40 border-b pb-8">
+        <h1 class="text-foreground text-3xl font-bold tracking-tight sm:text-4xl">Latest Updates</h1>
+        <p class="text-muted-foreground mt-4 text-lg">Thoughts on Software Engineering.</p>
 
         <!-- TAG FILTER SECTION -->
-        <div class="flex flex-wrap gap-2 mt-8">
+        <div class="mt-8 flex flex-wrap gap-2">
           <button
+            type="button"
             hlmBtn
             size="sm"
-            [variant]="activeTag() === 'All' ? 'default' : 'secondary'"
             class="transition-all"
+            [variant]="activeTag() === 'All' ? 'default' : 'secondary'"
             (click)="setTag('All')"
           >
             All
           </button>
 
           @for (tag of uniqueTags(); track tag) {
-          <button
-            hlmBtn
-            size="sm"
-            [variant]="activeTag() === tag ? 'default' : 'secondary'"
-            class="transition-all"
-            (click)="setTag(tag)"
-          >
-            {{ tag }}
-          </button>
+            <button
+              type="button"
+              hlmBtn
+              size="sm"
+              class="transition-all"
+              [variant]="activeTag() === tag ? 'default' : 'secondary'"
+              (click)="setTag(tag)"
+            >
+              {{ tag }}
+            </button>
           }
         </div>
       </div>
@@ -59,47 +55,37 @@ export const routeMeta: RouteMeta = {
       <!-- ARTICLE LIST -->
       <div class="flex flex-col gap-10">
         @for (article of filteredArticles(); track article.attributes.slug) {
-        <div class="animate-in fade-in slide-in-from-bottom-4 duration-250">
-          <app-blog-preview [article]="article.attributes" />
-        </div>
+          <div class="animate-in fade-in slide-in-from-bottom-4 duration-250">
+            <app-blog-preview [article]="article.attributes" />
+          </div>
         } @empty {
-        <div class="py-20 text-center text-muted-foreground">
-          No articles found for "{{ activeTag() }}"
-        </div>
+          <div class="text-muted-foreground py-20 text-center">No articles found for "{{ activeTag() }}"</div>
         }
       </div>
     </div>
   `,
 })
 export default class Blog {
-  readonly allArticles = injectContentFiles<ContentMetadata>();
+  protected readonly allArticles = injectContentFiles<ContentMetadata>();
 
-  readonly uniqueTags = signal<string[]>(
-    [
-      ...new Set(
-        this.allArticles.flatMap((article) => article.attributes.tags || [])
-      ),
-    ].sort()
+  protected readonly uniqueTags = signal<string[]>(
+    [...new Set(this.allArticles.flatMap((article) => article.attributes.tags || []))].sort()
   );
-  readonly activeTag = signal<string>('All');
+  protected readonly activeTag = signal<string>('All');
 
-  readonly filteredArticles = computed(() => {
+  protected readonly filteredArticles = computed(() => {
     const currentTag = this.activeTag();
 
     // Sort by date (newest first)
     const sorted = this.allArticles.sort(
-      (a, b) =>
-        new Date(b.attributes.date).getTime() -
-        new Date(a.attributes.date).getTime()
+      (a, b) => new Date(b.attributes.date).getTime() - new Date(a.attributes.date).getTime()
     );
 
     if (currentTag === 'All') {
       return sorted;
     }
 
-    return sorted.filter((article) =>
-      article.attributes.tags?.includes(currentTag)
-    );
+    return sorted.filter((article) => article.attributes.tags?.includes(currentTag));
   });
 
   setTag(tag: string) {

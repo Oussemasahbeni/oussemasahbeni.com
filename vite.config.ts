@@ -3,11 +3,11 @@
 import analog, { PrerenderContentFile } from '@analogjs/platform';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
-import viteTsConfigPaths from 'vite-tsconfig-paths';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   return {
+    resolve: { tsconfigPaths: true },
     root: __dirname,
     cacheDir: './node_modules/.vite',
     build: {
@@ -37,7 +37,6 @@ export default defineConfig(({ mode }) => {
           routes: [
             '/',
             '/blog',
-            '/projects',
             '/api/rss.xml',
             {
               contentDir: 'src/content',
@@ -55,7 +54,6 @@ export default defineConfig(({ mode }) => {
         },
       }),
       tailwindcss(),
-      viteTsConfigPaths(),
     ],
     test: {
       globals: true,

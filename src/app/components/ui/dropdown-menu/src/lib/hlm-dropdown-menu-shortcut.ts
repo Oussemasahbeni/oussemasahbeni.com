@@ -1,17 +1,12 @@
-import { computed, Directive, input } from '@angular/core';
-import { hlm } from '@spartan-ng/helm/utils';
-import type { ClassValue } from 'clsx';
+import { Directive } from '@angular/core';
+import { classes } from '@spartan-ng/helm/utils';
 
 @Directive({
 	selector: '[hlmDropdownMenuShortcut],hlm-dropdown-menu-shortcut',
-	host: {
-		'data-slot': 'dropdown-menu-shortcut',
-		'[class]': '_computedClass()',
-	},
+	host: { 'data-slot': 'dropdown-menu-shortcut' },
 })
 export class HlmDropdownMenuShortcut {
-	public readonly userClass = input<ClassValue>('', { alias: 'class' });
-	protected readonly _computedClass = computed(() =>
-		hlm('text-muted-foreground ml-auto text-xs tracking-widest', this.userClass()),
-	);
+	constructor() {
+		classes(() => 'text-muted-foreground group-focus/dropdown-menu-item:text-accent-foreground ms-auto text-xs tracking-widest');
+	}
 }

@@ -1,21 +1,19 @@
-import { Directive, computed, input } from '@angular/core';
-import { hlm } from '@spartan-ng/helm/utils';
-import { type VariantProps, cva } from 'class-variance-authority';
-import type { ClassValue } from 'clsx';
-
-export const cardVariants = cva('bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm', {
-	variants: {},
-	defaultVariants: {},
-});
-export type CardVariants = VariantProps<typeof cardVariants>;
+import { Directive, input } from '@angular/core';
+import { classes } from '@spartan-ng/helm/utils';
+import { HlmCardConfig, injectHlmCardConfig } from './hlm-card.token';
 
 @Directive({
-	selector: '[hlmCard]',
+	selector: '[hlmCard],hlm-card',
 	host: {
-		'[class]': '_computedClass()',
+		'data-slot': 'card',
+		'[attr.data-size]': 'size()',
 	},
 })
 export class HlmCard {
-	public readonly userClass = input<ClassValue>('', { alias: 'class' });
-	protected readonly _computedClass = computed(() => hlm(cardVariants(), this.userClass()));
+	private readonly _defaultConfig = injectHlmCardConfig();
+	public readonly size = input<HlmCardConfig['size']>(this._defaultConfig.size);
+
+	constructor() {
+		classes(() => 'ring-foreground/10 bg-card text-card-foreground gap-(--card-spacing) overflow-hidden rounded-xl py-(--card-spacing) text-sm ring-1 [--card-spacing:--spacing(4)] has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(3)] data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl group/card flex flex-col');
+	}
 }

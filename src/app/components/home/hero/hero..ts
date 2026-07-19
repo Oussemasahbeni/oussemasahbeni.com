@@ -1,24 +1,48 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ButtonVariants, HlmButtonImports } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideArrowRight, lucideMail } from '@ng-icons/lucide';
+import { radixGithubLogo, radixLinkedinLogo } from '@ng-icons/radix-icons';
+import { HlmButtonImports } from '@spartan-ng/helm/button';
+import { GITHUB_LINK, LINKEDIN_LINK } from '../../../core/constants';
+import { SpotifyWidget } from '../../../shared/components/spotifty-widget/spotify-widget';
 
-export interface ActionButton {
-  title: string;
+interface SocialLink {
+  label: string;
   icon: string;
-  variant: ButtonVariants['variant'];
   link: string;
 }
 
 @Component({
   selector: 'app-hero',
-  imports: [HlmButtonImports, HlmIconImports],
+  imports: [HlmButtonImports, RouterLink, NgIcon, SpotifyWidget],
+  providers: [
+    provideIcons({
+      lucideArrowRight,
+      lucideMail,
+      radixGithubLogo,
+      radixLinkedinLogo,
+    }),
+  ],
   templateUrl: './hero.html',
   styleUrl: './hero.css',
   host: {
-    class:
-      'block  relative min-h-screen flex items-center justify-center  px-4 sm:px-6 lg:px-8',
+    class: 'block relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8',
   },
-
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Hero {}
+export class Hero {
+  protected readonly socials: SocialLink[] = [
+    { label: 'GitHub', icon: 'radixGithubLogo', link: GITHUB_LINK },
+    { label: 'LinkedIn', icon: 'radixLinkedinLogo', link: LINKEDIN_LINK },
+  ];
+
+  // Rotated purely in CSS (see hero.css). Keep the count in sync with the
+  // keyframe steps there if you add or remove a role.
+  protected readonly roles = [
+    'Software Engineer',
+    'Open-source Contributor',
+    'Full-stack Developer',
+    'Football Enthusiast',
+    'Gym Rat',
+  ];
+}

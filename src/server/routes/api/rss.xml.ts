@@ -2,13 +2,12 @@ import fm from 'front-matter';
 import { defineEventHandler, setHeader } from 'h3';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { PostFrontmatter } from '../../../app/models/rss';
 
 export default defineEventHandler((event) => {
-  //  Define your site details
   const SITE_URL = 'https://www.oussemasahbeni.com';
   const BLOG_URL = `${SITE_URL}/blog`;
 
-  // Locate your content folder
   const contentDir = join(process.cwd(), 'src/content');
 
   // Read all files in the directory
@@ -18,7 +17,7 @@ export default defineEventHandler((event) => {
   const posts = files
     .map((file) => {
       const fileContent = readFileSync(join(contentDir, file), 'utf-8');
-      const { attributes } = fm(fileContent) as any;
+      const { attributes } = fm<PostFrontmatter>(fileContent);
 
       // Use the slug from frontmatter OR filename
       const slug = attributes.slug || file.replace('.md', '');
@@ -29,9 +28,10 @@ export default defineEventHandler((event) => {
         rawDate: new Date(attributes.date),
         description: attributes.description || '',
         link: `${BLOG_URL}/${slug}`,
+        draft: attributes.draft || false,
       };
     })
-    .filter((post) => !(post as any).draft)
+    .filter((post) => !post.draft)
     // Sort by newest first
     .sort((a, b) => b.rawDate.getTime() - a.rawDate.getTime());
 

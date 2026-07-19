@@ -1,19 +1,12 @@
-<header class="fixed top-0 z-50 h-16 w-full backdrop-blur-md border-b">
-  <nav class="relative flex h-full px-6 md:px-10 justify-between items-center">
+<header class="fixed top-0 z-50 h-16 w-full border-b backdrop-blur-md">
+  <nav class="relative flex h-full items-center justify-between px-6 md:px-10">
     <!-- Logo Section -->
     <a
       routerLink="/"
-      class="flex items-center space-x-2 hover:opacity-80 transition-opacity cursor-pointer text-zinc-900 dark:text-zinc-100"
+      class="flex cursor-pointer items-center space-x-2 text-zinc-900 transition-opacity hover:opacity-80 dark:text-zinc-100"
       aria-label="Home"
     >
-      <svg
-        width="40"
-        height="40"
-        viewBox="0 0 210 210"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-10 w-auto"
-      >
+      <svg width="40" height="40" viewBox="0 0 210 210" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-10 w-auto">
         <path
           d="M67.5 55C25.8333 88.3333 21.6667 134.167 55 192.5M142.5 155C184.167 121.667 188.333 76.7305 155 18.3972M105 5C78.4784 5 53.043 15.5357 34.2893 34.2893C15.5357 53.043 5 78.4784 5 105C5 131.522 15.5357 156.957 34.2893 175.711C53.043 194.464 78.4784 205 105 205C131.522 205 156.957 194.464 175.711 175.711C194.464 156.957 205 131.522 205 105C205 78.4784 194.464 53.043 175.711 34.2893C156.957 15.5357 131.522 5 105 5ZM105 42.5C88.424 42.5 72.5269 49.0848 60.8058 60.8058C49.0848 72.5269 42.5 88.424 42.5 105C42.5 121.576 49.0848 137.473 60.8058 149.194C72.5269 160.915 88.424 167.5 105 167.5C121.576 167.5 137.473 160.915 149.194 149.194C160.915 137.473 167.5 121.576 167.5 105C167.5 88.424 160.915 72.5269 149.194 60.8058C137.473 49.0848 121.576 42.5 105 42.5Z"
           stroke="currentColor"
@@ -25,113 +18,109 @@
 
     <div class="flex items-center gap-2">
       <!-- Desktop Navigation Links -->
-      <div class="hidden sm:flex items-center gap-8">
-        @for(nav of navigation(); track nav){
-        <a
-          [routerLink]="nav.link"
-          class="cursor-pointer group relative text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-all duration-200"
-          aria-label="{{ nav.ariaLabel }} section"
-        >
-          {{ nav.title }}
-          <span
-            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"
-          ></span>
-        </a>
+      <div class="hidden items-center gap-8 sm:flex">
+        @for (nav of navigation(); track nav) {
+          <a
+            class="group relative cursor-pointer text-sm font-medium text-zinc-600 transition-all duration-200 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+            [aria-label]="nav.ariaLabel"
+            [routerLink]="nav.link"
+          >
+            {{ nav.title }}
+            <span
+              class="absolute -bottom-1 left-0 h-0.5 w-0 bg-blue-500 transition-all duration-300 group-hover:w-full"
+            ></span>
+          </a>
         }
       </div>
 
       <!-- Right Section -->
       <div class="flex items-center gap-2">
         <!-- Divider (Desktop only) -->
-        <div class="bg-border h-6 w-px hidden sm:block"></div>
+        <div class="bg-border hidden h-6 w-px sm:block"></div>
 
         <!-- Desktop Only Socials & Now Playing -->
         <div class="flex items-center gap-1">
-          <div class="hidden sm:flex items-center gap-1">
-            <button
+          <div class="hidden items-center gap-1 sm:flex">
+            <a
               hlmBtn
               size="icon"
               variant="ghost"
-              (click)="openGithub()"
               aria-label="Visit GitHub Profile"
+              href="https://github.com/Oussemasahbeni"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <ng-icon hlm name="lucideGithub" class="text-primary" size="sm" />
-            </button>
-            <button
+              <ng-icon name="simpleGithub" />
+            </a>
+            <a
               hlmBtn
               size="icon"
               variant="ghost"
-              (click)="openX()"
               aria-label="Visit X (Twitter) Profile"
+              href="https://x.com/Spike_2002"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <ng-icon
-                hlm
-                name="remixTwitterXFill"
-                class="text-primary"
-                size="sm"
-              />
-            </button>
-            <button
+              <ng-icon name="simpleX" />
+            </a>
+            <a
               hlmBtn
               size="icon"
               variant="ghost"
-              (click)="openLinkedIn()"
               aria-label="Visit LinkedIn Profile"
+              href="https://www.linkedin.com/in/oussema-sahbeni/"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <ng-icon
-                hlm
-                name="radixLinkedinLogo"
-                class="text-primary"
-                size="sm"
-              />
-            </button>
-            <button
+              <ng-icon name="radixLinkedinLogo" />
+            </a>
+            <a
               hlmBtn
               size="icon"
               variant="ghost"
-              (click)="openRss()"
               aria-label="Subscribe via RSS"
+              href="/api/rss.xml"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <ng-icon hlm name="lucideRss" size="sm" />
-            </button>
+              <ng-icon name="lucideRss" />
+            </a>
           </div>
 
-          <app-theme-toggler />
+          <app-theme-switch />
 
           <!-- Desktop Now Playing -->
           <div class="ml-2 hidden sm:flex">
-            <app-now-playing />
+            <app-spotify-widget />
           </div>
         </div>
 
         <!-- 2. Mobile Sheet (Drawer) -->
         <hlm-sheet side="left">
           <button
-            class="sm:hidden cursor-pointer"
+            type="button"
+            class="cursor-pointer sm:hidden"
             hlmSheetTrigger
             hlmBtn
             size="icon"
             variant="outline"
             aria-label="Open mobile menu"
           >
-            <ng-icon hlmIcon size="sm" name="radixHamburgerMenu" />
+            <ng-icon name="lucideMenu" />
           </button>
 
-          <hlm-sheet-content
-            *brnSheetContent="let ctx"
-            class="flex flex-col justify-between h-full p-6"
-          >
+          <hlm-sheet-content *hlmSheetPortal="let ctx" class="flex h-full flex-col justify-between p-6">
             <!-- Top Section: Links -->
-            <div class="flex flex-col gap-6 mt-8">
-              @for(nav of navigation(); track nav){
-              <a
-                [routerLink]="nav.link"
-                (click)="closeMenu()"
-                class="cursor-pointer text-lg font-medium text-zinc-700 hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400 transition-colors"
-                [ariaLabel]="nav.ariaLabel"
-              >
-                {{ nav.title }}
-              </a>
+            <div class="mt-8 flex flex-col gap-6">
+              @for (nav of navigation(); track nav) {
+                <a
+                  class="cursor-pointer text-lg font-medium text-zinc-700 transition-colors hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400"
+                  [routerLink]="nav.link"
+                  [ariaLabel]="nav.ariaLabel"
+                  (click)="closeMenu()"
+                >
+                  {{ nav.title }}
+                </a>
               }
             </div>
 
@@ -139,45 +128,53 @@
             <div class="flex flex-col gap-6 pb-4">
               <!-- Mobile Socials -->
               <div class="flex flex-col gap-6 pb-4">
-                <div class="w-full h-px bg-border"></div>
-                <app-now-playing />
+                <div class="bg-border h-px w-full"></div>
+                <app-spotify-widget />
                 <div class="flex items-center gap-1">
-                  <button
+                  <a
                     hlmBtn
                     size="icon"
                     variant="ghost"
-                    (click)="openGithub()"
                     aria-label="Visit GitHub Profile"
+                    href="https://github.com/Oussemasahbeni"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <ng-icon hlm name="lucideGithub" size="sm" />
-                  </button>
-                  <button
+                    <ng-icon name="simpleGithub" />
+                  </a>
+                  <a
                     hlmBtn
                     size="icon"
                     variant="ghost"
-                    (click)="openX()"
                     aria-label="Visit X (Twitter) Profile"
+                    href="https://x.com/Spike_2002"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <ng-icon hlm name="remixTwitterXFill" size="sm" />
-                  </button>
-                  <button
+                    <ng-icon name="simpleX" />
+                  </a>
+                  <a
                     hlmBtn
                     size="icon"
                     variant="ghost"
-                    (click)="openLinkedIn()"
                     aria-label="Visit LinkedIn Profile"
+                    href="https://www.linkedin.com/in/oussema-sahbeni/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <ng-icon hlm name="radixLinkedinLogo" size="sm" />
-                  </button>
-                  <button
+                    <ng-icon name="radixLinkedinLogo" />
+                  </a>
+                  <a
                     hlmBtn
                     size="icon"
                     variant="ghost"
-                    (click)="openRss()"
                     aria-label="Subscribe via RSS"
+                    href="/api/rss.xml"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <ng-icon hlm name="lucideRss" size="sm" />
-                  </button>
+                    <ng-icon name="lucideRss" />
+                  </a>
                 </div>
               </div>
             </div>

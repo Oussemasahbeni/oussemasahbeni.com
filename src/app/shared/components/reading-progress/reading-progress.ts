@@ -1,20 +1,9 @@
-import { isPlatformBrowser } from '@angular/common';
-import {
-  Component,
-  DestroyRef,
-  DOCUMENT,
-  inject,
-  PLATFORM_ID,
-  signal,
-} from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { fromEvent, throttleTime } from 'rxjs';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-reading-progress',
-  imports: [],
   styles: `
-    @keyframes grow-progess {
+    @keyframes grow-progress {
       from {
         transform: scaleX(0);
       }
@@ -22,50 +11,23 @@ import { fromEvent, throttleTime } from 'rxjs';
         transform: scaleX(1);
       }
     }
-    // Not yet supported in firefox
-    #progress-bar {
-      animation: grow-progess linear forwards;
-      animation-timeline: scroll();
+
+    /* Firefox doesn't support animation-timeline yet, so we need to use a fallback */
+    .progress-bar {
+      transform-origin: left;
+      transform: scaleX(0);
+    }
+
+    @supports (animation-timeline: scroll()) {
+      .progress-bar {
+        transform-origin: left;
+        animation: grow-progress linear forwards;
+        animation-timeline: scroll(root block);
+      }
     }
   `,
   template: `
-    <div class="fixed top-0 left-0 w-full h-1 z-50 bg-transparent">
-      <div
-        class="h-full bg-blue-400 transition-transform duration-75 ease-out origin-left"
-        [style.transform]="'scaleX(' + readingProgress() / 100 + ')'"
-      ></div>
-    </div>
+    <div class="fixed inset-0 w-full h-1 z-50 bg-blue-400 progress-bar"></div>
   `,
 })
-export class ReadingProgress {
-  private readonly document = inject(DOCUMENT);
-  private readonly platformId = inject(PLATFORM_ID);
-  private readonly destroyRef = inject(DestroyRef);
-
-  readonly readingProgress = signal(0);
-
-  constructor() {
-    if (isPlatformBrowser(this.platformId)) {
-      fromEvent(window, 'scroll')
-        .pipe(throttleTime(20), takeUntilDestroyed(this.destroyRef))
-        .subscribe(() => {
-          this.calculateReadingProgress();
-        });
-    }
-  }
-
-  calculateReadingProgress() {
-    if (isPlatformBrowser(this.platformId)) {
-      const scrollTop =
-        window.scrollY || this.document.documentElement.scrollTop;
-      const height =
-        this.document.documentElement.scrollHeight -
-        this.document.documentElement.clientHeight;
-
-      if (height > 0) {
-        const scrolled = (scrollTop / height) * 100;
-        this.readingProgress.set(scrolled);
-      }
-    }
-  }
-}
+export class ReadingProgress {}

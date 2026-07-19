@@ -1,10 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Service, inject } from '@angular/core';
 import { ContactMessage } from '../../models/contact';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class ContactService {
   private readonly http = inject(HttpClient);
 

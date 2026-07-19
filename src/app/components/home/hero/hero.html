@@ -1,119 +1,42 @@
-<section>
-  <div class="relative z-10 mx-auto max-w-7xl mt-24 sm:mt-0">
-    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-      <!-- Content Section -->
-      <div class="text-center lg:text-left flex flex-col gap-8">
-        <!-- Greeting -->
-        <div class="space-y-2">
-          <p
-            class="text-sm font-medium text-zinc-600 dark:text-zinc-400 uppercase"
-          >
-            Hello there! I'm
-          </p>
-          <h1
-            class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100"
-          >
-            Oussema Sahbeni
-          </h1>
-          <div class="mt-4 w-fit mx-auto lg:mx-0">
-            <h2
-              class="text-center text-2xl sm:text-2xl lg:text-3xl font-semibold typewriter"
-            >
-              Fullstack Developer
-            </h2>
-          </div>
-        </div>
+<div class="relative z-10 mx-auto flex max-w-2xl flex-col items-center gap-6 text-center">
+  <!-- Now playing -->
+  <app-spotify-widget />
 
-        <!-- Description -->
-        <div class="max-w-2xl">
-          <p class="text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed">
-            Fullstack Developer from Tunisia with 2+ years of hands-on
-            experience designing, deploying, and securing scalable web
-            platforms. Delivered data-driven applications used by 1,000+ users,
-            automating workflows and contributing to mission-focused tech
-            initiatives. Skilled in backend architecture, frontend frameworks,
-            and cloud technologies.
-          </p>
-        </div>
-      </div>
-
-      <!-- Code Editor Visual -->
-      <div class="relative lg:order-last">
-        <div
-          class="relative mx-auto max-w-md lg:max-w-lg h-96 flex items-center justify-center"
-        >
-          <!-- Code Editor Window -->
-          <div
-            class="relative w-full border-none max-w-sm bg-zinc-800 dark:bg-zinc-900 rounded-3xl overflow-hidden shadow-2xl border border-zinc-600 dark:border-zinc-500"
-          >
-            <!-- Window Header -->
-            <div
-              class="flex items-center justify-between px-4 py-3 bg-zinc-700 dark:bg-zinc-800 border-b border-zinc-600 dark:border-zinc-600"
-            >
-              <div class="flex gap-2">
-                <div class="w-3 h-3 bg-red-500 rounded-full"></div>
-                <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-              </div>
-              <div class="text-xs text-zinc-200 dark:text-zinc-300 font-mono">
-                developer.ts
-              </div>
-              <div class="w-4 h-4"></div>
-            </div>
-
-            <!-- Code Content -->
-            <div
-              class="p-4 h-96 overflow-hidden font-mono text-xs leading-relaxed"
-            >
-              <div class="text-purple-400">
-                <span class="text-blue-400 mr-1">interface</span>
-                <span class="text-cyan-300">Developer</span> {{ "{" }}
-              </div>
-              <div class="ml-2 text-emerald-400">
-                name: <span class="text-orange-300">'Oussema Sahbeni'</span>;
-              </div>
-              <div class="ml-2 text-emerald-400">
-                role:
-                <span class="text-orange-300">'Fullstack Developer'</span>;
-              </div>
-              <div class="ml-2 text-emerald-400">
-                experience: <span class="text-yellow-300">2</span
-                ><span class="text-orange-300">+ years</span>;
-              </div>
-              <div class="ml-2 text-emerald-400">
-                location: <span class="text-orange-300">'Tunisia'</span>;
-              </div>
-              <div class="ml-2 text-emerald-400">languages: [</div>
-              <div class="ml-4 text-orange-300">
-                'Java', 'TypeScript', 'Python'
-              </div>
-              <div class="ml-2 text-emerald-400">];</div>
-              <div class="ml-2 text-emerald-400">frameworks: [</div>
-              <div class="ml-4 text-orange-300">
-                'Angular', 'Spring Boot', 'FastAPI'
-              </div>
-              <div class="ml-2 text-emerald-400">];</div>
-              <div class="ml-2 text-emerald-400">cloud: [</div>
-              <div class="ml-4 text-orange-300">'AWS', 'Azure', 'Docker'</div>
-              <div class="ml-2 text-emerald-400">];</div>
-              <div class="ml-2 text-emerald-400">
-                impact:
-                <span class="text-orange-300">'1000+ users served'</span>;
-              </div>
-              <div class="text-purple-400">{{ "}" }}</div>
-              <div class="mt-2 text-zinc-400 dark:text-zinc-400">
-                <span class="text-green-400">//</span> Building scalable
-                solutions
-              </div>
-              <div class="text-zinc-400 dark:text-zinc-400">
-                <span class="text-green-400">//</span> Ready for your next
-                project?
-                <span class="animate-pulse text-cyan-400">|</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- Name -->
+  <div class="flex flex-col gap-3">
+    <p class="text-muted-foreground font-mono text-sm tracking-widest uppercase">Hi, I'm</p>
+    <h1 class="text-foreground text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">Oussema Sahbeni</h1>
+    <h2 class="text-foreground h-8 overflow-hidden text-xl font-semibold sm:text-2xl" aria-label="Software Engineer">
+      <span class="role-rotator flex flex-col">
+        @for (role of roles; track role) {
+          <span class="flex h-8 items-center justify-center">{{ role }}</span>
+        }
+        <!-- Duplicate of the first role so the loop wraps seamlessly -->
+        <span class="flex h-8 items-center justify-center" aria-hidden="true">{{ roles[0] }}</span>
+      </span>
+    </h2>
   </div>
-</section>
+
+  <!-- Intro -->
+  <p class="text-muted-foreground max-w-xl text-base leading-relaxed sm:text-lg">
+    I build scalable web applications end to end — from clean, well-architected frontends to reliable backends.
+  </p>
+
+  <!-- Socials -->
+  <div class="flex items-center gap-1">
+    @for (social of socials; track social.label) {
+      <a
+        hlmBtn
+        size="icon"
+        variant="ghost"
+        class="text-muted-foreground hover:text-foreground"
+        target="_blank"
+        rel="noopener noreferrer"
+        [href]="social.link"
+        [attr.aria-label]="social.label"
+      >
+        <ng-icon [name]="social.icon" />
+      </a>
+    }
+  </div>
+</div>
