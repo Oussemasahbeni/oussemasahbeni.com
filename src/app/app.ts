@@ -7,11 +7,7 @@ import { Footer } from './layout/footer/footer';
 import { Navbar } from './layout/navbar/navbar';
 import { BackToTop } from './shared/components/back-to-top/back-to-top';
 
-declare const gtag: (
-  command: string,
-  targetId: string,
-  config?: Record<string, unknown>,
-) => void;
+declare const gtag: (command: string, targetId: string, config?: Record<string, unknown>) => void;
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, Footer, Navbar, BackToTop],
@@ -25,7 +21,7 @@ declare const gtag: (
       <router-outlet />
     </main>
     <app-footer />
-    <app-back-to-top variant="glass" size="medium" position="bottom-right" [showAfter]="200" />
+    <app-back-to-top />
   `,
 })
 export class App {

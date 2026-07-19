@@ -1,15 +1,8 @@
 import fm from 'front-matter';
-import { defineEventHandler } from 'h3';
+import { defineEventHandler, setHeader } from 'h3';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
-
-interface PostFrontmatter {
-  title: string;
-  date: string;
-  description?: string;
-  slug?: string;
-  draft?: boolean;
-}
+import { PostFrontmatter } from '../../../app/models/rss';
 
 export default defineEventHandler((event) => {
   const SITE_URL = 'https://www.oussemasahbeni.com';
@@ -70,6 +63,6 @@ export default defineEventHandler((event) => {
     </channel>
     </rss>`;
 
-  event.res.headers.set('content-type', 'text/xml');
+  setHeader(event, 'content-type', 'text/xml');
   return feedString;
 });

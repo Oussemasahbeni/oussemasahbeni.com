@@ -27,7 +27,6 @@ import { GITHUB_LINK, LINKEDIN_LINK, X_LINK } from '../../core/constants';
         <div class="flex justify-center gap-6 mb-6">
           <button
             hlmBtn
-            class="cursor-pointer"
             aria-label="Open GitHub Profile"
             size="icon"
             variant="ghost"
@@ -43,7 +42,6 @@ import { GITHUB_LINK, LINKEDIN_LINK, X_LINK } from '../../core/constants';
             size="icon"
             variant="ghost"
             type="button"
-            class="cursor-pointer"
             (click)="openX()"
           >
             <ng-icon name="simpleX" class="text-primary" />
@@ -54,7 +52,6 @@ import { GITHUB_LINK, LINKEDIN_LINK, X_LINK } from '../../core/constants';
             size="icon"
             variant="ghost"
             type="button"
-            class="cursor-pointer"
             (click)="openLinkedIn()"
           >
             <ng-icon name="radixLinkedinLogo" class="text-primary" />

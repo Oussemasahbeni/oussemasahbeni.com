@@ -1,15 +1,32 @@
 import { httpResource } from '@angular/common/http';
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideDumbbell, lucideFolders, lucideTrendingUp, lucideUsers } from '@ng-icons/lucide';
-import { HlmCardImports } from '@spartan-ng/helm/card';
-import { SpotlightColorDirective, SpotlightDirective } from '../../../shared/directives/spotlight.directive';
-import { NgOptimizedImage } from '@angular/common';
+import { lucideDumbbell, lucideFolders, lucideGitCommitHorizontal, lucideUsers } from '@ng-icons/lucide';
+import {
+  simpleAngular,
+  simpleApachekafka,
+  simpleCamunda,
+  simpleDocker,
+  simpleGit,
+  simpleGrafana,
+  simpleKeycloak,
+  simpleKubernetes,
+  simpleNodedotjs,
+  simpleOpenjdk,
+  simplePostgresql,
+  simplePrometheus,
+  simpleRabbitmq,
+  simpleRedhatopenshift,
+  simpleSpringboot,
+  simpleTailwindcss,
+  simpleTanstack,
+  simpleTypescript,
+} from '@ng-icons/simple-icons';
+import { HlmButtonImports } from '@spartan-ng/helm/button';
 
 interface TechStack {
   name: string;
   icon: string;
-  title: string;
 }
 
 interface GitHubData {
@@ -17,108 +34,139 @@ interface GitHubData {
   followers: number;
 }
 
+interface ContributionsData {
+  total: Record<string, number>;
+}
+
+interface Stat {
+  icon: string;
+  value: string | number;
+  label: string;
+}
+
 @Component({
   selector: 'app-about-me',
-  imports: [HlmCardImports,NgOptimizedImage, NgIcon, SpotlightDirective, SpotlightColorDirective],
+  imports: [HlmButtonImports, NgIcon],
   providers: [
     provideIcons({
+      simpleTypescript,
+      simpleAngular,
+      simpleSpringboot,
+      simpleOpenjdk,
+      simplePostgresql,
+      simpleDocker,
+      simpleTailwindcss,
+      simpleKeycloak,
+      simpleApachekafka,
+      simpleRabbitmq,
+      simplePrometheus,
+      simpleGrafana,
+      simpleNodedotjs,
+      simpleGit,
+      simpleRedhatopenshift,
+      simpleKubernetes,
+      simpleCamunda,
+      simpleTanstack,
       lucideUsers,
       lucideFolders,
-      lucideTrendingUp,
+      lucideGitCommitHorizontal,
       lucideDumbbell,
     }),
   ],
   templateUrl: './about-me.html',
-  styleUrls: ['./about-me.css'],
 })
 export class AboutMe {
-  protected readonly yearsExperience = signal(2);
-  protected readonly usersServed = signal(1000);
-  protected readonly projectsCompleted = signal(4);
-  protected readonly languagesSpoken = signal(3);
-
   protected readonly githubData = httpResource<GitHubData>(() => `https://api.github.com/users/Oussemasahbeni`);
+
+  protected readonly contributions = httpResource<ContributionsData>(
+    () => `https://github-contributions-api.jogruber.de/v4/Oussemasahbeni?y=all`
+  );
+
+  protected readonly stats = computed<Stat[]>(() => {
+    const gh = this.githubData.value();
+    const contrib = this.contributions.value();
+    const totalContributions = contrib ? Object.values(contrib.total).reduce((sum, n) => sum + n, 0) : undefined;
+
+    return [
+      { icon: 'lucideFolders', value: gh?.public_repos ?? '—', label: 'Repositories' },
+      { icon: 'lucideUsers', value: gh?.followers ?? '—', label: 'Followers' },
+      { icon: 'lucideGitCommitHorizontal', value: totalContributions?.toLocaleString() ?? '—', label: 'Contributions' },
+      { icon: 'lucideDumbbell', value: '80kg', label: 'Bench PR' },
+    ];
+  });
 
   protected readonly techStack = signal<TechStack[]>([
     {
       name: 'Angular',
-      icon: 'https://img.icons8.com/?size=48&id=6SWtW8hxZWSo&format=png',
-      title: 'Angular - TypeScript-based web framework',
+      icon: 'simpleAngular',
     },
     {
       name: 'Spring Boot',
-      icon: 'https://img.icons8.com/?size=48&id=90519&format=png',
-      title: 'Spring Boot - Java enterprise framework',
+      icon: 'simpleSpringboot',
     },
     {
       name: 'Java',
-      icon: 'https://img.icons8.com/?size=100&id=GPfHz0SM85FX&format=png&color=000000',
-      title: 'Java - Programming language',
+      icon: 'simpleOpenjdk',
     },
     {
       name: 'PostgreSQL',
-      icon: 'https://img.icons8.com/?size=48&id=38561&format=png',
-      title: 'PostgreSQL - Advanced relational database',
-    },
-    {
-      name: 'MongoDB',
-      icon: 'https://img.icons8.com/?size=48&id=8rKdRqZFLurS&format=png',
-      title: 'MongoDB - NoSQL document database',
+      icon: 'simplePostgresql',
     },
     {
       name: 'Docker',
-      icon: 'https://img.icons8.com/?size=48&id=cdYUlRaag9G9&format=png',
-      title: 'Docker - Containerization platform',
+      icon: 'simpleDocker',
     },
     {
       name: 'Tailwind CSS',
-      icon: 'https://img.icons8.com/?size=48&id=CIAZz2CYc6Kc&format=png',
-      title: 'Tailwind CSS - Utility-first CSS framework',
+      icon: 'simpleTailwindcss',
     },
     {
       name: 'Keycloak',
-      icon: 'https://img.icons8.com/fluency/48/key-cloak.png',
-      title: 'Keycloak - Identity and access management',
+      icon: 'simpleKeycloak',
     },
     {
       name: 'Apache Kafka',
-      icon: 'https://img.icons8.com/?size=48&id=fOhLNqGJsUbJ&format=png',
-      title: 'Apache Kafka - Distributed streaming platform',
+      icon: 'simpleApachekafka',
     },
     {
       name: 'RabbitMQ',
-      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rabbitmq/rabbitmq-original.svg',
-      title: 'RabbitMQ - Message broker',
+      icon: 'simpleRabbitmq',
     },
     {
       name: 'Prometheus',
-      icon: 'https://img.icons8.com/?size=48&id=lOqoeP2Zy02f&format=png',
-      title: 'Prometheus - Monitoring and alerting toolkit',
+      icon: 'simplePrometheus',
     },
     {
       name: 'Grafana',
-      icon: 'https://img.icons8.com/?size=48&id=9uVrNMu3Zx1K&format=png',
-      title: 'Grafana - Analytics and monitoring platform',
+      icon: 'simpleGrafana',
     },
     {
       name: 'Node.js',
-      icon: 'https://img.icons8.com/?size=48&id=hsPbhkOH4FMe&format=png',
-      title: 'Node.js - JavaScript runtime environment',
+      icon: 'simpleNodedotjs',
     },
     {
       name: 'TypeScript',
-      icon: 'https://img.icons8.com/?size=48&id=uJM6fQYqDaZK&format=png',
-      title: 'TypeScript - Typed JavaScript superset',
+      icon: 'simpleTypescript',
     },
     {
       name: 'Git',
-      icon: 'https://img.icons8.com/?size=48&id=20906&format=png',
-      title: 'Git - Version control system',
+      icon: 'simpleGit',
     },
     {
-      name: 'AWS',
-      icon: 'https://img.icons8.com/?size=100&id=G0CnLqqcRBXl&format=png&color=000000',
-      title: 'AWS - Amazon Web Services cloud platform',
+      name: 'Openshift',
+      icon: 'simpleRedhatopenshift',
+    },
+    {
+      name: 'Kubernetes',
+      icon: 'simpleKubernetes',
+    },
+    {
+      name: 'Camunda',
+      icon: 'simpleCamunda',
+    },
+    {
+      name: 'Tanstack',
+      icon: 'simpleTanstack',
     },
   ]);
 }

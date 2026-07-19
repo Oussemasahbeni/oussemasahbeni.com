@@ -51,14 +51,7 @@ import { ContentMetadata } from '../../../models/content-metadata';
             }
           </div>
 
-          <button
-            type="button"
-            hlmBtn
-            size="sm"
-            variant="default"
-            class="group w-full cursor-pointer gap-2 pl-0 transition-colors sm:w-fit"
-            [routerLink]="['/blog', article.slug]"
-          >
+          <button type="button" hlmBtn size="sm" variant="default" [routerLink]="['/blog', article.slug]">
             Read article
             <ng-icon name="lucideArrowRight" class="transition-transform group-hover:translate-x-1" />
           </button>

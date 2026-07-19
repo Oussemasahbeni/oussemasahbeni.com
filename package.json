@@ -68,7 +68,7 @@
     "angular-eslint": "22.1.0",
     "eslint": "^9.39.1",
     "eslint-plugin-unused-imports": "^4.4.1",
-    "h3": "2.0.1-rc.25",
+    "h3": "^1.15.0",
     "jsdom": "^27.1.0",
     "postcss": "^8.5.3",
     "prettier": "^3.8.3",

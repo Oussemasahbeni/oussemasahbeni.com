@@ -22,7 +22,7 @@
         @for (nav of navigation(); track nav) {
           <a
             class="group relative cursor-pointer text-sm font-medium text-zinc-600 transition-all duration-200 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
-            [aria-label]="nav.ariaLabel + ' section'"
+            [aria-label]="nav.ariaLabel"
             [routerLink]="nav.link"
           >
             {{ nav.title }}
@@ -41,39 +41,50 @@
         <!-- Desktop Only Socials & Now Playing -->
         <div class="flex items-center gap-1">
           <div class="hidden items-center gap-1 sm:flex">
-            <button
-              type="button"
+            <a
               hlmBtn
               size="icon"
               variant="ghost"
               aria-label="Visit GitHub Profile"
-              (click)="openGithub()"
+              href="https://github.com/Oussemasahbeni"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <ng-icon name="simpleGithub" class="text-primary" />
-            </button>
-            <button
-              type="button"
+              <ng-icon name="simpleGithub" />
+            </a>
+            <a
               hlmBtn
               size="icon"
               variant="ghost"
               aria-label="Visit X (Twitter) Profile"
-              (click)="openX()"
+              href="https://x.com/Spike_2002"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <ng-icon name="simpleX" class="text-primary" />
-            </button>
-            <button
-              type="button"
+              <ng-icon name="simpleX" />
+            </a>
+            <a
               hlmBtn
               size="icon"
               variant="ghost"
               aria-label="Visit LinkedIn Profile"
-              (click)="openLinkedIn()"
+              href="https://www.linkedin.com/in/oussema-sahbeni/"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <ng-icon name="radixLinkedinLogo" class="text-primary" />
-            </button>
-            <button type="button" hlmBtn size="icon" variant="ghost" aria-label="Subscribe via RSS" (click)="openRss()">
+              <ng-icon name="radixLinkedinLogo" />
+            </a>
+            <a
+              hlmBtn
+              size="icon"
+              variant="ghost"
+              aria-label="Subscribe via RSS"
+              href="/api/rss.xml"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <ng-icon name="lucideRss" />
-            </button>
+            </a>
           </div>
 
           <app-theme-switch />
@@ -120,46 +131,50 @@
                 <div class="bg-border h-px w-full"></div>
                 <app-spotify-widget />
                 <div class="flex items-center gap-1">
-                  <button
-                    type="button"
+                  <a
                     hlmBtn
                     size="icon"
                     variant="ghost"
                     aria-label="Visit GitHub Profile"
-                    (click)="openGithub()"
+                    href="https://github.com/Oussemasahbeni"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <ng-icon name="simpleGithub" />
-                  </button>
-                  <button
-                    type="button"
+                  </a>
+                  <a
                     hlmBtn
                     size="icon"
                     variant="ghost"
                     aria-label="Visit X (Twitter) Profile"
-                    (click)="openX()"
+                    href="https://x.com/Spike_2002"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <ng-icon name="simpleX" />
-                  </button>
-                  <button
-                    type="button"
+                  </a>
+                  <a
                     hlmBtn
                     size="icon"
                     variant="ghost"
                     aria-label="Visit LinkedIn Profile"
-                    (click)="openLinkedIn()"
+                    href="https://www.linkedin.com/in/oussema-sahbeni/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <ng-icon name="radixLinkedinLogo" />
-                  </button>
-                  <button
-                    type="button"
+                  </a>
+                  <a
                     hlmBtn
                     size="icon"
                     variant="ghost"
                     aria-label="Subscribe via RSS"
-                    (click)="openRss()"
+                    href="/api/rss.xml"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <ng-icon name="lucideRss" />
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>

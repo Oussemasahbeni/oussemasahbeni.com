@@ -1,114 +1,78 @@
-<section class="mx-auto max-w-7xl px-6 sm:px-8">
-  <div class="flex flex-col gap-8">
-    <!-- Section Header -->
-    <div class="space-y-4 text-center">
-      <div class="inline-flex items-center gap-2 font-mono text-lg text-zinc-600 dark:text-zinc-400">
-        <span class="h-px w-8 bg-zinc-300 dark:bg-zinc-700"></span>
-        <span>About Me</span>
-        <span class="h-px w-8 bg-zinc-300 dark:bg-zinc-700"></span>
-      </div>
+<section>
+  <!-- Section Header -->
+  <div class="mb-10">
+    <div class="text-muted-foreground flex items-center gap-3 font-mono text-xs tracking-widest uppercase">
+      <span>About Me</span>
+      <span class="bg-border h-px flex-1"></span>
     </div>
+  </div>
 
-    <!--  Stats Grid -->
-    <div class="flex flex-col gap-8">
-      <div class="text-center">
-        <h3 class="mb-2 text-2xl font-bold text-zinc-900 dark:text-zinc-100">By the Numbers</h3>
-        <p class="text-zinc-600 dark:text-zinc-400">A few metrics that define my journey</p>
-      </div>
+  <!-- Bio -->
+  <div class="text-muted-foreground space-y-4 text-sm leading-relaxed sm:text-base">
+    <p>
+      I'm Oussema, a software engineer with <span class="text-foreground font-medium">2+ years</span> of experience based in
+      Tunis, Tunisia. My core stack is <span class="text-foreground font-medium">Angular</span>,
+      <span class="text-foreground font-medium">Spring Boot</span>, PostgreSQL, Keycloak and Docker. At
+      <a
+        class="text-foreground font-medium hover:underline"
+        href="https://www.oddo-bhf.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        >ODDO BHF</a
+      >
+      I build enterprise applications with Angular and Spring Boot on Kubernetes and OpenShift, working with Camunda,
+      microservices and micro-frontends.
+    </p>
+    <p>
+      Beyond my day job I'm an active <span class="text-foreground font-medium">open-source</span> contributor, I contribute
+      regularly to
+      <a
+        class="text-foreground font-medium hover:underline"
+        href="https://www.spartan.ng/"
+        target="_blank"
+        rel="noopener noreferrer"
+        >spartan/ui</a
+      >, the library that brings the shadcn experience to Angular, and to
+      <a
+        class="text-foreground hover:anderline font-medium"
+        href="https://github.com/keycloakify/keycloakify"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Keycloakify
+      </a>
+      The library that allows you to build Keycloak themes with React and Angular. When I'm not building things, you'll find
+      me at the gym chasing a new PR.
+    </p>
+  </div>
 
-      <!-- Stats Cards Grid -->
-      @if (githubData.hasValue()) {
-        <div appSpotlight class="spotlight-grid grid grid-cols-1 gap-4 lg:grid-cols-4">
-          <section
-            hlmCard
-            appSpotlightColor="59, 130, 246"
-            class="spotlight-card group relative text-center transition-all duration-300"
-          >
-            <div class="spotlight-content p-6">
-              <ng-icon class="mx-auto mb-4 text-zinc-500 transition-colors group-hover:text-blue-500" name="lucideUsers" />
-              <div hlmCardContent>
-                <div class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
-                  {{ githubData.value().followers }}
-                </div>
-                <div class="mt-1 text-sm text-zinc-600 dark:text-zinc-400">Total Github Followers</div>
-              </div>
-            </div>
-          </section>
-
-          <section
-            hlmCard
-            appSpotlightColor="168, 85, 247"
-            class="spotlight-card group relative text-center transition-all duration-300"
-          >
-            <div class="spotlight-content p-6">
-              <ng-icon
-                class="mx-auto mb-4 text-zinc-500 transition-colors group-hover:text-purple-500"
-                name="lucideFolders"
-              />
-              <div hlmCardContent>
-                <div class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
-                  {{ githubData.value().public_repos }}
-                </div>
-                <div class="mt-1 text-sm text-zinc-600 dark:text-zinc-400">Total GitHub Repositories</div>
-              </div>
-            </div>
-          </section>
-
-          <section
-            hlmCard
-            appSpotlightColor="16, 185, 129"
-            class="spotlight-card group relative text-center transition-all duration-300"
-          >
-            <div class="spotlight-content p-6">
-              <ng-icon
-                class="mx-auto mb-4 text-zinc-500 transition-colors group-hover:text-emerald-500"
-                name="lucideTrendingUp"
-              />
-              <div hlmCardContent>
-                <div class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">∞</div>
-                <div class="mt-1 text-sm text-zinc-600 dark:text-zinc-400">Years of Experience</div>
-              </div>
-            </div>
-          </section>
-
-          <section
-            hlmCard
-            appSpotlightColor="249, 115, 22"
-            class="spotlight-card group relative text-center transition-all duration-300"
-          >
-            <div class="spotlight-content p-6">
-              <ng-icon
-                class="mx-auto mb-4 text-zinc-500 transition-colors group-hover:text-orange-500"
-                name="lucideDumbbell"
-              />
-              <div hlmCardContent>
-                <div class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">80kg</div>
-                <div class="mt-1 text-sm text-zinc-600 dark:text-zinc-400">How Much I Bench</div>
-              </div>
-            </div>
-          </section>
+  <!-- Stats -->
+  <dl class="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
+    @for (stat of stats(); track stat.label) {
+      <div class="border-border bg-card/40 flex flex-col gap-2 rounded-xl border p-4">
+        <ng-icon class="text-muted-foreground" size="1.15rem" [name]="stat.icon" />
+        <div class="mt-1">
+          <dt class="text-foreground text-2xl font-bold tabular-nums">{{ stat.value }}</dt>
+          <dd class="text-muted-foreground mt-0.5 text-xs">{{ stat.label }}</dd>
         </div>
-      }
+      </div>
+    }
+  </dl>
+
+  <!-- Tech Stack -->
+  <div class="mt-14">
+    <div class="text-muted-foreground mb-6 flex items-center gap-3 font-mono text-xs tracking-widest uppercase">
+      <span>Tech I use</span>
+      <span class="bg-border h-px flex-1"></span>
     </div>
 
-    <!-- Modern Tech Stack -->
-    <div class="flex flex-col gap-8">
-      <div class="text-center">
-        <h3 class="mb-2 text-2xl font-bold text-zinc-900 dark:text-zinc-100">Technologies I Work With</h3>
-        <p class="text-zinc-600 dark:text-zinc-400">A look at the technologies and tools I use regularly.</p>
-      </div>
-
-      <!-- Tech Icons -->
-      <div class="grid w-full grid-cols-4 gap-6 md:grid-cols-6 lg:grid-cols-8">
-        @for (tech of techStack(); track tech.name) {
-          <div
-            class="flex h-16 w-16 items-center justify-center rounded-xl border border-zinc-200 bg-white shadow-sm transition-shadow hover:shadow-md dark:border-zinc-700 dark:bg-zinc-800"
-            [title]="tech.title"
-          >
-            <img class="size-10" width="40" height="40" [ngSrc]="tech.icon" [alt]="tech.name" />
-          </div>
-        }
-      </div>
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-6">
+      @for (tech of techStack(); track tech.name) {
+        <button type="button" hlmBtn variant="secondary" [attr.aria-label]="tech.name">
+          <ng-icon [name]="tech.icon" />
+          <span class="text-muted-foreground font-mono">{{ tech.name }}</span>
+        </button>
+      }
     </div>
   </div>
 </section>

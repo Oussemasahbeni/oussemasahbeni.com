@@ -19,29 +19,15 @@ import { ContentMetadata } from '../../../models/content-metadata';
     @if (article(); as article) {
       <a
         hlmCard
-        class="
-        group flex flex-col h-full
-        transition-all duration-300
-        hover:-translate-y-1 hover:shadow-lg hover:border-primary/50
-        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
-      "
+        class="flex h-full flex-col transition-all duration-300 hover:-translate-y-1"
         [routerLink]="['/blog', article.slug]"
       >
         <div hlmCardHeader>
-          <div class="flex justify-between items-start mb-2">
-            <span class="text-xs font-mono text-muted-foreground">
+          <div class="mb-2 flex items-start justify-between">
+            <span class="text-muted-foreground font-mono text-xs">
               {{ article.date | date: 'mediumDate' }}
             </span>
-            <!-- Mobile: Always visible | Desktop: Animation on hover -->
-            <ng-icon
-              name="lucideArrowRight"
-              class="
-              text-primary transition-all duration-300
-              opacity-100 translate-x-0
-              sm:opacity-0 sm:-translate-x-2
-              group-hover:opacity-100 group-hover:translate-x-0
-            "
-            />
+            <ng-icon name="lucideArrowRight" />
           </div>
 
           <h3 hlmCardTitle class="text-xl leading-tight">
@@ -50,7 +36,7 @@ import { ContentMetadata } from '../../../models/content-metadata';
         </div>
 
         <div hlmCardContent class="flex-1">
-          <p class="text-muted-foreground leading-relaxed line-clamp-3">
+          <p class="text-muted-foreground line-clamp-3 leading-relaxed">
             {{ article.description }}
           </p>
         </div>

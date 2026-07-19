@@ -1,47 +1,24 @@
 import { defineEventHandler } from 'h3';
+import { SpotifyNowPlayingResponse, SpotifyTokenResponse } from '../../../../app/models/spotify';
 
 const SPOTIFY_CLIENT_ID = process.env['SPOTIFY_CLIENT_ID'];
 const SPOTIFY_CLIENT_SECRET = process.env['SPOTIFY_CLIENT_SECRET'];
 const SPOTIFY_REFRESH_TOKEN = process.env['SPOTIFY_REFRESH_TOKEN'];
 
-const NOW_PLAYING_ENDPOINT =
-  'https://api.spotify.com/v1/me/player/currently-playing';
+const NOW_PLAYING_ENDPOINT = 'https://api.spotify.com/v1/me/player/currently-playing';
 const TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token';
-
-interface SpotifyTokenResponse {
-  access_token: string;
-}
-
-interface SpotifyArtist {
-  name: string;
-}
-
-interface SpotifyNowPlayingResponse {
-  is_playing: boolean;
-  item: {
-    name: string;
-    artists: SpotifyArtist[];
-    album: {
-      name: string;
-      images: { url: string }[];
-    };
-    external_urls: { spotify: string };
-  };
-}
 
 async function getAccessToken() {
   if (!SPOTIFY_CLIENT_ID || !SPOTIFY_CLIENT_SECRET || !SPOTIFY_REFRESH_TOKEN) {
     throw new Error('Spotify credentials not configured');
   }
 
-  const basic = Buffer.from(
-    `${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`
-  ).toString('base64');
+  const basic = Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64');
 
   const response = await fetch(TOKEN_ENDPOINT, {
     method: 'POST',
     headers: {
-      "Authorization": `Basic ${basic}`,
+      Authorization: `Basic ${basic}`,
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: new URLSearchParams({

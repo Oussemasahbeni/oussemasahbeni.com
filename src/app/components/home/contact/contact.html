@@ -1,0 +1,176 @@
+<section id="contact">
+  <!-- Section Header -->
+  <div class="text-muted-foreground mb-10 flex items-center gap-3 font-mono text-xs tracking-widest uppercase">
+    <span>Contact</span>
+    <span class="bg-border h-px flex-1"></span>
+  </div>
+
+  <div class="grid gap-8 md:grid-cols-[0.85fr_1.15fr]">
+    <!-- Left: intro + direct methods -->
+    <div class="flex flex-col gap-5">
+      <div>
+        <h2 class="text-foreground text-2xl font-bold">Let's work together</h2>
+        <p class="text-muted-foreground mt-2 text-sm leading-relaxed">
+          Open to new projects, ideas, or opportunities. Send a message, or reach me directly.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <button
+          type="button"
+          class="group border-border bg-card/50 hover:border-foreground/20 flex items-center gap-3 rounded-lg border p-3 text-left transition-colors"
+          [attr.aria-label]="emailCopied() ? 'Email copied' : 'Copy email address'"
+          (click)="copyEmail()"
+        >
+          <ng-icon class="text-muted-foreground" name="lucideMail" />
+          <span class="min-w-0 flex-1">
+            <span class="text-muted-foreground block text-xs">Email</span>
+            <span class="text-foreground block truncate text-sm font-medium">{{ email }}</span>
+          </span>
+          @if (emailCopied()) {
+            <span class="flex items-center gap-1 text-xs font-medium text-green-600 dark:text-green-400">
+              <ng-icon name="lucideCheck" />
+              Copied
+            </span>
+          } @else {
+            <ng-icon class="text-muted-foreground group-hover:text-foreground transition-colors" name="lucideCopy" />
+          }
+        </button>
+
+        <!-- LinkedIn -->
+        <a
+          class="group border-border bg-card/50 hover:border-foreground/20 flex items-center gap-3 rounded-lg border p-3 transition-colors"
+          target="_blank"
+          rel="noopener noreferrer"
+          [href]="linkedinLink"
+        >
+          <ng-icon class="text-muted-foreground" name="radixLinkedinLogo" />
+          <span class="min-w-0 flex-1">
+            <span class="text-muted-foreground block text-xs">LinkedIn</span>
+            <span class="text-foreground block truncate text-sm font-medium">Connect with me</span>
+          </span>
+          <ng-icon class="text-muted-foreground group-hover:text-foreground transition-colors" name="lucideExternalLink" />
+        </a>
+
+        <!-- GitHub -->
+        <a
+          class="group border-border bg-card/50 hover:border-foreground/20 flex items-center gap-3 rounded-lg border p-3 transition-colors"
+          target="_blank"
+          rel="noopener noreferrer"
+          [href]="githubLink"
+        >
+          <ng-icon class="text-muted-foreground" name="simpleGithub" />
+          <span class="min-w-0 flex-1">
+            <span class="text-muted-foreground block text-xs">GitHub</span>
+            <span class="text-foreground block truncate text-sm font-medium">@Oussemasahbeni</span>
+          </span>
+          <ng-icon class="text-muted-foreground group-hover:text-foreground transition-colors" name="lucideExternalLink" />
+        </a>
+      </div>
+    </div>
+
+    <!-- Right: form -->
+    <div hlmCard class="p-6">
+      @if (submitMessage() !== 'success') {
+        <form class="flex flex-col gap-4" [formRoot]="contactForm">
+          <div class="grid gap-4 sm:grid-cols-2">
+            <!-- Name -->
+            <hlm-field>
+              <hlm-field-label for="name">Name</hlm-field-label>
+              <input hlmInput id="name" type="text" placeholder="Your name" class="w-full" [formField]="contactForm.name" />
+              @let name = contactForm.name();
+              @if (name.touched() && name.invalid()) {
+                @for (error of name.errors(); track error) {
+                  <hlm-field-error>{{ error.message }}</hlm-field-error>
+                }
+              }
+            </hlm-field>
+
+            <!-- Email -->
+            <hlm-field>
+              <hlm-field-label for="form-email">Email</hlm-field-label>
+              <input
+                hlmInput
+                id="form-email"
+                type="email"
+                placeholder="you@example.com"
+                class="w-full"
+                [formField]="contactForm.email"
+              />
+              @let emailField = contactForm.email();
+              @if (emailField.touched() && emailField.invalid()) {
+                @for (error of emailField.errors(); track error) {
+                  <hlm-field-error>{{ error.message }}</hlm-field-error>
+                }
+              }
+            </hlm-field>
+          </div>
+
+          <!-- Subject -->
+          <hlm-field>
+            <hlm-field-label for="subject">Subject</hlm-field-label>
+            <input
+              hlmInput
+              id="subject"
+              type="text"
+              placeholder="What's this about?"
+              class="w-full"
+              [formField]="contactForm.subject"
+            />
+            @let subject = contactForm.subject();
+            @if (subject.touched() && subject.invalid()) {
+              @for (error of subject.errors(); track error) {
+                <hlm-field-error>{{ error.message }}</hlm-field-error>
+              }
+            }
+          </hlm-field>
+
+          <!-- Message -->
+          <hlm-field>
+            <hlm-field-label for="message">Message</hlm-field-label>
+            <textarea
+              id="message"
+              placeholder="Tell me about your project or inquiry..."
+              hlmTextarea
+              class="min-h-28"
+              [formField]="contactForm.message"
+            ></textarea>
+            @let message = contactForm.message();
+            @if (message.touched() && message.invalid()) {
+              @for (error of message.errors(); track error) {
+                <hlm-field-error>{{ error.message }}</hlm-field-error>
+              }
+            }
+          </hlm-field>
+
+          <div class="absolute -top-1250 -left-1250" aria-hidden="true">
+            <input type="text" tabindex="-1" autocomplete="off" [formField]="contactForm.honeypot" />
+          </div>
+
+          <!-- Submit -->
+          <div class="flex justify-end">
+            @let isSubmitting = contactForm().submitting();
+            <button hlmBtn type="submit" class="w-fit" [disabled]="contactForm().invalid() || isSubmitting">
+              @if (isSubmitting) {
+                <hlm-spinner />
+              } @else {
+                <ng-icon name="lucideSend" />
+              }
+              <span>Send message</span>
+            </button>
+          </div>
+        </form>
+      } @else {
+        <!-- Success -->
+        <div class="animate-in fade-in zoom-in flex flex-col items-center py-10 text-center duration-300">
+          <ng-icon class="text-green-600 dark:text-green-400" size="2rem" name="lucideCheckCircle" />
+          <h3 class="text-foreground mt-4 text-xl font-bold">Message sent!</h3>
+          <p class="text-muted-foreground mt-2 text-sm">
+            Thanks for reaching out — I'll get back to you within 24–48 hours.
+          </p>
+          <button type="button" hlmBtn variant="outline" class="mt-6" (click)="sendAnotherMessage()">Send another</button>
+        </div>
+      }
+    </div>
+  </div>
+</section>

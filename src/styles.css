@@ -1,21 +1,21 @@
 @layer theme, base, components, utilities;
 
 @font-face {
-  font-family: "JetBrains Mono";
+  font-family: 'JetBrains Mono';
   font-style: normal;
   font-weight: 100 800;
   font-display: swap;
-  src: url("/fonts/jetbrains-mono-v24-latin-regular.woff2") format("woff2");
+  src: url('/fonts/jetbrains-mono-v24-latin-regular.woff2') format('woff2');
 }
 
-@import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/preflight.css" layer(base);
-@import "tailwindcss/utilities.css";
-@plugin "@tailwindcss/typography";
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/preflight.css' layer(base);
+@import 'tailwindcss/utilities.css';
+@plugin '@tailwindcss/typography';
 
-@import "@angular/cdk/overlay-prebuilt.css";
+@import '@angular/cdk/overlay-prebuilt.css';
 
-@import "@spartan-ng/brain/hlm-tailwind-preset.css";
+@import '@spartan-ng/brain/hlm-tailwind-preset.css';
 
 *,
 *::before,
@@ -60,6 +60,14 @@ html,
 body {
   height: 100%;
 }
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
 /*
   Remove built-in form typography styles
 */
@@ -91,11 +99,9 @@ app-root {
 :root {
   color-scheme: light;
 
-  --font-sans:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
-    Arial, sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
-  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -161,11 +167,11 @@ app-root {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground scrollbar-gutter-stable;
   }
 
   button:not([disabled]),
-  [role="button"]:not([disabled]) {
+  [role='button']:not([disabled]) {
     cursor: pointer;
   }
 }

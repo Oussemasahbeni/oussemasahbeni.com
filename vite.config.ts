@@ -37,7 +37,6 @@ export default defineConfig(({ mode }) => {
           routes: [
             '/',
             '/blog',
-            '/projects',
             '/api/rss.xml',
             {
               contentDir: 'src/content',
