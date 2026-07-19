@@ -1,6 +1,7 @@
 {
   "name": "portfolio",
   "version": "0.0.0",
+  "packageManager": "pnpm@11.0.9",
   "scripts": {
     "ng": "ng",
     "dev": "vite",
