@@ -47,7 +47,7 @@
   </div>
 
   <!-- Stats -->
-  <dl class="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
+  <div class="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
     @for (stat of stats(); track stat.label) {
       <div class="border-border bg-card/40 flex flex-col gap-2 rounded-xl border p-4">
         <ng-icon class="text-muted-foreground" size="1.15rem" [name]="stat.icon" />
@@ -57,7 +57,7 @@
         </div>
       </div>
     }
-  </dl>
+  </div>
 
   <!-- Tech Stack -->
   <div class="mt-14">
